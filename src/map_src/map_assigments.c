@@ -6,13 +6,13 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:14:30 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/25 13:53:51 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/25 18:17:12 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/cub3d.h"
 
-void	get_prime_map(t_cub3d *main, int i) //leak kontrolü yapılmadı
+void	get_prime_map(t_cub3d *main, int i)
 {
 	char	**map;
 	int		c;
@@ -37,22 +37,19 @@ void	get_prime_map(t_cub3d *main, int i) //leak kontrolü yapılmadı
 	{
 		b = 0;
 		while (main->map->map[c][b])
+		{
+			if (main->map->map[c][b] == 'N' || main->map->map[c][b] == 'W' || main->map->map[c][b] == 'E' || main->map->map[c][b] == 'S')
+			{
+				main->mini_map = malloc(sizeof (t_cub3d_mini_map));
+				main->mini_map->player_x = b;
+				main->mini_map->player_y = c;
+			}
 			b++;
+		}
 		if (b >= main->map->map_max_line)
 			main->map->map_max_line = b;
 		c++;
 	}
-	//printf("%d %d", main->map->map_lines_num, main->map->map_max_line);
-	// c = 0;
-	// system("leaks cub3d");
-	// exit(0);
-	// while (map[c] != NULL)
-	// {
-	// 	printf("*%s*\n", map[c]);
-	// 	free(map[c]);
-	// 	c++;
-	// }
-	// free(map);
 }
 
 char	*get_texture_path(t_cub3d *main, int i, int k)

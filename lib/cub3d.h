@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/23 16:31:51 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/25 18:20:01 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@
 # define MINI_MAP_HEIGHT_RATION	4
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
 # define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
+
+# define KEY_ESC 53
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_W 13
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
+# define KEY_UP 126
 
 typedef struct s_cub3d_map
 {
@@ -80,7 +90,7 @@ void	exit_free(t_cub3d *main, int err_no);
 void	map_check(t_cub3d *main);
 void	map_full_check(int index, char **str, t_cub3d *main);
 void	map_down_control(t_cub3d *main);
-void	check_invallid_chracters(char s, t_cub3d *main, int x, int y, int status);
+void	check_invallid_chracters(char s, t_cub3d *main, int status);
 void	name_check(char *str, t_cub3d *main);
 void	free_double_Str(char **s);
 void	get_RGB(t_cub3d *main, int i, int k);
@@ -96,7 +106,7 @@ char	*get_texture_path(t_cub3d *main, int i, int k);
 
 unsigned long rgb_to_hex(int transparent, int r, int g, int b);
 
-
+int	move(int key_code, t_cub3d *main);
 int		get_SO_path(t_cub3d *main, int i, int k);
 int		get_EA_path(t_cub3d *main, int i, int k);
 int		get_WE_path(t_cub3d *main, int i, int k);

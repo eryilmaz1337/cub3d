@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:47:51 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/25 13:47:56 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/25 18:18:23 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	get_map_parts(t_cub3d *main)
 	return (ret);
 }
 
-void	check_invallid_chracters(char s, t_cub3d *main, int y, int x, int status)
+void	check_invallid_chracters(char s, t_cub3d *main, int status)
 {
 	static int	player_c;
 
@@ -100,12 +100,7 @@ void	check_invallid_chracters(char s, t_cub3d *main, int y, int x, int status)
 				if (s == 'N' || s == 'W' || s == 'S' || s == 'E')
 				{
 					if (player_c == 0)
-					{
-						main->mini_map = malloc(sizeof (t_cub3d_mini_map));
-						main->mini_map->player_x = x;
-						main->mini_map->player_y = y;
 						player_c++;
-					}
 					else if (player_c > 1)
 						exit_free (main, INVALID_COUNTS);
 				}
@@ -130,7 +125,7 @@ void	map_down_control(t_cub3d *main)//{printf("NO:1  i:%d k:%d  O:%c\n", i, k, m
 		k = 0;
 		while (k < (int)ft_strlen(main->map->map[i]))
 		{
-			check_invallid_chracters(main->map->map[i][k], main, i, k, 0);
+			check_invallid_chracters(main->map->map[i][k], main, 0);
 			if (main->map->map[i][k] != '1' && check_isspace(main->map->map[i][k]) == 1)
 			{
 				if (i == s_i && check_isspace(main->map->map[i][k]) == 1)
@@ -154,7 +149,7 @@ void	map_down_control(t_cub3d *main)//{printf("NO:1  i:%d k:%d  O:%c\n", i, k, m
 		}
 		i++;
 	}
-	check_invallid_chracters(main->map->map[0][0], main, 0, 0, 1);
+	check_invallid_chracters(main->map->map[0][0], main, 1);
 	get_prime_map(main, s_i);
 }
 

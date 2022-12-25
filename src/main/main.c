@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:58:03 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/25 13:50:49 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/25 18:21:26 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void loop_window_and_game(t_cub3d *main)
 {
 	main_game_img_paint(main);
 	game_mini_map_paint(main);
+	mlx_hook(main->mlx_window, 2, 2L << 1, move, main);
 	mlx_hook(main->mlx_window, 17, (0L), ft_close, main);
 	mlx_loop(main->mlx);
 }

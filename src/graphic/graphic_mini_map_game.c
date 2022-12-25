@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_mini_map_game.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryilmaz <eryilmaz@student.42kocaeli.com.  +#+  +:+       +#+        */
+/*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/25 18:03:43 by eryilmaz         ###   ########.tr	      */
+/*   Updated: 2022/12/25 18:32:50 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void map_paint(t_cub3d *main)
 		{
 			// printf("%c", main->map->map[x][y]);
 			if (main->map->map[y][x] == '1')
-				ft_pixel_put(main, main->mini_map->map_img_size_x*x, main->mini_map->map_img_size_y*y, 0xffffff);
+				ft_pixel_put(main, main->mini_map->map_img_size_x * x, main->mini_map->map_img_size_y * y, 0xf0ff0f);
 			else if (main->map->map[y][x] == '0')
-				ft_pixel_put(main, main->mini_map->map_img_size_x*x, main->mini_map->map_img_size_y*y, 0xff0000);
-			else
-				ft_pixel_put(main, main->mini_map->map_img_size_x*x, main->mini_map->map_img_size_y*y, 0x0000ff);
+				ft_pixel_put(main, main->mini_map->map_img_size_x*x, main->mini_map->map_img_size_y*y, 0xba8576);
+			else if (main->map->map[y][x] != ' ')
+				ft_pixel_put(main, main->mini_map->map_img_size_x * x, main->mini_map->map_img_size_y * y, 0xff0000);
 		}
 	}
 }
@@ -64,4 +64,53 @@ void game_mini_map_paint(t_cub3d *main)
 {
 	map_paint(main);
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map_img, 0, 0);
+}
+
+int	move(int key_code, t_cub3d *main)
+{
+	int	x;
+	int	y;
+
+	x = main->mini_map->player_x;
+	y = main->mini_map->player_y;
+	if (key_code == KEY_ESC)
+		exit(0);
+	else if (key_code == KEY_D)
+	{
+		if (main->map->map[y][x + 1] == '0')
+		{
+			main->map->map[y][x + 1] = 'E';
+			main->map->map[y][x] = '0';
+			main->mini_map->player_x++;
+		}
+	}
+	else if (key_code == KEY_A)
+	{
+		if (main->map->map[y][x - 1] == '0')
+		{
+			main->map->map[y][x - 1] = 'W';
+			main->map->map[y][x] = '0';
+			main->mini_map->player_x--;
+		}
+	}
+	else if (key_code == KEY_S)
+	{
+		if (main->map->map[y + 1] && main->map->map[y + 1][x] == '0')
+		{
+			main->map->map[y + 1][x] = 'S';
+			main->map->map[y][x] = '0';
+			main->mini_map->player_y++;
+		}
+	}
+	else if (key_code == KEY_W)
+	{
+		if (main->map->map[y - 1][x] == '0')
+		{
+			main->map->map[y][x] = '0';
+			main->map->map[y - 1][x] = 'N';
+			main->mini_map->player_y--;
+		}
+	}
+	game_mini_map_paint(main);
+	return (0);
 }
