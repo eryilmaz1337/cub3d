@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:58:03 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/23 16:14:22 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/25 13:50:49 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void map_paint(t_cub3d *main)
 	while (++y != main->map->map_lines_num)
 	{
 		x = -1;
-		printf("%d %p %s\n", y , main->map->map[y], main->map->map[y]);
+		//("%d %p %s\n", y , main->map->map[y], main->map->map[y]);
 		// while (++x != main->map->map_max_line)
 		// {
 		// 	// printf("%c", main->map->map[x][y]);

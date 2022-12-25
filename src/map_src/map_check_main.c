@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 19:25:48 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/23 16:37:01 by uercan           ###   ########.fr       */
+/*   Created: 2022/12/25 13:47:51 by uercan            #+#    #+#             */
+/*   Updated: 2022/12/25 13:47:56 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,46 +116,46 @@ void	check_invallid_chracters(char s, t_cub3d *main, int y, int x, int status)
 		exit_free (main, INVALID_COUNTS);
 }
 
-void    map_down_control(t_cub3d *main)//{printf("NO:1  i:%d k:%d  O:%c\n", i, k, main->map->map[i][k]);exit (1);}//
+void	map_down_control(t_cub3d *main)//{printf("NO:1  i:%d k:%d  O:%c\n", i, k, main->map->map[i][k]);exit (1);}//
 {
-    int i;
-    int k;
-    int s_i;
-    int l_i;
-    i = get_map_parts(main);
-    s_i = i;
-    l_i = main->map->map_line_c;
-    while (i < main->map->map_line_c - 1)
-    {
-        k = 0;
-        while (k < (int)ft_strlen(main->map->map[i]))
-        {
-            check_invallid_chracters(main->map->map[i][k], main, i, k, 0);
-            if (main->map->map[i][k] != '1' && check_isspace(main->map->map[i][k]) == 1)
-            {
-                if (i == s_i && check_isspace(main->map->map[i][k]) == 1)
-                    exit_free(main, INVALID_MAP);
-                else if (i - 1 > s_i && check_isspace(main->map->map[i - 1][k]) == 0)
-                    exit_free(main, INVALID_MAP);
-                else if (k + 1 < (int)ft_strlen(main->map->map[i]) && check_isspace(main->map->map[i][k + 1]) == 0)
-                    exit_free(main, INVALID_MAP);
-                else if (k == (int)ft_strlen(main->map->map[i]) - 1 && check_isspace(main->map->map[i][k]) == 1)
-                    exit_free(main, INVALID_MAP);
-                else if (i + 1 < l_i - 1 && check_isspace(main->map->map[i + 1][k]) == 0)
-                    exit_free(main, INVALID_MAP);
-                else if (i == l_i - 2 && check_isspace(main->map->map[i][k]) == 1)
-                    exit_free(main, INVALID_MAP);
-                else if (k == 0 && check_isspace(main->map->map[i][k]) == 1)
-                    exit_free(main, INVALID_MAP);
-                else if (k - 1 > 0 && check_isspace(main->map->map[i][k]) == 0)
-                    exit_free(main, INVALID_MAP);
-            }
-            k++;
-        }
-        i++;
-    }
-    check_invallid_chracters(main->map->map[0][0], main, 0, 0, 1);
-    get_prime_map(main, s_i);
+	int i;
+	int k;
+	int s_i;
+	int l_i;
+	i = get_map_parts(main);
+	s_i = i;
+	l_i = main->map->map_line_c;
+	while (i < main->map->map_line_c - 1)
+	{
+		k = 0;
+		while (k < (int)ft_strlen(main->map->map[i]))
+		{
+			check_invallid_chracters(main->map->map[i][k], main, i, k, 0);
+			if (main->map->map[i][k] != '1' && check_isspace(main->map->map[i][k]) == 1)
+			{
+				if (i == s_i && check_isspace(main->map->map[i][k]) == 1)
+					exit_free(main, INVALID_MAP);
+				else if (i - 1 > s_i && check_isspace(main->map->map[i - 1][k]) == 0)
+					exit_free(main, INVALID_MAP);
+				else if (k + 1 < (int)ft_strlen(main->map->map[i]) && check_isspace(main->map->map[i][k + 1]) == 0)
+					exit_free(main, INVALID_MAP);
+				else if (k == (int)ft_strlen(main->map->map[i]) - 1 && check_isspace(main->map->map[i][k]) == 1)
+					exit_free(main, INVALID_MAP);
+				else if (i + 1 < l_i - 1 && check_isspace(main->map->map[i + 1][k]) == 0)
+					exit_free(main, INVALID_MAP);
+				else if (i == l_i - 2 && check_isspace(main->map->map[i][k]) == 1)
+					exit_free(main, INVALID_MAP);
+				else if (k == 0 && check_isspace(main->map->map[i][k]) == 1)
+					exit_free(main, INVALID_MAP);
+				else if (k - 1 > 0 && check_isspace(main->map->map[i][k]) == 0)
+					exit_free(main, INVALID_MAP);
+			}
+			k++;
+		}
+		i++;
+	}
+	check_invallid_chracters(main->map->map[0][0], main, 0, 0, 1);
+	get_prime_map(main, s_i);
 }
 
 void map_check(t_cub3d *main)

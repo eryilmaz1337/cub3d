@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:14:30 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/23 16:14:04 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/25 13:53:51 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,14 @@ void	get_RGB(t_cub3d *main, int i, int k)
 	a = -1;
 	while (++a < 3)
 		code[a] = ft_atoi(val[a]);
+	a = 0;
+	while (val[a])
+	{
+		free(val[a]);
+		a++;
+	}
+	free(val[a]);
+	free(path);
 	//printf("sa! %c\n", main->map->map[i][k]);
 	if (main->map->map[i][k] == 'F')
 		main->map->F_rgb_code = rgb_to_hex(code[0], code[1], code[2]);
