@@ -13,9 +13,9 @@
 #include "../../lib/cub3d.h"
 
 
-unsigned long	rgb_to_hex(int r, int g, int b)//0x_00_00_ff
+unsigned long	rgb_to_hex(int transparent ,int r, int g, int b)//0x_00_00_ff
 {
-	return ((r << 16) + (g << 8) + (b));
+	return ((transparent << 24)+(r << 16) + (g << 8) + (b));
 }
 void game_window(t_cub3d *main)
 {
@@ -71,7 +71,7 @@ void ft_pixel_put(t_cub3d *main, int x, int y, unsigned long color)
 		k = -1;
 		while (++k < main->mini_map->map_img_size_x)
 		{
-			main->mini_map_img_adress[(int)(main->mini_map->map_img_size_x * (y + i) + (x + k))] = color;
+			main->mini_map_img_adress[(int)(MINI_MAP_WIDTH * (y + i) + (x + k))] = color;
 		}
 	}
 }
@@ -83,17 +83,31 @@ void map_paint(t_cub3d *main)
 
 	main->mini_map->map_img_size_y = MINI_MAP_HEIGHT / main->map->map_lines_num;
 	main->mini_map->map_img_size_x = MINI_MAP_WIDTH / main->map->map_max_line;
+
+	int k=0, i = 0;
+	while (k != MINI_MAP_HEIGHT)
+	{
+		i = -1;
+		while (++i != MINI_MAP_WIDTH)
+			main->mini_map_img_adress[MINI_MAP_WIDTH * k + i] = rgb_to_hex(255,0,0,0);
+		k++;
+	}
+
 	y = -1;
-	while (++y != main->map->map_lines_num)
+	while (main->map->map[++y])
 	{
 		x = -1;
 		//("%d %p %s\n", y , main->map->map[y], main->map->map[y]);
-		// while (++x != main->map->map_max_line)
-		// {
-		// 	// printf("%c", main->map->map[x][y]);
-		// 	if (main->map->map[y][x] == '1')
-		// 		ft_pixel_put(main, main->map->map_max_line*x, main->map->map_lines_num*y, 0xffffff);
-		// }
+		while (main->map->map[y][++x])
+		{
+			// printf("%c", main->map->map[x][y]);
+			if (main->map->map[y][x] == '1')
+				ft_pixel_put(main, main->mini_map->map_img_size_x*x, main->mini_map->map_img_size_y*y, 0xffffff);
+			else if (main->map->map[y][x] == '0')
+				ft_pixel_put(main, main->mini_map->map_img_size_x*x, main->mini_map->map_img_size_y*y, 0xff0000);
+			else
+				ft_pixel_put(main, main->mini_map->map_img_size_x*x, main->mini_map->map_img_size_y*y, 0x0000ff);
+		}
 	}
 }
 

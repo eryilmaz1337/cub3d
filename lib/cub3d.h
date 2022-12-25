@@ -33,8 +33,8 @@
 /*------------MAP-SIZE--------------*/
 # define SCREEN_WIDTH			1920
 # define SCREEN_HEIGHT			1080
-# define MINI_MAP_WIDTH_RATION	2
-# define MINI_MAP_HEIGHT_RATION	2
+# define MINI_MAP_WIDTH_RATION	4
+# define MINI_MAP_HEIGHT_RATION	4
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
 # define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
 
@@ -91,7 +91,7 @@ char	**ft_split_isspace(const char *s);
 char	*ft_strjoin_2(char *save, char *buffer);
 char	*get_texture_path(t_cub3d *main, int i, int k);
 
-unsigned long	rgb_to_hex(int r, int g, int b);
+unsigned long rgb_to_hex(int transparent, int r, int g, int b);
 
 int		get_SO_path(t_cub3d *main, int i, int k);
 int		get_EA_path(t_cub3d *main, int i, int k);

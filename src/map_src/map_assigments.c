@@ -119,8 +119,8 @@ void	get_RGB(t_cub3d *main, int i, int k)
 	free(path);
 	//printf("sa! %c\n", main->map->map[i][k]);
 	if (main->map->map[i][k] == 'F')
-		main->map->F_rgb_code = rgb_to_hex(code[0], code[1], code[2]);
+		main->map->F_rgb_code = rgb_to_hex(0,code[0], code[1], code[2]);
 	else if (main->map->map[i][k] == 'C')
-		main->map->C_rgb_code = rgb_to_hex(code[0], code[1], code[2]);
+		main->map->C_rgb_code = rgb_to_hex(0,code[0], code[1], code[2]);
 	//printf("%c: %lu\n", main->map->map[i][k],main->map->F_rgb_code);
 }
