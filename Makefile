@@ -3,7 +3,7 @@ LIBFT		= ./lib/libft/
 MLX			= ./lib/mlx/
 CC			= gcc
 FLAGS		= -framework OpenGL -framework AppKit -L ./lib/mlx -Wall -Wextra -Werror
-FILE		= ./src/map_src/*.c ./src/exit/*.c ./src/main/*.c ./lib/get_next_line/get_next_line.c ./lib/get_next_line/get_next_line_utils.c ./src/archive/libft.a ./src/archive/libmlx.a
+FILE		= ./src/graphic/*.c ./src/map_src/*.c ./src/exit/*.c ./src/main/*.c ./lib/get_next_line/get_next_line.c ./lib/get_next_line/get_next_line_utils.c ./src/archive/libft.a ./src/archive/libmlx.a
 RM			= rm -f
 AR			= ar rcs
 

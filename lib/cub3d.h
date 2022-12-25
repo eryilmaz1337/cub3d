@@ -85,6 +85,9 @@ void	name_check(char *str, t_cub3d *main);
 void	free_double_Str(char **s);
 void	get_RGB(t_cub3d *main, int i, int k);
 void	get_prime_map(t_cub3d *main, int i);
+void	main_game_img_paint(t_cub3d *main);
+void	game_mini_map_paint(t_cub3d *main);
+void 	game_window(t_cub3d *main);
 
 char	**ft_double_strcpy(char **s, int i);
 char	**ft_split_isspace(const char *s);
@@ -92,6 +95,7 @@ char	*ft_strjoin_2(char *save, char *buffer);
 char	*get_texture_path(t_cub3d *main, int i, int k);
 
 unsigned long rgb_to_hex(int transparent, int r, int g, int b);
+
 
 int		get_SO_path(t_cub3d *main, int i, int k);
 int		get_EA_path(t_cub3d *main, int i, int k);
