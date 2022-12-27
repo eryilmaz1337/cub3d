@@ -6,13 +6,14 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/25 18:20:01 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/27 14:37:43 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
+# include <stdbool.h>
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -48,6 +49,10 @@
 # define KEY_RIGHT 124
 # define KEY_UP 126
 
+
+# define MOVE_PIXEL 10
+
+
 typedef struct s_cub3d_map
 {
 	char			**map;
@@ -63,12 +68,22 @@ typedef struct s_cub3d_map
 	int				map_max_line;
 } t_cub3d_map;
 
+typedef struct s_player
+{
+	bool			key_w;
+	bool			key_s;
+	bool			key_d;
+	bool			key_a;
+	bool			dir_right;
+	bool			dir_left;
+	double			player_x;
+	double			player_y;
+}	t_player;
+
 typedef struct s_cub3d_mini_map
 {
 	int				map_img_size_y;
 	int				map_img_size_x;
-	double			player_x;
-	double			player_y;
 }	t_cub3d_mini_map;
 
 typedef struct s_cub3d
@@ -84,6 +99,7 @@ typedef struct s_cub3d
 	void				*mini_map_img;
 	t_cub3d_mini_map	*mini_map;
 	t_cub3d_map			*map;
+	t_player			*player;
 }	t_cub3d;
 
 void	exit_free(t_cub3d *main, int err_no);
@@ -97,7 +113,8 @@ void	get_RGB(t_cub3d *main, int i, int k);
 void	get_prime_map(t_cub3d *main, int i);
 void	main_game_img_paint(t_cub3d *main);
 void	game_mini_map_paint(t_cub3d *main);
-void 	game_window(t_cub3d *main);
+void	game_window(t_cub3d *main);
+void	game_put_player(t_cub3d *main);
 
 char	**ft_double_strcpy(char **s, int i);
 char	**ft_split_isspace(const char *s);
@@ -106,7 +123,8 @@ char	*get_texture_path(t_cub3d *main, int i, int k);
 
 unsigned long rgb_to_hex(int transparent, int r, int g, int b);
 
-int	move(int key_code, t_cub3d *main);
+int		ft_key_press(int key_code, t_cub3d *main);
+int		ft_key_release(int key_code, t_cub3d *main);
 int		get_SO_path(t_cub3d *main, int i, int k);
 int		get_EA_path(t_cub3d *main, int i, int k);
 int		get_WE_path(t_cub3d *main, int i, int k);

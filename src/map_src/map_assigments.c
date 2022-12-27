@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:14:30 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/25 18:17:12 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/27 15:16:05 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ void	get_prime_map(t_cub3d *main, int i)
 			if (main->map->map[c][b] == 'N' || main->map->map[c][b] == 'W' || main->map->map[c][b] == 'E' || main->map->map[c][b] == 'S')
 			{
 				main->mini_map = malloc(sizeof (t_cub3d_mini_map));
-				main->mini_map->player_x = b;
-				main->mini_map->player_y = c;
+				main->player = malloc(sizeof (t_player));
+				main->player->player_x = (double)b;
+				main->player->player_y = (double)c;
+				main->player->player_y *= MINI_MAP_HEIGHT / main->map->map_lines_num;
+				main->player->player_x *= MINI_MAP_WIDTH / main->map->map_max_line;
 			}
 			b++;
 		}
