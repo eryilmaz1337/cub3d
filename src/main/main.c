@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:58:03 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/27 15:22:38 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/27 17:21:39 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,32 @@ int	loop_test(t_cub3d *main)
 {
 	//printf("%d %d", main->player->key_a, main->mini_map->dir_left);
 	if (main->player->key_a)
-		main->player->player_x -= MOVE_PIXEL;
+	{
+		main->player->player_x += -1 * sin(angle_to_radyan(main->player->angle));
+		main->player->player_y -= cos(angle_to_radyan(main->player->angle));
+	}
 	if (main->player->key_s)
-		main->player->player_y += MOVE_PIXEL;
+	{
+		main->player->player_x += -1 * cos(angle_to_radyan(main->player->angle));
+		main->player->player_y += sin(angle_to_radyan(main->player->angle));
+	}
 	if (main->player->key_d)
-		main->player->player_x += MOVE_PIXEL;
+	{
+		main->player->player_x += sin(angle_to_radyan(main->player->angle));
+		main->player->player_y += cos(angle_to_radyan(main->player->angle));
+	}
 	if (main->player->key_w)
-		main->player->player_y -= MOVE_PIXEL;
+	{
+		main->player->player_x += cos(angle_to_radyan(main->player->angle));
+		main->player->player_y += -1 * sin(angle_to_radyan(main->player->angle));
+	}
+	if (main->player->dir_left)
+		main->player->angle += MOVE_ANGLE;
+	if (main->player->dir_right)
+		main->player->angle -= MOVE_ANGLE;
 	game_mini_map_paint(main);
 	game_put_player(main);
-	printf("%0.2f\t%0.2f\n", main->player->player_x, main->player->player_y);
+	printf("x:%0.2f\ty:%0.2f\tAng:%0.2f\n", main->player->player_x, main->player->player_y, main->player->angle);
 	return (0);
 }
 

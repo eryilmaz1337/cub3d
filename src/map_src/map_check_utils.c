@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:13:05 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/20 16:30:45 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/27 16:18:34 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,22 @@ char	**ft_double_strcpy(char **s, int i)
 	}
 	map[a] = NULL;
 	return (map);
+}
+
+void	set_direction(t_cub3d *main, char s, int c, int b)
+{
+	main->mini_map = malloc(sizeof (t_cub3d_mini_map));
+	main->player = malloc(sizeof (t_player));
+	main->player->player_x = (double)b;
+	main->player->player_y = (double)c;
+	main->player->player_y *= MINI_MAP_HEIGHT / main->map->map_lines_num;
+	main->player->player_x *= MINI_MAP_WIDTH / main->map->map_max_line;
+	if (s == 'W')
+		main->player->angle = 180.0;
+	else if (s == 'S')
+		main->player->angle = 90.0;
+	else if (s == 'E')
+		main->player->angle = 0.0;
+	else if (s == 'W')
+		main->player->angle = 270.0;
 }

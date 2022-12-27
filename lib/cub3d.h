@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/27 14:37:43 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/27 17:15:10 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
 # include <stdbool.h>
+# include <math.h>
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -50,7 +51,8 @@
 # define KEY_UP 126
 
 
-# define MOVE_PIXEL 10
+# define MOVE_PIXEL 25
+# define MOVE_ANGLE 5
 
 
 typedef struct s_cub3d_map
@@ -78,6 +80,7 @@ typedef struct s_player
 	bool			dir_left;
 	double			player_x;
 	double			player_y;
+	double			angle;
 }	t_player;
 
 typedef struct s_cub3d_mini_map
@@ -102,35 +105,37 @@ typedef struct s_cub3d
 	t_player			*player;
 }	t_cub3d;
 
-void	exit_free(t_cub3d *main, int err_no);
-void	map_check(t_cub3d *main);
-void	map_full_check(int index, char **str, t_cub3d *main);
-void	map_down_control(t_cub3d *main);
-void	check_invallid_chracters(char s, t_cub3d *main, int status);
-void	name_check(char *str, t_cub3d *main);
-void	free_double_Str(char **s);
-void	get_RGB(t_cub3d *main, int i, int k);
-void	get_prime_map(t_cub3d *main, int i);
-void	main_game_img_paint(t_cub3d *main);
-void	game_mini_map_paint(t_cub3d *main);
-void	game_window(t_cub3d *main);
-void	game_put_player(t_cub3d *main);
+void			exit_free(t_cub3d *main, int err_no);
+void			map_check(t_cub3d *main);
+void			map_full_check(int index, char **str, t_cub3d *main);
+void			map_down_control(t_cub3d *main);
+void			check_invallid_chracters(char s, t_cub3d *main, int status);
+void			name_check(char *str, t_cub3d *main);
+void			free_double_Str(char **s);
+void			get_RGB(t_cub3d *main, int i, int k);
+void			get_prime_map(t_cub3d *main, int i);
+void			main_game_img_paint(t_cub3d *main);
+void			game_mini_map_paint(t_cub3d *main);
+void			game_window(t_cub3d *main);
+void			game_put_player(t_cub3d *main);
+void			set_direction(t_cub3d *main, char s, int c, int b);
 
-char	**ft_double_strcpy(char **s, int i);
-char	**ft_split_isspace(const char *s);
-char	*ft_strjoin_2(char *save, char *buffer);
-char	*get_texture_path(t_cub3d *main, int i, int k);
+char			**ft_double_strcpy(char **s, int i);
+char			**ft_split_isspace(const char *s);
+char			*ft_strjoin_2(char *save, char *buffer);
+char			*get_texture_path(t_cub3d *main, int i, int k);
 
-unsigned long rgb_to_hex(int transparent, int r, int g, int b);
+unsigned long	rgb_to_hex(int transparent, int r, int g, int b);
+double			angle_to_radyan(double ang);
 
-int		ft_key_press(int key_code, t_cub3d *main);
-int		ft_key_release(int key_code, t_cub3d *main);
-int		get_SO_path(t_cub3d *main, int i, int k);
-int		get_EA_path(t_cub3d *main, int i, int k);
-int		get_WE_path(t_cub3d *main, int i, int k);
-int		get_C_RGB(t_cub3d *main, int i, int k);
-int		get_F_RGB(t_cub3d *main, int i, int k);
-int		get_map_parts(t_cub3d *main);
-int		check_isspace(char s);
+int				ft_key_press(int key_code, t_cub3d *main);
+int				ft_key_release(int key_code, t_cub3d *main);
+int				get_SO_path(t_cub3d *main, int i, int k);
+int				get_EA_path(t_cub3d *main, int i, int k);
+int				get_WE_path(t_cub3d *main, int i, int k);
+int				get_C_RGB(t_cub3d *main, int i, int k);
+int				get_F_RGB(t_cub3d *main, int i, int k);
+int				get_map_parts(t_cub3d *main);
+int				check_isspace(char s);
 
 #endif
