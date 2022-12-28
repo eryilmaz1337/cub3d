@@ -32,6 +32,7 @@ void game_window(t_cub3d *main)
 	if (!main->mini_map_img_adress)
 		exit_free(main, MLX_ERROR_IMG);
 }
+
 void main_game_img_paint(t_cub3d *main)
 {
 	int i;

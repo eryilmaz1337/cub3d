@@ -64,59 +64,22 @@ void game_mini_map_paint(t_cub3d *main)
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map_img, 0, 0);
 }
 
-void	game_put_player(t_cub3d *main)
-{
-	int	i;
-	int	k;
-	void	*player;
-	int	*player_addrs;
-	i = 0;
-	k = 0;
-	player = mlx_new_image(main->mlx, main->mini_map->map_img_size_x, main->mini_map->map_img_size_y);
-	player_addrs = (int *)mlx_get_data_addr(player, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
-	while (k != main->mini_map->map_img_size_y)
-	{
-		i = -1;
-		while (++i != main->mini_map->map_img_size_x)
-			player_addrs[main->mini_map->map_img_size_x * k + i] = 0xff0000;
-		k++;
-	}
-	mlx_put_image_to_window(main->mlx, main->mlx_window, player, main->player->player_x, main->player->player_y);
-}
-
-int	ft_key_press(int key_code, t_cub3d *main)
-{
-	printf("Ang:%0.2f\n", main->player->angle);
-	if (key_code == KEY_ESC)
-		exit(0);
-	if (key_code == KEY_A)
-		main->player->key_a = true;
-	if (key_code == KEY_S)
-		main->player->key_s = true;
-	if (key_code == KEY_D)
-		main->player->key_d = true;
-	if (key_code == KEY_W)
-		main->player->key_w = true;
-	if (key_code == KEY_RIGHT)
-		main->player->dir_right = true;
-	if (key_code == KEY_LEFT)
-		main->player->dir_left = true;
-	return (0);
-}
-
-int	ft_key_release(int key_code, t_cub3d *main)
-{
-	if (key_code == KEY_A)
-		main->player->key_a = false;
-	if (key_code == KEY_S)
-		main->player->key_s = false;
-	if (key_code == KEY_D)
-		main->player->key_d = false;
-	if (key_code == KEY_W)
-		main->player->key_w = false;
-	if (key_code == KEY_RIGHT)
-		main->player->dir_right = false;
-	if (key_code == KEY_LEFT)
-		main->player->dir_left = false;
-	return (0);
-}
+// void	game_put_player(t_cub3d *main)
+// {
+// 	int	i;
+// 	int	k;
+// 	void	*player;
+// 	int	*player_addrs;
+// 	i = 0;
+// 	k = 0;
+// 	player = mlx_new_image(main->mlx, main->mini_map->map_img_size_x, main->mini_map->map_img_size_y);
+// 	player_addrs = (int *)mlx_get_data_addr(player, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
+// 	while (k != main->mini_map->map_img_size_y)
+// 	{
+// 		i = -1;
+// 		while (++i != main->mini_map->map_img_size_x)
+// 			player_addrs[main->mini_map->map_img_size_x * k + i] = 0xff0000;
+// 		k++;
+// 	}
+// 	mlx_put_image_to_window(main->mlx, main->mlx_window, player, main->player->player_x, main->player->player_y);
+// }

@@ -33,10 +33,10 @@
 # define SUCCESSFUL				0
 
 /*------------MAP-SIZE--------------*/
-# define SCREEN_WIDTH			1920 / 2
-# define SCREEN_HEIGHT			1080 / 2
-# define MINI_MAP_WIDTH_RATION	2
-# define MINI_MAP_HEIGHT_RATION	2
+# define SCREEN_WIDTH			1920
+# define SCREEN_HEIGHT			1080
+# define MINI_MAP_WIDTH_RATION	4
+# define MINI_MAP_HEIGHT_RATION	4
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
 # define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
 
@@ -128,6 +128,7 @@ char			*get_texture_path(t_cub3d *main, int i, int k);
 unsigned long	rgb_to_hex(int transparent, int r, int g, int b);
 double			angle_to_radyan(double ang);
 
+int				move_loop(t_cub3d *main);
 int				ft_key_press(int key_code, t_cub3d *main);
 int				ft_key_release(int key_code, t_cub3d *main);
 int				get_SO_path(t_cub3d *main, int i, int k);
