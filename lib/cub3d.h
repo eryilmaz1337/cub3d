@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/27 19:31:15 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/28 18:35:37 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@
 # define SUCCESSFUL				0
 
 /*------------MAP-SIZE--------------*/
-# define SCREEN_WIDTH			1920
-# define SCREEN_HEIGHT			1080
-# define MINI_MAP_WIDTH_RATION	4
-# define MINI_MAP_HEIGHT_RATION	4
+# define SCREEN_WIDTH			1920 / 2
+# define SCREEN_HEIGHT			1080 / 2
+# define MINI_MAP_WIDTH_RATION	1
+# define MINI_MAP_HEIGHT_RATION	1
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
 # define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
 

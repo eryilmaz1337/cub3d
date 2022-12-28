@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/27 19:55:47 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/28 17:50:11 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,22 @@ void game_mini_map_paint(t_cub3d *main)
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map_img, 0, 0);
 }
 
-// void	game_put_player(t_cub3d *main)
-// {
-// 	int	i;
-// 	int	k;
-// 	void	*player;
-// 	int	*player_addrs;
-// 	i = 0;
-// 	k = 0;
-// 	player = mlx_new_image(main->mlx, main->mini_map->map_img_size_x, main->mini_map->map_img_size_y);
-// 	player_addrs = (int *)mlx_get_data_addr(player, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
-// 	while (k != main->mini_map->map_img_size_y)
-// 	{
-// 		i = -1;
-// 		while (++i != main->mini_map->map_img_size_x)
-// 			player_addrs[main->mini_map->map_img_size_x * k + i] = 0xff0000;
-// 		k++;
-// 	}
-// 	mlx_put_image_to_window(main->mlx, main->mlx_window, player, main->player->player_x, main->player->player_y);
-// }
+void	game_put_player(t_cub3d *main)
+{
+	int	i;
+	int	k;
+	void	*player;
+	int	*player_addrs;
+	i = 0;
+	k = 0;
+	player = mlx_new_image(main->mlx, main->mini_map->map_img_size_x, main->mini_map->map_img_size_y);
+	player_addrs = (int *)mlx_get_data_addr(player, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
+	while (k != main->mini_map->map_img_size_y)
+	{
+		i = -1;
+		while (++i != main->mini_map->map_img_size_x)
+			player_addrs[main->mini_map->map_img_size_x * k + i] = 0xff0000;
+		k++;
+	}
+	mlx_put_image_to_window(main->mlx, main->mlx_window, player, main->player->player_x, main->player->player_y);
+}
