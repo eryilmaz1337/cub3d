@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/28 18:35:37 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/28 20:43:24 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
 # define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
 
-# define KEY_ESC 53
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_W 13
-# define KEY_LEFT 123
-# define KEY_DOWN 125
-# define KEY_RIGHT 124
-# define KEY_UP 126
+# define KEY_ESC				53
+# define KEY_A					0
+# define KEY_S					1
+# define KEY_D					2
+# define KEY_W					13
+# define KEY_LEFT				123
+# define KEY_DOWN				125
+# define KEY_RIGHT				124
+# define KEY_UP					126
 
 
 # define MOVE_PIXEL 25
-# define MOVE_ANGLE 5
+# define MOVE_ANGLE 2.5
 
 
 typedef struct s_cub3d_map
@@ -104,6 +104,10 @@ typedef struct s_cub3d
 	t_cub3d_map			*map;
 	t_player			*player;
 }	t_cub3d;
+
+//*********{V.I.P}*********//
+/***/void check_leaks();/***/
+//*********{V.I.P}*********//
 
 void			exit_free(t_cub3d *main, int err_no);
 void			map_check(t_cub3d *main);

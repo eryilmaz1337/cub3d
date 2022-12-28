@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/28 18:40:55 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/28 19:55:56 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,13 @@
 // 	return (0);
 // }
 
-int	is_wall(t_cub3d *main, double x, double y, char c)
+int	is_wall(t_cub3d *main, double x, double y)
 {
 	double	new_x;
 	double	new_y;
+
 	new_x = (x + 2.0) / main->mini_map->map_img_size_x;
 	new_y = (y + 2.0) / main->mini_map->map_img_size_y;
-	// if (main->map->map[y][x] != c)
-	// 	if (main->map->map[y][x + (int)((double)MINI_MAP_WIDTH / (double)(main->map->map_max_line))] != c)
-	// 		if (main->map->map[y + (int)((double)MINI_MAP_HEIGHT / (double)main->map->map_lines_num)][x] != c)
-	// 			if (main->map->map[y + (int)((double)MINI_MAP_HEIGHT / (double)main->map->map_lines_num)][x + (int)((double)MINI_MAP_WIDTH / (double)(main->map->map_max_line))] != c)
-	// 				return (0);
-	//printf("x:%d y:%d x++:%0.2f y++:%0.2f MX:%0.2f MY:%0.2f\n", (int)x, (int)y, x - cos(angle_to_radyan(main->player->angle)),
-	//	y - (-1 * sin(angle_to_radyan(main->player->angle))), main->player->player_x, main->player->player_y);
-	//printf("%c\n", main->map->map[y + p_y][x + p_x]);
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sol_üst\n");
@@ -82,66 +75,32 @@ int	is_wall(t_cub3d *main, double x, double y, char c)
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sağ_üst\n");
-		return (1);
+		return (2);
 	}
 		new_x = (x + 2.0) / main->mini_map->map_img_size_x;
 		new_y = ((y - 2.0) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sol_alt\n");
-		return (1);
+		return (3);
 	}
 		new_x = ((x - 2.0) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
 		new_y = ((y - 2.0) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sağ_alt\n");
-		return (1);
+		return (4);
 	}
-	// if (c == 'W')
-	// {
-	// 	x -= cos(angle_to_radyan(main->player->angle));
-	// 	y -= -1 * sin(angle_to_radyan(main->player->angle));
-	// 	printf("-*W*-x:%d y:%d MX:%0.2f MY:%0.2f\n", (int)x, (int)y, main->player->player_x, main->player->player_y);
-	// 	if (main->map->map[(int)y][(int)x] == '1')
-	// 		return (1);
-	// }
-	// else if (c == 'A')
-	// {
-	// 	x -= -1 * sin(angle_to_radyan(main->player->angle));
-	// 	y += cos(angle_to_radyan(main->player->angle));
-	// 	if (main->map->map[(int)y][(int)x] == '1')
-	// 		return (1);
-	// }
-	// else if (c == 'S')
-	// {
-	// 	x -= -1 * cos(angle_to_radyan(main->player->angle));
-	// 	y -= sin(angle_to_radyan(main->player->angle));
-	// 	if (main->map->map[(int)y][(int)x] == '1')
-	// 		return (1);
-	// 	x -= -1 * cos(angle_to_radyan(main->player->angle));
-	// 	y -= sin(angle_to_radyan(main->player->angle));
-	// 	printf("-*S*-x:%d y:%d MX:%0.2f MY:%0.2f\n", (int)x, (int)y, main->player->player_x, main->player->player_y);
-	// 	if (main->map->map[(int)y][(int)x] == '1')
-	// 		return (1);
-	// }
-	// else if (c == 'D')
-	// {
-	// 	x -= sin(angle_to_radyan(main->player->angle));
-	// 	y -= cos(angle_to_radyan(main->player->angle));
-	// 	if (main->map->map[(int)y][(int)x] == '1')
-	// 		return (1);
-	// }
-	c++;
 	return (0);
 }
+
 
 int	move_loop(t_cub3d *main)
 {
 	double	x;
 	double	y;
 	int		status;
-	
+
 	status = 0;
 	x = main->player->player_x;
 	y = main->player->player_y;
@@ -149,28 +108,30 @@ int	move_loop(t_cub3d *main)
 	{
 		x += cos(angle_to_radyan(main->player->angle));
 		y += -1 * sin(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, x, y, 'W'))
+		if (!is_wall(main, x, y))
 			status = 1;
+		else
+			printf("---_%d_--*\n", is_wall(main, x, y));
 	}
 	if (main->player->key_a)
 	{
 		x += -1 * sin(angle_to_radyan(main->player->angle));
 		y -= cos(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, x, y, 'A'))
+		if (!is_wall(main, x, y))
 			status = 1;
 	}
 	if (main->player->key_s)
 	{
 		x += -1 * cos(angle_to_radyan(main->player->angle));
 		y += sin(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, x, y, 'S'))
+		if (!is_wall(main, x, y))
 			status = 1;
 	}
 	if (main->player->key_d)
 	{
 		x += sin(angle_to_radyan(main->player->angle));
 		y += cos(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, x, y, 'D'))
+		if (!is_wall(main, x, y))
 			status = 1;
 	}
 	if (main->player->dir_left)
@@ -185,7 +146,7 @@ int	move_loop(t_cub3d *main)
 	}
 	game_mini_map_paint(main);
 	game_put_player(main);
-	//printf("x:%0.2f\ty:%0.2f\tAng:%0.2f\n", main->player->player_x, main->player->player_y, main->player->angle);
+	printf("x:%0.2f\ty:%0.2f\tAng:%0.2f\n", main->player->player_x, main->player->player_y, main->player->angle);
 	//printf("x:%d y:%d MX:%0.2f MY:%0.2f\n", x, y, main->player->player_x, main->player->player_y);
 	return (0);
 }

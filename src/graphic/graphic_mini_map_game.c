@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/28 17:50:11 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/28 19:51:58 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	game_put_player(t_cub3d *main)
 {
 	int	i;
 	int	k;
+
 	void	*player;
 	int	*player_addrs;
 	i = 0;

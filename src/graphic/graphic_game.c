@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryilmaz <eryilmaz@student.42kocaeli.com.  +#+  +:+       +#+        */
+/*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/25 18:03:31 by eryilmaz         ###   ########.tr	      */
+/*   Updated: 2022/12/28 20:52:50 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/cub3d.h"
 void game_window(t_cub3d *main)
 {
+	int	a = SCREEN_WIDTH;
+	int b = SCREEN_HEIGHT;
 	main->mlx = mlx_init();
 	if (!main->mlx)
 		exit_free(main, MLX_ERROR_INIT);
-	main->mlx_window = mlx_new_window(main->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "CUB3D");
+	main->mlx_window = mlx_new_window(main->mlx, a, b, "CUB3D");
 	if (!main->mlx_window)
 		exit_free(main, MLX_ERROR_WINDOW);
 	main->game_img = mlx_new_image(main->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);

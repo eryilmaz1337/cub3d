@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:58:03 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/28 16:52:04 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/28 20:50:10 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int main(int argc, char **argv)
 	map_full_check(argc, argv, main); // leak var get_prime_map fonksiyonu
 	game_window(main);
 	loop_window_and_game(main);
+	check_leaks();
 	return (EXIT_SUCCESS);
 }
