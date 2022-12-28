@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:04:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/27 16:35:22 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/27 17:32:12 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,5 @@ unsigned long	rgb_to_hex(int transparent ,int r, int g, int b)//0x_00_00_ff
 
 double	angle_to_radyan(double ang)
 {
-	double	PI;
-
-	PI = 3.1459265;
-	return(ang * (PI / 180.0));
+	return(ang * (M_PI / 180.0));
 }

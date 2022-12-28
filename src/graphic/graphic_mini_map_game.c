@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/27 14:32:58 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:55:47 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	game_put_player(t_cub3d *main)
 
 int	ft_key_press(int key_code, t_cub3d *main)
 {
+	printf("Ang:%0.2f\n", main->player->angle);
 	if (key_code == KEY_ESC)
 		exit(0);
 	if (key_code == KEY_A)
