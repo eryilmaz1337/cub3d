@@ -70,7 +70,7 @@ void	game_put_player(t_cub3d *main)
 	int	k;
 
 	void	*player;
-	int	*player_addrs;
+	int		*player_addrs;
 	i = 0;
 	k = 0;
 	player = mlx_new_image(main->mlx, main->mini_map->map_img_size_x, main->mini_map->map_img_size_y);

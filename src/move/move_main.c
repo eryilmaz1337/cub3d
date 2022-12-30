@@ -70,22 +70,22 @@ int	is_wall(t_cub3d *main, double x, double y)
 		printf("WHTYUk_sol_üst\n");
 		return (1);
 	}
-		new_x = ((x - 2.0) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
-		new_y = (y + 2.0) / main->mini_map->map_img_size_y;
+	new_x = ((x - 2.0) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
+	new_y = (y + 2.0) / main->mini_map->map_img_size_y;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sağ_üst\n");
 		return (2);
 	}
-		new_x = (x + 2.0) / main->mini_map->map_img_size_x;
-		new_y = ((y - 2.0) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
+	new_x = (x + 2.0) / main->mini_map->map_img_size_x;
+	new_y = ((y - 2.0) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sol_alt\n");
 		return (3);
 	}
-		new_x = ((x - 2.0) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
-		new_y = ((y - 2.0) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
+	new_x = ((x - 2.0) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
+	new_y = ((y - 2.0) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sağ_alt\n");
@@ -146,6 +146,7 @@ int	move_loop(t_cub3d *main)
 	}
 	game_mini_map_paint(main);
 	game_put_player(main);
+	put_ray(main);
 	printf("x:%0.2f\ty:%0.2f\tAng:%0.2f\n", main->player->player_x, main->player->player_y, main->player->angle);
 	//printf("x:%d y:%d MX:%0.2f MY:%0.2f\n", x, y, main->player->player_x, main->player->player_y);
 	return (0);

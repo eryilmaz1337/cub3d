@@ -44,6 +44,6 @@ int main(int argc, char **argv)
 	map_full_check(argc, argv, main); // leak var get_prime_map fonksiyonu
 	game_window(main);
 	loop_window_and_game(main);
-	check_leaks();
+	//check_leaks();
 	return (EXIT_SUCCESS);
 }
