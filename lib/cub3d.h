@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/28 20:43:24 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/06 18:53:33 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define MINI_MAP_HEIGHT_RATION	1
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
 # define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
-/*-----------KEY-KOD----------------*/
+
 # define KEY_ESC				53
 # define KEY_A					0
 # define KEY_S					1
@@ -49,14 +49,14 @@
 # define KEY_DOWN				125
 # define KEY_RIGHT				124
 # define KEY_UP					126
+# define KEY_SHIFT				257
 
-/*----------MOVE--------------------*/
-# define MOVE_BEAM_ANGLE_INCREASE_RATIO 0.5
-# define MOVE_PERSPECTIVE 60
-# define MOVE_PIXEL 25
-# define MOVE_ANGLE 2.5
 
-/*---------STCRUCT------------------*/
+# define MOVE_PIXEL 1
+# define MOVE_PIXEL_FAST 2
+# define ROT_ANGLE 5
+
+
 typedef struct s_cub3d_map
 {
 	char			**map;
@@ -78,19 +78,25 @@ typedef struct s_player
 	bool			key_s;
 	bool			key_d;
 	bool			key_a;
+	bool			key_shift;
 	bool			dir_right;
 	bool			dir_left;
-	double			def_p_x;
-	double			def_p_y;
+	int				*player_addr;
+	double			move_speed;
 	double			player_x;
 	double			player_y;
 	double			angle;
+	void			*player_img;
 }	t_player;
 
 typedef struct s_cub3d_mini_map
 {
 	int				map_img_size_y;
 	int				map_img_size_x;
+	int			*ray_addr;
+	void			*ray_img;
+	int				ray_center;
+	
 }	t_cub3d_mini_map;
 
 typedef struct s_cub3d
@@ -100,12 +106,10 @@ typedef struct s_cub3d
 	int					tmp_img_z;
 	int					*game_img_adress;
 	int					*mini_map_img_adress;
-	int					*img_ray_adress;
 	void				*mlx;
 	void				*mlx_window;
 	void				*game_img;
 	void				*mini_map_img;
-	void				*img_ray;
 	t_cub3d_mini_map	*mini_map;
 	t_cub3d_map			*map;
 	t_player			*player;
@@ -115,7 +119,6 @@ typedef struct s_cub3d
 // /***/void check_leaks();/***/
 // //*********{V.I.P}*********//
 
-/*--------------FUNCTION----------*/
 void			exit_free(t_cub3d *main, int err_no);
 void			map_check(t_cub3d *main);
 void			map_full_check(int index, char **str, t_cub3d *main);
@@ -130,7 +133,7 @@ void			game_mini_map_paint(t_cub3d *main);
 void			game_window(t_cub3d *main);
 void			game_put_player(t_cub3d *main);
 void			set_direction(t_cub3d *main, char s, int c, int b);
-void			put_ray(t_cub3d *main);
+void			draw_ray(t_cub3d *main, int i,int k);
 
 char			**ft_double_strcpy(char **s, int i);
 char			**ft_split_isspace(const char *s);
@@ -140,6 +143,7 @@ char			*get_texture_path(t_cub3d *main, int i, int k);
 unsigned long	rgb_to_hex(int transparent, int r, int g, int b);
 double			angle_to_radyan(double ang);
 
+int				is_wall(t_cub3d *main, double x, double y);
 int				move_loop(t_cub3d *main);
 int				ft_key_press(int key_code, t_cub3d *main);
 int				ft_key_release(int key_code, t_cub3d *main);

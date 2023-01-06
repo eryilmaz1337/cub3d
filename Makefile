@@ -12,7 +12,7 @@ FILE		= ./src/move/*.c \
 				./lib/get_next_line/get_next_line_utils.c \
 				./src/archive/libft.a \
 				./src/archive/libmlx.a \
-#./src/leacks_cheker_ex.c
+				#./src/leacks_cheker_ex.c
 RM			= rm -f
 AR			= ar rcs
 

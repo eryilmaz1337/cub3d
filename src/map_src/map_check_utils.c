@@ -117,8 +117,6 @@ void	set_direction(t_cub3d *main, char s, int c, int b)
 {
 	main->mini_map = malloc(sizeof (t_cub3d_mini_map));
 	main->player = malloc(sizeof (t_player));
-	main->player->def_p_x = (double)b;
-	main->player->def_p_y= (double)c;
 	main->player->player_x = (double)b;
 	main->player->player_y = (double)c;
 	main->player->player_y *= MINI_MAP_HEIGHT / main->map->map_lines_num;

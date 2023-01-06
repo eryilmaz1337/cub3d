@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:58:03 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/28 20:50:10 by uercan           ###   ########.fr       */
+/*   Updated: 2022/12/29 13:22:37 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void loop_window_and_game(t_cub3d *main)
 {
 	main_game_img_paint(main);
 	game_mini_map_paint(main);
-	//mlx_hook(main->mlx_window, 2, 2L << 1, move, main);
 	mlx_hook(main->mlx_window, 2, 1L<<0, &ft_key_press, main);
 	mlx_hook(main->mlx_window, 3, 1L<<1, &ft_key_release, main);
 	mlx_hook(main->mlx_window, 17, (0L), ft_close, main);
@@ -41,7 +40,7 @@ int main(int argc, char **argv)
 	main->map = (t_cub3d_map *)malloc(sizeof(t_cub3d_map));
 	if(!main->map)
 		exit_free(main, MALLOC_ERROR);
-	map_full_check(argc, argv, main); // leak var get_prime_map fonksiyonu
+	map_full_check(argc, argv, main);
 	game_window(main);
 	loop_window_and_game(main);
 	//check_leaks();
