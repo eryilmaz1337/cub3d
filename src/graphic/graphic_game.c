@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/06 18:56:47 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:15:06 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,9 @@ void	draw_ray(t_cub3d *main, int i, int k)
 	int status = 0;
 	int i2;
 	int k2;
-	
+	double angle2;
+
+	angle2 = (double)angle;
 	l = 0;
 	l2 = 1;
 	while (k != MINI_MAP_HEIGHT)
@@ -161,39 +163,7 @@ void	draw_ray(t_cub3d *main, int i, int k)
 	k = main->player->player_x + (main->mini_map->map_img_size_x / 2);
 	new_x = (main->player->player_x - ((SCREEN_WIDTH / 2)));
 	new_y = (main->player->player_y - ((SCREEN_HEIGHT / 2)));
-	//printf("%d %d\n", new_x, new_y);
-	//SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
-	//SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
-	/*int l3 = 100;
-	i2 = 0;
-	k2 = 0;
-	k2++;
-	i2++;
-	angle++;
-	status++;
-	while (l++ < SCREEN_HEIGHT)
-	{
-		l2 = 0;
-		while (l2++ < l3)
-		{
-			//printf("{%c}\n",main->map->map[(i / main->mini_map->map_img_size_y)][(k / main->mini_map->map_img_size_x)]);
-			if (((i - l) / main->mini_map->map_img_size_y) >= 0)
-			{
-				if (main->map->map[((i - l) / main->mini_map->map_img_size_y)][((k + l2) / main->mini_map->map_img_size_x)] != '1')
-					main->mini_map->ray_addr[((i - l) * SCREEN_WIDTH) + (k + l2)] = 0x00ff00;
-			else
-				break;
-			}
-			if (((i - l) * SCREEN_WIDTH) >= 0)
-			{
-				if (main->map->map[((i - l) / main->mini_map->map_img_size_y)][(((k + 1) - l2) / main->mini_map->map_img_size_x)] != '1')
-					main->mini_map->ray_addr[((i - l) * SCREEN_WIDTH) + ((k + 1) - l2)] = 0x00ff00;
-				else
-					break;
-			}
-		}
-		l3++;
-	}*/
+
 	while (status == 0)
 	{
 		//if (main->map->map[((i - ((int)sin(angle_to_radyan(main->player->angle)) * l))) / main->mini_map->map_img_size_y][((k + ((int)cos(angle_to_radyan(main->player->angle)) * l))) / main->mini_map->map_img_size_x] != '1')
@@ -207,7 +177,6 @@ void	draw_ray(t_cub3d *main, int i, int k)
 			{
 				if (main->map->map[i2][k2] != '1' && i2 < main->map->map_lines_num && k2 < main->map->map_max_line)
 				{
-					//main->mini_map->ray_addr[(((i - ((int)sin(angle_to_radyan(angle)) * l))) * SCREEN_WIDTH) + ((k + ((int)cos(angle_to_radyan(angle)) * l)))] = 0x00ff00;
 					main->mini_map->ray_addr[(((i - (int)(sin(angle_to_radyan(angle)) * (double)l))) * SCREEN_WIDTH) + ((k + (int)(cos(angle_to_radyan(angle)) * (double)l)))] = 0x00ff00;
 					//DONT! main->mini_map->ray_addr[(int)((((double)i - (sin(angle_to_radyan(main->player->angle)) * l))) * SCREEN_WIDTH) + (int)((double)k + (cos(angle_to_radyan(main->player->angle)) * l))] = 0x00ff00;
 					//printf("i:%d k:%d\n", (int)((((double)i - (sin(angle_to_radyan(main->player->angle)) * l))) * SCREEN_WIDTH), (int)((double)k + (cos(angle_to_radyan(main->player->angle)) * l)));
@@ -224,7 +193,6 @@ void	draw_ray(t_cub3d *main, int i, int k)
 			{
 				if (main->map->map[i2][k2] != '1')
 				{
-					//main->mini_map->ray_addr[(((i - ((int)sin(angle_to_radyan(angle)) * l))) * SCREEN_WIDTH) + ((k + ((int)cos(angle_to_radyan(angle)) * l)))] = 0x00ff00;
 					main->mini_map->ray_addr[(((i - (int)(sin(angle_to_radyan(angle - 45)) * (double)l))) * SCREEN_WIDTH) + ((k + (int)(cos(angle_to_radyan(angle - 45)) * (double)l)))] = 0x00ff00;
 					//DONT! main->mini_map->ray_addr[(int)((((double)i - (sin(angle_to_radyan(main->player->angle)) * l))) * SCREEN_WIDTH) + (int)((double)k + (cos(angle_to_radyan(main->player->angle)) * l))] = 0x00ff00;
 					//printf("i:%d k:%d\n", (int)((((double)i - (sin(angle_to_radyan(main->player->angle)) * l))) * SCREEN_WIDTH), (int)((double)k + (cos(angle_to_radyan(main->player->angle)) * l)));
@@ -236,21 +204,33 @@ void	draw_ray(t_cub3d *main, int i, int k)
 				}
 			}
 			//------------------
-			double angle2 = (double)angle;
-			i2 = ((i - (int)(sin(angle_to_radyan(angle2 - 0.5)) * (double)l))) / main->mini_map->map_img_size_y;
-			k2 = ((k + (int)(cos(angle_to_radyan(angle2 - 0.5)) * (double)l))) / main->mini_map->map_img_size_x;
+			angle2 = (double)angle;
+			angle2 -= 0.5;
+			i2 = ((i - (int)(sin(angle_to_radyan(angle2)) * (double)l))) / main->mini_map->map_img_size_y;
+			k2 = ((k + (int)(cos(angle_to_radyan(angle2)) * (double)l))) / main->mini_map->map_img_size_x;
 			if (i2 < main->map->map_lines_num && k2 < main->map->map_max_line)
 			{
 				if (main->map->map[i2][k2] != '1' && i2 < main->map->map_lines_num && k2 < main->map->map_max_line)
-				{
-					//main->mini_map->ray_addr[(((i - ((int)sin(angle_to_radyan(angle)) * l))) * SCREEN_WIDTH) + ((k + ((int)cos(angle_to_radyan(angle)) * l)))] = 0x00ff00;
-					main->mini_map->ray_addr[(((i - (int)(sin(angle_to_radyan(angle2 - 0.5)) * (double)l))) * SCREEN_WIDTH) + ((k + (int)(cos(angle_to_radyan(angle2 - 0.5)) * (double)l)))] = 0xffffff;
-					//DONT! main->mini_map->ray_addr[(int)((((double)i - (sin(angle_to_radyan(main->player->angle)) * l))) * SCREEN_WIDTH) + (int)((double)k + (cos(angle_to_radyan(main->player->angle)) * l))] = 0x00ff00;
-					//printf("i:%d k:%d\n", (int)((((double)i - (sin(angle_to_radyan(main->player->angle)) * l))) * SCREEN_WIDTH), (int)((double)k + (cos(angle_to_radyan(main->player->angle)) * l)));
-				}
+					main->mini_map->ray_addr[(((i - (int)(sin(angle_to_radyan(angle2)) * (double)l))) * SCREEN_WIDTH) + ((k + (int)(cos(angle_to_radyan(angle2)) * (double)l)))] = 0x0f0ff0;
 				else
 				{
-					printf("1/l:%d ANG:%d %d %d\n", l2, angle, i2, k2);
+					printf("3/l:%d ANG:%d %d %d\n", l2, angle, i2, k2);
+					status = 1;
+				}
+			}
+			//------------------
+			//------------------
+			angle2 = (double)angle;
+			angle2 -= 44.5;
+			i2 = ((i - (int)(sin(angle_to_radyan(angle2)) * (double)l))) / main->mini_map->map_img_size_y;
+			k2 = ((k + (int)(cos(angle_to_radyan(angle2)) * (double)l))) / main->mini_map->map_img_size_x;
+			if (i2 < main->map->map_lines_num && k2 < main->map->map_max_line)
+			{
+				if (main->map->map[i2][k2] != '1' && i2 < main->map->map_lines_num && k2 < main->map->map_max_line)
+					main->mini_map->ray_addr[(((i - (int)(sin(angle_to_radyan(angle2)) * (double)l))) * SCREEN_WIDTH) + ((k + (int)(cos(angle_to_radyan(angle2)) * (double)l)))] = 0xff0fff;
+				else
+				{
+					printf("4/l:%d ANG:%d %d %d\n", l2, angle, i2, k2);
 					status = 1;
 				}
 			}
