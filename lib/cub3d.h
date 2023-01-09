@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/06 19:20:34 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/09 17:22:31 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@
 # define SUCCESSFUL				0
 
 /*------------MAP-SIZE--------------*/
-# define SCREEN_WIDTH			1920 / 2
-# define SCREEN_HEIGHT			1080 / 2
-# define MINI_MAP_WIDTH_RATION	1
-# define MINI_MAP_HEIGHT_RATION	1
+# define SCREEN_WIDTH			1920 / 1
+# define SCREEN_HEIGHT			1080 / 1
+# define MINI_MAP_WIDTH_RATION	3
+# define MINI_MAP_HEIGHT_RATION	3
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
 # define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
 
@@ -55,7 +55,7 @@
 # define MOVE_PIXEL 1
 # define MOVE_PIXEL_FAST 2
 # define ROT_ANGLE 10
-# define ROT_ANGLE_USER 60
+# define ROT_ANGLE_USER 90
 
 
 typedef struct s_cub3d_map
@@ -119,6 +119,9 @@ typedef struct s_cub3d
 // //*********{V.I.P}*********//
 // /***/void check_leaks();/***/
 // //*********{V.I.P}*********//
+
+void			put_to_3d(t_cub3d *main, int dis, int ray);
+void			put_game(t_cub3d *main);
 
 void			exit_free(t_cub3d *main, int err_no);
 void			map_check(t_cub3d *main);

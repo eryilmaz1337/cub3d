@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/06 16:25:47 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/09 17:41:38 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	move_loop(t_cub3d *main)
 	}
 	if (main->player->key_a)
 	{
-		x += -1 * sin(angle_to_radyan(main->player->angle));
+		x += -1 * sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
 		y -= cos(angle_to_radyan(main->player->angle));
 		if (!is_wall(main, x, y))
 			status = 1;
@@ -134,7 +134,7 @@ int	move_loop(t_cub3d *main)
 	if (main->player->key_s)
 	{
 		x += -1 * cos(angle_to_radyan(main->player->angle));
-		y += sin(angle_to_radyan(main->player->angle));
+		y += sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
 		if (!is_wall(main, x, y))
 			status = 1;
 		else
@@ -142,7 +142,7 @@ int	move_loop(t_cub3d *main)
 	}
 	if (main->player->key_d)
 	{
-		x += sin(angle_to_radyan(main->player->angle));
+		x += sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
 		y += cos(angle_to_radyan(main->player->angle));
 		if (!is_wall(main, x, y))
 			status = 1;
@@ -159,6 +159,7 @@ int	move_loop(t_cub3d *main)
 		main->player->player_y = y;
 		status = 0;
 	}
+	put_game(main);
 	game_mini_map_paint(main);
 	draw_ray(main, 0, 0);
 	game_put_player(main);

@@ -6,11 +6,28 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/06 19:15:06 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/09 17:44:26 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/cub3d.h"
+
+void	put_game(t_cub3d *main)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	y = 0;
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
+	while (y != SCREEN_HEIGHT)
+	{
+		x = -1;
+		while (++x != SCREEN_WIDTH)
+			main->game_img_adress[SCREEN_WIDTH * y + x] = rgb_to_hex(255,0,0,0);
+		y++;
+	}
+}
 
 void	create_ray_image(t_cub3d *main)
 {
@@ -87,7 +104,7 @@ void	draw_ray(t_cub3d *main, int i, int k)
 	int tmp_next_x;
 
 	ray_run_distance = 0;
-	angle_tmp = main->player->angle;
+	angle_tmp = main->player->angle - 45;
 	status = 0;
 	tmp_y = main->player->player_y + (main->mini_map->map_img_size_y / 2);
 	tmp_x = main->player->player_x + (main->mini_map->map_img_size_x / 2);
@@ -111,7 +128,10 @@ void	draw_ray(t_cub3d *main, int i, int k)
 			if (main->map->map[tmp_next_y][tmp_next_x] != '1')
 				main->mini_map->ray_addr[(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_run_distance))) * MINI_MAP_WIDTH) + ((tmp_x + (int)(cos(angle_to_radyan(angle_tmp)) * (double)ray_run_distance)))] = 0x00ff00;
 			else
+			{
+				put_to_3d(main, ray_run_distance, i);
 				status = 1;
+			}
 			//printf("%d\n",tmp_next_x);
 			//printf("%d\n",tmp_next_y);
 			ray_run_distance++;
