@@ -51,10 +51,11 @@
 # define KEY_UP					126
 # define KEY_SHIFT				257
 
-
+/*----------------MOVE-------------*/
 # define MOVE_PIXEL 1
 # define MOVE_PIXEL_FAST 2
-# define ROT_ANGLE 5
+# define ROT_ANGLE 10
+# define ROT_ANGLE_USER 60
 
 
 typedef struct s_cub3d_map
@@ -96,7 +97,7 @@ typedef struct s_cub3d_mini_map
 	int			*ray_addr;
 	void			*ray_img;
 	int				ray_center;
-	
+
 }	t_cub3d_mini_map;
 
 typedef struct s_cub3d
