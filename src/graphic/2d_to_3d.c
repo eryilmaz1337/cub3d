@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:07:17 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/09 17:57:45 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/10 15:55:01 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 void	put_to_3d(t_cub3d *main, int dis, int ray)
 {
-	(void)main;
+	//(void)main;
 	int	wh;
 	int	draw_loc;
-
-	draw_loc = ((SCREEN_WIDTH * (SCREEN_HEIGHT / 2) + (SCREEN_WIDTH - 1)) - ray);
-	wh = SCREEN_HEIGHT / dis;
-	//printf("dis:%d draw_loc:%d ray:%d\n", dis, draw_loc, ray);
-	int x = dis;
-	int y = wh;
-	//y = draw_loc;
-		//main->game_img_adress[draw_loc] = 0xffff00;
-
 	int i;
-	int k;
-	
-	i = -1;
-	while (++i < wh)
+	int	mid;
+
+	i = 0;
+	mid = SCREEN_HEIGHT / 2;
+	wh = (SCREEN_WIDTH / dis) * 2;
+
+	draw_loc = ((SCREEN_WIDTH * mid + (SCREEN_WIDTH)) - ray);
+	//if (ray == 0)
+	//	printf("dis:%d draw_loc:%d ray:%d\n", dis, draw_loc, ray);
+	while (i < wh)
 	{
-		k = -1;
-		while (++k < wh)
-		{
-			main->game_img_adress[] =  0xffff00;
-		}
+		main->game_img_adress[draw_loc - (SCREEN_WIDTH * i)] = 0xffff00 * dis;
+		main->game_img_adress[draw_loc + (SCREEN_WIDTH * i)] = 0xffff00 * dis;
+		i++;
 	}
+		//main->game_img_adress[draw_loc - (SCREEN_WIDTH * i++)] = mlx_get_data_addr(main->mlx, main->map->NO_texture_addr, 0, 0);
+	
+	
 }

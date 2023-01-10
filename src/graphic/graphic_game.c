@@ -6,26 +6,30 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/09 17:44:26 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/10 15:40:17 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/cub3d.h"
 
-void	put_game(t_cub3d *main)
+void	put_backscreen(t_cub3d *main)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	y = 0;
+	int i;
+	int k;
+	int sky;
+	k = 0;
+	i = 0;
+	sky = SCREEN_HEIGHT / 2;
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
-	while (y != SCREEN_HEIGHT)
+	while (k != SCREEN_HEIGHT)
 	{
-		x = -1;
-		while (++x != SCREEN_WIDTH)
-			main->game_img_adress[SCREEN_WIDTH * y + x] = rgb_to_hex(255,0,0,0);
-		y++;
+		i = -1;
+		while (++i != SCREEN_WIDTH && k != sky)
+			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
+		i = -1;
+		while (++i != SCREEN_WIDTH && k >= sky)
+			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->F_rgb_code;
+		k++;
 	}
 }
 
@@ -96,7 +100,7 @@ void main_game_img_paint(t_cub3d *main)
 void	draw_ray(t_cub3d *main, int i, int k)
 {
 	double ray_run_distance;
-	int angle_tmp;
+	double angle_tmp;
 	int status;
 	int tmp_x;
 	int tmp_y;
@@ -117,7 +121,7 @@ void	draw_ray(t_cub3d *main, int i, int k)
 	}
 	i = 0;
 	k = 0;
-	while (i <= ROT_ANGLE_USER)
+	while (i <= SCREEN_WIDTH)
 	{
 		ray_run_distance = 0;
 		status = 0;
@@ -137,7 +141,7 @@ void	draw_ray(t_cub3d *main, int i, int k)
 			ray_run_distance++;
 		}
 		//printf("%d %d\n", tmp_next_x, tmp_next_y);
-		angle_tmp++;
+		angle_tmp += ((double)90 / (double)SCREEN_WIDTH);
 		i++;
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map->ray_img, 0, 0);

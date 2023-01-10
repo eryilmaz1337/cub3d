@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/09 17:22:31 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/10 15:26:55 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@
 
 typedef struct s_cub3d_map
 {
+	void			*NO_texture_img;
+	int				*NO_texture_addr;
 	char			**map;
 	char			*map_name;
 	char			*NO_texture_path;
@@ -94,7 +96,7 @@ typedef struct s_cub3d_mini_map
 {
 	int				map_img_size_y;
 	int				map_img_size_x;
-	int			*ray_addr;
+	int				*ray_addr;
 	void			*ray_img;
 	int				ray_center;
 
@@ -121,7 +123,7 @@ typedef struct s_cub3d
 // //*********{V.I.P}*********//
 
 void			put_to_3d(t_cub3d *main, int dis, int ray);
-void			put_game(t_cub3d *main);
+void			put_backscreen(t_cub3d *main);
 
 void			exit_free(t_cub3d *main, int err_no);
 void			map_check(t_cub3d *main);

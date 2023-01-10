@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/09 17:41:38 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/10 15:43:54 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	is_wall(t_cub3d *main, double x, double y)
 	double	new_y;
 	double	collider;
 
-	collider = 6.0;
+	collider = 7.0;
 	new_x = (x + collider) / main->mini_map->map_img_size_x;
 	new_y = (y + collider) / main->mini_map->map_img_size_y;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
@@ -159,7 +159,7 @@ int	move_loop(t_cub3d *main)
 		main->player->player_y = y;
 		status = 0;
 	}
-	put_game(main);
+	put_backscreen(main);
 	game_mini_map_paint(main);
 	draw_ray(main, 0, 0);
 	game_put_player(main);
@@ -191,6 +191,7 @@ int	ft_key_press(int key_code, t_cub3d *main)
 
 int	ft_key_release(int key_code, t_cub3d *main)
 {
+	//mlx_clear_window(main->mlx, main->mlx_window);
 	if (key_code == KEY_A)
 		main->player->key_a = false;
 	if (key_code == KEY_S)
