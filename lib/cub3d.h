@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/10 15:26:55 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/12 18:01:33 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define MAX_INT 2147483647
+# define MIN_INT -2147483648
 /*------------ERROR-CODE----------------*/
 # define PROGRAM_ARG_ERROR		101	//22	EINVAL	Invalid argument
 # define FILE_NOT_FOUND_ERROR	102	//2		ENOENT	No such file or directory
@@ -40,6 +42,7 @@
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
 # define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
 
+/*----------KEY-CODES------------*/
 # define KEY_ESC				53
 # define KEY_A					0
 # define KEY_S					1
@@ -53,10 +56,12 @@
 
 /*----------------MOVE-------------*/
 # define MOVE_PIXEL 1
-# define MOVE_PIXEL_FAST 2
-# define ROT_ANGLE 10
-# define ROT_ANGLE_USER 90
+# define MOVE_PIXEL_FAST 10
+# define ROT_ANGLE 5
+# define ROT_ANGLE_USER 60
 
+# define MINI_WALL 0xf0ff0f
+# define MINI_FLOOR 0xba8576
 
 typedef struct s_cub3d_map
 {
@@ -84,6 +89,8 @@ typedef struct s_player
 	bool			key_shift;
 	bool			dir_right;
 	bool			dir_left;
+	bool			dir_up;
+	bool			dir_down;
 	int				*player_addr;
 	double			move_speed;
 	double			player_x;
@@ -98,7 +105,7 @@ typedef struct s_cub3d_mini_map
 	int				map_img_size_x;
 	int				*ray_addr;
 	void			*ray_img;
-	int				ray_center;
+	int				screen_focus;
 
 }	t_cub3d_mini_map;
 
@@ -122,7 +129,7 @@ typedef struct s_cub3d
 // /***/void check_leaks();/***/
 // //*********{V.I.P}*********//
 
-void			put_to_3d(t_cub3d *main, int dis, int ray);
+void			put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle);
 void			put_backscreen(t_cub3d *main);
 
 void			exit_free(t_cub3d *main, int err_no);

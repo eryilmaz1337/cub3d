@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/06 13:21:35 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/11 17:59:28 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void map_paint(t_cub3d *main)
 		{
 			// printf("%c", main->map->map[x][y]);
 			if (main->map->map[y][x] == '1')
-				ft_pixel_put(main, main->mini_map->map_img_size_x * x, main->mini_map->map_img_size_y * y, 0xf0ff0f);
+				ft_pixel_put(main, main->mini_map->map_img_size_x * x, main->mini_map->map_img_size_y * y, MINI_WALL);
 			else if (main->map->map[y][x] == '0')
-				ft_pixel_put(main, main->mini_map->map_img_size_x * x, main->mini_map->map_img_size_y * y, 0xba8576);
+				ft_pixel_put(main, main->mini_map->map_img_size_x * x, main->mini_map->map_img_size_y * y, MINI_FLOOR);
 		}
 	}
 }

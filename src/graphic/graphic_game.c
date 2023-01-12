@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/10 15:40:17 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/12 18:08:56 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ void	put_backscreen(t_cub3d *main)
 	{
 		i = -1;
 		while (++i != SCREEN_WIDTH && k != sky)
-			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
+		{
+			if ((i * k) / 7 % 10000 == 0)
+				main->game_img_adress[SCREEN_WIDTH * k + i] = 0xffe100;
+			else
+				main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
+		}
 		i = -1;
 		while (++i != SCREEN_WIDTH && k >= sky)
 			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->F_rgb_code;
@@ -53,8 +58,19 @@ void	create_ray_image(t_cub3d *main)
 
 void game_window(t_cub3d *main)
 {
-	int	a = SCREEN_WIDTH;
-	int b = SCREEN_HEIGHT;
+	int	a;
+	int	b;
+	
+	a = SCREEN_WIDTH;
+	b = SCREEN_HEIGHT;
+
+	
+	// main->map->NO_texture_img = mlx_xpm_file_to_image(main->mlx, "/Users/uercan/Desktop/c3d_v8.5/texture/wall_2.xpm", &a, &b);
+	
+	
+	main->mini_map->screen_focus = SCREEN_HEIGHT / 2;
+
+	
 	main->mlx = mlx_init();
 	if (!main->mlx)
 		exit_free(main, MLX_ERROR_INIT);
@@ -88,7 +104,7 @@ void main_game_img_paint(t_cub3d *main)
 	{
 		i = -1;
 		while (++i != SCREEN_WIDTH && k != sky)
-			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
+				main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
 		i = -1;
 		while (++i != SCREEN_WIDTH && k >= sky)
 			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->F_rgb_code;
@@ -99,7 +115,7 @@ void main_game_img_paint(t_cub3d *main)
 
 void	draw_ray(t_cub3d *main, int i, int k)
 {
-	double ray_run_distance;
+	double ray_lenght;
 	double angle_tmp;
 	int status;
 	int tmp_x;
@@ -107,7 +123,7 @@ void	draw_ray(t_cub3d *main, int i, int k)
 	int tmp_next_y;
 	int tmp_next_x;
 
-	ray_run_distance = 0;
+	ray_lenght = 0;
 	angle_tmp = main->player->angle - 45;
 	status = 0;
 	tmp_y = main->player->player_y + (main->mini_map->map_img_size_y / 2);
@@ -121,27 +137,36 @@ void	draw_ray(t_cub3d *main, int i, int k)
 	}
 	i = 0;
 	k = 0;
-	while (i <= SCREEN_WIDTH)
+	while (i < SCREEN_WIDTH)
 	{
-		ray_run_distance = 0;
+		ray_lenght = 0;
 		status = 0;
 		while (status == 0)
 		{
-			tmp_next_y = ((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_run_distance))) / main->mini_map->map_img_size_y;
-			tmp_next_x = ((tmp_x + (int)(cos(angle_to_radyan(angle_tmp)) * (double)ray_run_distance))) / main->mini_map->map_img_size_x;
+			// if (i == SCREEN_WIDTH / 2)
+			// {
+			// 	printf("ang:%0.f\n", angle_tmp);
+			// }
+			tmp_next_y = ((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) / main->mini_map->map_img_size_y;
+			tmp_next_x = ((tmp_x + (int)(cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) / main->mini_map->map_img_size_x;
 			if (main->map->map[tmp_next_y][tmp_next_x] != '1')
-				main->mini_map->ray_addr[(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_run_distance))) * MINI_MAP_WIDTH) + ((tmp_x + (int)(cos(angle_to_radyan(angle_tmp)) * (double)ray_run_distance)))] = 0x00ff00;
+				main->mini_map->ray_addr[(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) * MINI_MAP_WIDTH) + ((tmp_x + (int) (cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght)))] = 0x00ff00;
 			else
 			{
-				put_to_3d(main, ray_run_distance, i);
+				put_to_3d(main, ray_lenght, i,(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) * MINI_MAP_WIDTH) + ((tmp_x + (int) (cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght))), angle_tmp);
 				status = 1;
 			}
+			// if (i == SCREEN_WIDTH / 2)
+			// {
+			// 	main->mini_map->ray_addr[(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) * MINI_MAP_WIDTH) + ((tmp_x + (int)(cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght)))] = 0x0f0f0f;
+			// 	printf("ang:%0.f\n", angle_tmp);
+			// }
 			//printf("%d\n",tmp_next_x);
 			//printf("%d\n",tmp_next_y);
-			ray_run_distance++;
+			ray_lenght += 0.1;
 		}
 		//printf("%d %d\n", tmp_next_x, tmp_next_y);
-		angle_tmp += ((double)90 / (double)SCREEN_WIDTH);
+		angle_tmp += ((double)ROT_ANGLE_USER/ (double)SCREEN_WIDTH);
 		i++;
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map->ray_img, 0, 0);
