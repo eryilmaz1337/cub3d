@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/13 04:01:48 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/13 07:02:21 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	draw_ray(t_cub3d *main, int i, int k)
 	k = 0;
 	while (i < SCREEN_WIDTH)
 	{
-		ray_lenght = 0;
+		ray_lenght = 0.1;
 		status = 0;
 		while (status == 0)
 		{
@@ -179,12 +179,16 @@ void	draw_ray(t_cub3d *main, int i, int k)
 			// 	ray_lenght += 0.001;
 			// if (ray_lenght < 5)
 			// 	ray_lenght += 0.01;
-			 if (ray_lenght < 50)
-				ray_lenght += 0.1;
-			else if (ray_lenght < 200)
+			
+			//  if (ray_lenght < 50)
+			// 	ray_lenght += 0.1;
+			// else if (ray_lenght < 200)
 				ray_lenght++;
-			else
-				ray_lenght += 10;
+			// else
+			// 	ray_lenght += 10;
+
+			//ray_lenght += ray_lenght / (ray_lenght * 10);
+			
 			//printf("%0.2f\n", ray_lenght);
 		}
 		//printf("%d %d\n", tmp_next_x, tmp_next_y);

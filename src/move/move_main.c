@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/13 06:02:32 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/13 06:13:59 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ int	move_loop(t_cub3d *main)
 			main->player->angle -= 360;
 	while (main->player->angle < 0)
 			main->player->angle += 360;
-	printf("%0.2f\n", main->player->angle);
+	//printf("%0.2f\n", main->player->angle);
 	put_backscreen(main);
 	game_mini_map_paint(main);
 	draw_ray(main, 0, 0);
