@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:07:17 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/13 07:11:09 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/13 07:37:57 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	i = 0;
 	wh = (SCREEN_HEIGHT / dis) * 3;
 	draw_loc = ((SCREEN_WIDTH * main->mini_map->screen_focus + (SCREEN_WIDTH)) - ray);
+
+	int	pic_loc;
+	int	j;
+
+	j = 0;
+	pic_loc = ((64 * 32) - ray);
 	//oran = 1 + (wh * 2);
 	//color = 0xeeeeee * dis;//mid
 	// color = 0x654321 * dis;//big
@@ -31,7 +37,7 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	// if (0xffff00 * dis <= MAX_INT && dis > 5)
 	// 	color = 0xffff00 * dis;
 	// else
-	color = 0x000000;
+	 //	color = 0x000000;
 	//printf("%d\n", ray);
 	//write(1, ft_itoa(dis), ft_strlen(ft_itoa(dis)));
 	//write (1, "\n", 1);
@@ -60,14 +66,16 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 		color = 0x0000ff;
 	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc - SCREEN_WIDTH] || angle == 270.0)
 		color = 0xffffff;
+	else
+		color = 0x000000;
 	while (i < wh)
 	{
 		// if (angle < 90)
 		// {
 		// 	if (main->mini_map_img_adress[(SCREEN_WIDTH * y2) + x2])
 		// }
-		main->game_img_adress[draw_loc - (SCREEN_WIDTH * i)] = color;//(int)&color * M_PI / color;
-		main->game_img_adress[draw_loc + (SCREEN_WIDTH * i)] = color;
+		main->game_img_adress[draw_loc - (SCREEN_WIDTH * i)] = main->map->NO_texture_addr[pic_loc - (i * 64)];//(int)&color * M_PI / color;
+		main->game_img_adress[draw_loc + (SCREEN_WIDTH * i)] = main->map->NO_texture_addr[pic_loc - (i * 64)];
 	// 	if (angle > 0 && angle < 180)
 	// 	{
 			
