@@ -1,9 +1,9 @@
-NO ./texture/wall_2
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./texture/redbrick.xpm
+SO ./texture/bluestone.xpm
+WE ./texture/purplestone.xpm
+EA ./texture/greystone.xpm
 F 33,84,24
-C 56,65,71
+C 28,28,28
 
 
 

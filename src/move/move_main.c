@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/11 14:53:10 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/13 06:02:32 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,9 +156,9 @@ int	move_loop(t_cub3d *main)
 		main->player->angle += ROT_ANGLE;
 	if (main->player->dir_right)
 		main->player->angle -= ROT_ANGLE;
-	if (main->player->dir_up)
+	if (main->player->dir_up && main->mini_map->screen_focus < (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
 		main->mini_map->screen_focus++;
-	if (main->player->dir_down)
+	if (main->player->dir_down && main->mini_map->screen_focus > SCREEN_HEIGHT / 4)
 		main->mini_map->screen_focus--;
 	if (status == 1)
 	{
@@ -166,11 +166,15 @@ int	move_loop(t_cub3d *main)
 		main->player->player_y = y;
 		status = 0;
 	}
+	while (main->player->angle >= 360)
+			main->player->angle -= 360;
+	while (main->player->angle < 0)
+			main->player->angle += 360;
+	printf("%0.2f\n", main->player->angle);
 	put_backscreen(main);
 	game_mini_map_paint(main);
 	draw_ray(main, 0, 0);
 	game_put_player(main);
-	//mlx_put_image_to_window(main->mlx, main->mlx_window, main->map->NO_texture_img, 0, 0);
 	//printf("x:%0.2f\ty:%0.2f\tAng:%0.2f\n", main->player->player_x, main->player->player_y, main->player->angle);
 	//printf("x:%d y:%d MX:%0.2f MY:%0.2f\n", x, y, main->player->player_x, main->player->player_y);
 	return (0);

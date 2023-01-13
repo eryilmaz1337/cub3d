@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/12 18:08:56 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/13 04:01:48 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	put_backscreen(t_cub3d *main)
 {
-	int i;
-	int k;
-	int sky;
+	int	i;
+	int	k;
+	int	sky;
+
 	k = 0;
 	i = 0;
-	sky = SCREEN_HEIGHT / 2;
+	sky = main->mini_map->screen_focus;
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
 	while (k != SCREEN_HEIGHT)
 	{
@@ -60,18 +61,16 @@ void game_window(t_cub3d *main)
 {
 	int	a;
 	int	b;
-	
+	int	pixel;
+
+	pixel = 64;
 	a = SCREEN_WIDTH;
 	b = SCREEN_HEIGHT;
-
-	
-	// main->map->NO_texture_img = mlx_xpm_file_to_image(main->mlx, "/Users/uercan/Desktop/c3d_v8.5/texture/wall_2.xpm", &a, &b);
-	
 	
 	main->mini_map->screen_focus = SCREEN_HEIGHT / 2;
 
-	
 	main->mlx = mlx_init();
+	
 	if (!main->mlx)
 		exit_free(main, MLX_ERROR_INIT);
 	main->mlx_window = mlx_new_window(main->mlx, a, b, "CUB3D");
@@ -89,6 +88,19 @@ void game_window(t_cub3d *main)
 	main->mini_map_img_adress = (int *)mlx_get_data_addr(main->mini_map_img, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
 	if (!main->mini_map_img_adress)
 		exit_free(main, MLX_ERROR_IMG);
+
+	
+	main->map->NO_texture_img = mlx_xpm_file_to_image(main->mlx, main->map->NO_texture_path, &pixel, &pixel);
+	main->map->NO_texture_addr = (int *)mlx_get_data_addr(main->map->NO_texture_img, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
+	
+	main->map->SO_texture_img = mlx_xpm_file_to_image(main->mlx, main->map->SO_texture_path, &pixel, &pixel);
+	main->map->SO_texture_addr = (int *)mlx_get_data_addr(main->map->SO_texture_img, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
+
+	main->map->WE_texture_img = mlx_xpm_file_to_image(main->mlx, main->map->WE_texture_path, &pixel, &pixel);
+	main->map->WE_texture_addr = (int *)mlx_get_data_addr(main->map->WE_texture_img, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
+
+	main->map->EA_texture_img = mlx_xpm_file_to_image(main->mlx, main->map->EA_texture_path, &pixel, &pixel);
+	main->map->EA_texture_addr = (int *)mlx_get_data_addr(main->map->EA_texture_img, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
 	create_ray_image(main);
 }
 
@@ -100,16 +112,16 @@ void main_game_img_paint(t_cub3d *main)
 	k = 0;
 	i = 0;
 	sky = SCREEN_HEIGHT / 2;
-	while (k != SCREEN_HEIGHT)
-	{
-		i = -1;
-		while (++i != SCREEN_WIDTH && k != sky)
-				main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
-		i = -1;
-		while (++i != SCREEN_WIDTH && k >= sky)
-			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->F_rgb_code;
-		k++;
-	}
+	// while (k != SCREEN_HEIGHT)
+	// {
+	// 	i = -1;
+	// 	while (++i != SCREEN_WIDTH && k != sky)
+	// 			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
+	// 	i = -1;
+	// 	while (++i != SCREEN_WIDTH && k >= sky)
+	// 		main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->F_rgb_code;
+	// 	k++;
+	// }
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
 }
 
@@ -124,7 +136,7 @@ void	draw_ray(t_cub3d *main, int i, int k)
 	int tmp_next_x;
 
 	ray_lenght = 0;
-	angle_tmp = main->player->angle - 45;
+	angle_tmp = main->player->angle - (ROT_ANGLE_USER / 2);
 	status = 0;
 	tmp_y = main->player->player_y + (main->mini_map->map_img_size_y / 2);
 	tmp_x = main->player->player_x + (main->mini_map->map_img_size_x / 2);
@@ -163,10 +175,20 @@ void	draw_ray(t_cub3d *main, int i, int k)
 			// }
 			//printf("%d\n",tmp_next_x);
 			//printf("%d\n",tmp_next_y);
-			ray_lenght += 0.1;
+			// if (ray_lenght < 2)
+			// 	ray_lenght += 0.001;
+			// if (ray_lenght < 5)
+			// 	ray_lenght += 0.01;
+			 if (ray_lenght < 50)
+				ray_lenght += 0.1;
+			else if (ray_lenght < 200)
+				ray_lenght++;
+			else
+				ray_lenght += 10;
+			//printf("%0.2f\n", ray_lenght);
 		}
 		//printf("%d %d\n", tmp_next_x, tmp_next_y);
-		angle_tmp += ((double)ROT_ANGLE_USER/ (double)SCREEN_WIDTH);
+		angle_tmp += ((double)ROT_ANGLE_USER / (double)SCREEN_WIDTH);
 		i++;
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map->ray_img, 0, 0);
