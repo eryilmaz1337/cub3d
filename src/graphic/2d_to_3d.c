@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:07:17 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/13 07:50:59 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/13 07:55:46 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,20 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc - 1] || angle == 0.0 || angle == 360.0)//W
 		direction = 0;//color = 0xff0000;
 	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc + 1] || angle == 180.0)//E
-		direction = 2;//color = 0x00ff00;
+		direction = 1;//color = 0x00ff00;
 	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc + SCREEN_WIDTH] || angle == 90.0)//S
-		direction = 3;//color = 0x0000ff;
+		direction = 2;//color = 0x0000ff;
 	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc - SCREEN_WIDTH] || angle == 270.0)//N
-		direction = 4;//color = 0xffffff;
+		direction = 3;//color = 0xffffff;
 	else
-		direction = 5;
+		direction = 4;
 	while (i < wh)
 	{
 		// if (angle < 90)
 		// {
 		// 	if (main->mini_map_img_adress[(SCREEN_WIDTH * y2) + x2])
 		// }
-		if (direction == 5)
+		if (direction == 4)
 			break;
 		main->game_img_adress[draw_loc - (SCREEN_WIDTH * i)] = images[direction][pic_loc - (i * 64)];//(int)&color * M_PI / color;
 		main->game_img_adress[draw_loc + (SCREEN_WIDTH * i)] = images[direction][pic_loc - (i * 64)];
