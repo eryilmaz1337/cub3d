@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:07:17 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/13 07:37:57 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/13 07:50:59 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	int	wh;
 	int	draw_loc;
 	int	i;
-	int	color;
-	
+	int	direction;
 	i = 0;
 	wh = (SCREEN_HEIGHT / dis) * 3;
 	draw_loc = ((SCREEN_WIDTH * main->mini_map->screen_focus + (SCREEN_WIDTH)) - ray);
@@ -28,6 +27,8 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	int	j;
 
 	j = 0;
+	while (ray > 64)
+		ray -= 64;
 	pic_loc = ((64 * 32) - ray);
 	//oran = 1 + (wh * 2);
 	//color = 0xeeeeee * dis;//mid
@@ -58,24 +59,36 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	// 	color = 0xffffff;
 	// else if (angle == 270)
 	// 	color = 0x0000ff;
-	if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc - 1] || angle == 0.0 || angle == 360.0)
-		color = 0xff0000;
-	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc + 1] || angle == 180.0)
-		color = 0x00ff00;
-	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc + SCREEN_WIDTH] || angle == 90.0)
-		color = 0x0000ff;
-	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc - SCREEN_WIDTH] || angle == 270.0)
-		color = 0xffffff;
+
+
+	int *images[4];
+
+	images[0] = main->map->WE_texture_addr;
+	images[1] = main->map->EA_texture_addr;
+	images[2] = main->map->SO_texture_addr;
+	images[3] = main->map->NO_texture_addr;
+
+	
+	if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc - 1] || angle == 0.0 || angle == 360.0)//W
+		direction = 0;//color = 0xff0000;
+	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc + 1] || angle == 180.0)//E
+		direction = 2;//color = 0x00ff00;
+	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc + SCREEN_WIDTH] || angle == 90.0)//S
+		direction = 3;//color = 0x0000ff;
+	else if (main->mini_map_img_adress[loc] != main->mini_map_img_adress[loc - SCREEN_WIDTH] || angle == 270.0)//N
+		direction = 4;//color = 0xffffff;
 	else
-		color = 0x000000;
+		direction = 5;
 	while (i < wh)
 	{
 		// if (angle < 90)
 		// {
 		// 	if (main->mini_map_img_adress[(SCREEN_WIDTH * y2) + x2])
 		// }
-		main->game_img_adress[draw_loc - (SCREEN_WIDTH * i)] = main->map->NO_texture_addr[pic_loc - (i * 64)];//(int)&color * M_PI / color;
-		main->game_img_adress[draw_loc + (SCREEN_WIDTH * i)] = main->map->NO_texture_addr[pic_loc - (i * 64)];
+		if (direction == 5)
+			break;
+		main->game_img_adress[draw_loc - (SCREEN_WIDTH * i)] = images[direction][pic_loc - (i * 64)];//(int)&color * M_PI / color;
+		main->game_img_adress[draw_loc + (SCREEN_WIDTH * i)] = images[direction][pic_loc - (i * 64)];
 	// 	if (angle > 0 && angle < 180)
 	// 	{
 			
