@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:07:17 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/13 07:55:46 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/13 08:26:46 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	int	direction;
 	i = 0;
 	wh = (SCREEN_HEIGHT / dis) * 3;
-	draw_loc = ((SCREEN_WIDTH * main->mini_map->screen_focus + (SCREEN_WIDTH)) - ray);
+	draw_loc = (((SCREEN_WIDTH * main->mini_map->screen_focus) + (SCREEN_WIDTH)) - ray);
 
-	int	pic_loc;
+	int	img_loc;
 	int	j;
 
 	j = 0;
 	while (ray > 64)
 		ray -= 64;
-	pic_loc = ((64 * 32) - ray);
+	img_loc = ((64 * 32) - ray);
 	//oran = 1 + (wh * 2);
 	//color = 0xeeeeee * dis;//mid
 	// color = 0x654321 * dis;//big
@@ -79,21 +79,30 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 		direction = 3;//color = 0xffffff;
 	else
 		direction = 4;
+	int k = i;
 	while (i < wh)
 	{
 		// if (angle < 90)
 		// {
 		// 	if (main->mini_map_img_adress[(SCREEN_WIDTH * y2) + x2])
 		// }
-		if (direction == 4)
+		if (direction == 4)//koşede sıkıntı çıkmaması için basmıyor
 			break;
-		main->game_img_adress[draw_loc - (SCREEN_WIDTH * i)] = images[direction][pic_loc - (i * 64)];//(int)&color * M_PI / color;
-		main->game_img_adress[draw_loc + (SCREEN_WIDTH * i)] = images[direction][pic_loc - (i * 64)];
-	// 	if (angle > 0 && angle < 180)
-	// 	{
-			
-	// 	}
-		i++;
+		if (wh * 2 >= 64)
+			j = (wh * 2) / 64;
+		else
+			j = 64 / (wh * 2);
+		while (j)
+		{
+			main->game_img_adress[draw_loc - (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * 64)];//(int)&color * M_PI / color;
+			main->game_img_adress[draw_loc + (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * 64)];
+			j--;
+		}
+		if (wh * 2 >= 64)
+			i += (wh * 2) / 64;
+		else
+			i += 64 / (wh * 2);
+		k++;
 	}
 		//main->game_img_adress[draw_loc - (SCREEN_WIDTH * i++)] = mlx_get_data_addr(main->mlx, main->map->NO_texture_addr, 0, 0);
 	
