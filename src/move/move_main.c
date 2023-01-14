@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/14 16:56:10 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:12:47 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ int	mouse_cursor(int x, int y, t_cub3d *main)
 	if (x < MOUSE_CENTER)
 		main->player->angle += ROT_ANGLE;
 	if (y < MOUSE_CENTER)
-		main->mini_map->screen_focus += 4;
+		main->mini_map->screen_focus += 10;
 	if (y > MOUSE_CENTER)
-		main->mini_map->screen_focus -= 4;
+		main->mini_map->screen_focus -= 10;
 	
 	mlx_mouse_move(main->mlx_window, MOUSE_CENTER, MOUSE_CENTER);
 	return (0);

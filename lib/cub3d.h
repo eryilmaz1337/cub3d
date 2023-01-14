@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/14 16:52:44 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:06:13 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,6 @@ typedef struct s_cub3d
 	int					tmp_img_z;
 	int					*game_img_adress;
 	int					*mini_map_img_adress;
-	int					m_x;
-	int					m_y;
 	void				*mlx;
 	void				*mlx_window;
 	void				*game_img;

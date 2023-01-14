@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:07:17 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/14 17:02:44 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:50:05 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	// else if (angle == 180)
 	// 	color = 0xffffff;
 	// else if (angle == 270)
-	//int	color = 0xff0f00 * dis; // (int)&color * M_PI / color;
+	
+	
+	
+	int	color = (int)&color * M_PI / color;//0xff0f00 * dis; // (int)&color * M_PI / color;
 
 
 	images[0] = main->map->WE_texture_addr;
@@ -93,10 +96,11 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 			j = (wh * 2) / TEXTURE_SIZE;
 		else
 			j = TEXTURE_SIZE / (wh * 2);
+		main->game_img_adress[draw_loc - (SCREEN_WIDTH * (i))] = (int)&color;
 		while (j)
 		{
-			main->game_img_adress[draw_loc - (SCREEN_WIDTH * (i + j))] =images[direction][img_loc - (k * TEXTURE_SIZE)];// color;//(int)&color * M_PI / color;//main->game_img_adress[draw_loc - (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * TEXTURE_SIZE)];//
-			main->game_img_adress[draw_loc + (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * TEXTURE_SIZE)];
+			main->game_img_adress[draw_loc - (SCREEN_WIDTH * (i + j))] = (int)&color;//images[direction][img_loc - (k * TEXTURE_SIZE)];
+			main->game_img_adress[draw_loc + (SCREEN_WIDTH * (i + j))] = (int)&color;//images[direction][img_loc - (k * TEXTURE_SIZE)];
 			// h = 0;
 			// while (h < j)
 			// {
