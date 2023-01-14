@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/12 23:31:44 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 16:52:44 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@
 
 # define MINI_WALL 0xf0ff0f
 # define MINI_FLOOR 0xba8576
+# define TEXTURE_SIZE 64
+
+# define MOUSE_CENTER 123
 
 typedef struct s_cub3d_map
 {
@@ -77,6 +80,8 @@ typedef struct s_cub3d_map
 	void			*EA_texture_img;
 	int				*EA_texture_addr;
 	
+	void			*torch;
+
 	char			**map;
 	char			*map_name;
 	char			*NO_texture_path;
@@ -126,6 +131,8 @@ typedef struct s_cub3d
 	int					tmp_img_z;
 	int					*game_img_adress;
 	int					*mini_map_img_adress;
+	int					m_x;
+	int					m_y;
 	void				*mlx;
 	void				*mlx_window;
 	void				*game_img;
@@ -141,6 +148,7 @@ typedef struct s_cub3d
 
 void			put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle);
 void			put_backscreen(t_cub3d *main);
+int				mouse_cursor(int x, int y, t_cub3d *main);
 
 void			exit_free(t_cub3d *main, int err_no);
 void			map_check(t_cub3d *main);

@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:07:17 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/13 08:26:46 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:02:44 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 {
-	//(void)main;
+	int	*images[4];
 	int	wh;
 	int	draw_loc;
 	int	i;
 	int	direction;
-	i = 0;
-	wh = (SCREEN_HEIGHT / dis) * 3;
-	draw_loc = (((SCREEN_WIDTH * main->mini_map->screen_focus) + (SCREEN_WIDTH)) - ray);
-
 	int	img_loc;
 	int	j;
 
+	int	k;
+
+	i = 0;
+	wh = (SCREEN_HEIGHT / dis) * 10;
+	draw_loc = (((SCREEN_WIDTH * main->mini_map->screen_focus) + (SCREEN_WIDTH)) - ray);
+
 	j = 0;
-	while (ray > 64)
-		ray -= 64;
-	img_loc = ((64 * 32) - ray);
+	while (ray > TEXTURE_SIZE)
+		ray -= TEXTURE_SIZE;
+	img_loc = ((TEXTURE_SIZE * (TEXTURE_SIZE / 2)) - ray);
+	while (wh * 2 + 1 > SCREEN_HEIGHT)
+		wh--;
 	//oran = 1 + (wh * 2);
 	//color = 0xeeeeee * dis;//mid
 	// color = 0x654321 * dis;//big
@@ -58,10 +62,8 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 	// else if (angle == 180)
 	// 	color = 0xffffff;
 	// else if (angle == 270)
-	// 	color = 0x0000ff;
+	//int	color = 0xff0f00 * dis; // (int)&color * M_PI / color;
 
-
-	int *images[4];
 
 	images[0] = main->map->WE_texture_addr;
 	images[1] = main->map->EA_texture_addr;
@@ -79,32 +81,38 @@ void	put_to_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 		direction = 3;//color = 0xffffff;
 	else
 		direction = 4;
-	int k = i;
+	
+	k = i;
+
+	// int h;
 	while (i < wh)
 	{
-		// if (angle < 90)
-		// {
-		// 	if (main->mini_map_img_adress[(SCREEN_WIDTH * y2) + x2])
-		// }
 		if (direction == 4)//koşede sıkıntı çıkmaması için basmıyor
 			break;
-		if (wh * 2 >= 64)
-			j = (wh * 2) / 64;
+		if (wh * 2 >= TEXTURE_SIZE)
+			j = (wh * 2) / TEXTURE_SIZE;
 		else
-			j = 64 / (wh * 2);
+			j = TEXTURE_SIZE / (wh * 2);
 		while (j)
 		{
-			main->game_img_adress[draw_loc - (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * 64)];//(int)&color * M_PI / color;
-			main->game_img_adress[draw_loc + (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * 64)];
+			main->game_img_adress[draw_loc - (SCREEN_WIDTH * (i + j))] =images[direction][img_loc - (k * TEXTURE_SIZE)];// color;//(int)&color * M_PI / color;//main->game_img_adress[draw_loc - (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * TEXTURE_SIZE)];//
+			main->game_img_adress[draw_loc + (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * TEXTURE_SIZE)];
+			// h = 0;
+			// while (h < j)
+			// {
+			// 	main->game_img_adress[(draw_loc - h) - (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * TEXTURE_SIZE)];
+			// 	main->game_img_adress[(draw_loc - h) + (SCREEN_WIDTH * (i + j))] = images[direction][img_loc - (k * TEXTURE_SIZE)];
+			// 	h++;
+			// }
 			j--;
 		}
-		if (wh * 2 >= 64)
-			i += (wh * 2) / 64;
+		if (wh * 2 >= TEXTURE_SIZE)
+			i += (wh * 2) / TEXTURE_SIZE;
 		else
-			i += 64 / (wh * 2);
+			i += TEXTURE_SIZE / (wh * 2);
 		k++;
+		//----------------------------
+		
 	}
 		//main->game_img_adress[draw_loc - (SCREEN_WIDTH * i++)] = mlx_get_data_addr(main->mlx, main->map->NO_texture_addr, 0, 0);
-	
-	
 }

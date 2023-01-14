@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:47:51 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/25 18:18:23 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 14:31:30 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,42 +38,42 @@ int	get_map_parts(t_cub3d *main)
 				main->map->NO_texture_path = get_texture_path(main, i, k);
 			}
 			else if (l == 0)
-				exit_free(main, INVALID_MAP);
+				{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 			else if (main->map->map[i][k] == 'S' && main->map->map[i][k + 1] == 'O' && l == 1)
 			{
 				l++;
 				main->map->SO_texture_path = get_texture_path(main, i, k);
 			}
 			else if (l == 1)
-				exit_free(main, INVALID_MAP);
+				{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 			else if (main->map->map[i][k] == 'W' && main->map->map[i][k + 1] == 'E' && l == 2)
 			{
 				l++;
 				main->map->WE_texture_path = get_texture_path(main, i, k);
 			}
 			else if (l == 2)
-				exit_free(main, INVALID_MAP);
+				{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 			else if (main->map->map[i][k] == 'E' && main->map->map[i][k + 1] == 'A' && l == 3)
 			{
 				l++;
 				main->map->EA_texture_path = get_texture_path(main, i, k);
 			}
 			else if (l == 3)
-				exit_free(main, INVALID_MAP);
+				{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 			else if (main->map->map[i][k] == 'F' && l == 4)
 			{
 				l++;
 				get_RGB(main, i, k);
 			}
 			else if (l == 4)
-				exit_free(main, INVALID_MAP);
+				{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 			else if (main->map->map[i][k] == 'C' && l == 5)
 			{
 				l++;
 				get_RGB(main, i, k);
 			}
 			else if (l == 5)
-				exit_free(main, INVALID_MAP);
+				{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 			else if (l == 6)
 			{
 				ret = i;
@@ -82,7 +82,7 @@ int	get_map_parts(t_cub3d *main)
 			else
 			{
 				if (l == 7 && (main->map->map[i][k] != '1' || main->map->map[i][k] == '0'))
-					exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 			}
 		}
 	}
@@ -129,21 +129,21 @@ void	map_down_control(t_cub3d *main)//{printf("NO:1  i:%d k:%d  O:%c\n", i, k, m
 			if (main->map->map[i][k] != '1' && check_isspace(main->map->map[i][k]) == 1)
 			{
 				if (i == s_i && check_isspace(main->map->map[i][k]) == 1)
-					exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (i - 1 > s_i && check_isspace(main->map->map[i - 1][k]) == 0)
-					exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (k + 1 < (int)ft_strlen(main->map->map[i]) && check_isspace(main->map->map[i][k + 1]) == 0)
-					exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (k == (int)ft_strlen(main->map->map[i]) - 1 && check_isspace(main->map->map[i][k]) == 1)
-					exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (i + 1 < l_i - 1 && check_isspace(main->map->map[i + 1][k]) == 0)
-					exit_free(main, INVALID_MAP);
-				else if (i == l_i - 2 && check_isspace(main->map->map[i][k]) == 1)
-					exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
+				else if (i == l_i - 1 && check_isspace(main->map->map[i][k]) == 1)
+					{printf("F:%s f:%s, l:%d %d %d\n", __FILE__, __FUNCTION__, __LINE__, i, k);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (k == 0 && check_isspace(main->map->map[i][k]) == 1)
-					exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (k - 1 > 0 && check_isspace(main->map->map[i][k]) == 0)
-					exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 			}
 			k++;
 		}

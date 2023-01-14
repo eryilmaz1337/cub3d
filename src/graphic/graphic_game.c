@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/13 07:02:21 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 16:12:53 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void game_window(t_cub3d *main)
 
 	main->map->EA_texture_img = mlx_xpm_file_to_image(main->mlx, main->map->EA_texture_path, &pixel, &pixel);
 	main->map->EA_texture_addr = (int *)mlx_get_data_addr(main->map->EA_texture_img, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
+	
+	main->map->torch = mlx_xpm_file_to_image(main->mlx, "./texture/torch.xpm", &pixel, &pixel);
 	create_ray_image(main);
 }
 
@@ -162,7 +164,7 @@ void	draw_ray(t_cub3d *main, int i, int k)
 			tmp_next_y = ((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) / main->mini_map->map_img_size_y;
 			tmp_next_x = ((tmp_x + (int)(cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) / main->mini_map->map_img_size_x;
 			if (main->map->map[tmp_next_y][tmp_next_x] != '1')
-				main->mini_map->ray_addr[(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) * MINI_MAP_WIDTH) + ((tmp_x + (int) (cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght)))] = 0x00ff00;
+				main->mini_map->ray_addr[(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) * MINI_MAP_WIDTH) + ((tmp_x + (int) (cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght)))] = 0xFFFFFF / ray_lenght;
 			else
 			{
 				put_to_3d(main, ray_lenght, i,(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) * MINI_MAP_WIDTH) + ((tmp_x + (int) (cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght))), angle_tmp);
@@ -183,11 +185,13 @@ void	draw_ray(t_cub3d *main, int i, int k)
 			//  if (ray_lenght < 50)
 			// 	ray_lenght += 0.1;
 			// else if (ray_lenght < 200)
-				ray_lenght++;
+			// 	ray_lenght++;
 			// else
 			// 	ray_lenght += 10;
-
-			//ray_lenght += ray_lenght / (ray_lenght * 10);
+			
+			ray_lenght++;
+			
+			// ray_lenght += ray_lenght / (ray_lenght * 10);
 			
 			//printf("%0.2f\n", ray_lenght);
 		}

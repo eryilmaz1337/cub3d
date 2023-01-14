@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:14:30 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/11 13:46:39 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 14:28:44 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ void	get_prime_map(t_cub3d *main, int i)
 	map = main->map->map;
 	main->map->map = ft_double_strcpy(main->map->map, i);
 	while (map[c])
-	{
-		free(map[c]);
-		c++;
-	}
+		free(map[c++]);
 	free(map);
 	main->map->map_lines_num = 0;
 	while (main->map->map[main->map->map_lines_num])
@@ -57,7 +54,7 @@ char	*get_texture_path(t_cub3d *main, int i, int k)
 	while (main->map->map[i][k] != '\0' && check_isspace(main->map->map[i][k]) == 0)
 			k++;
 	if (k == '\0')
-		exit_free(main, INVALID_MAP);
+		{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 	y = k;
 	while (main->map->map[i][y] != '\0' && check_isspace(main->map->map[i][y]) == 1)
 		y++;
@@ -68,7 +65,7 @@ char	*get_texture_path(t_cub3d *main, int i, int k)
 	while (main->map->map[i][z] != '\0' && check_isspace(main->map->map[i][z]) == 0)
 	{
 		if (check_isspace(main->map->map[i][z]) == 1)
-			exit_free(main, INVALID_MAP);
+			{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 		z++;
 	}
 	return (ft_substr(main->map->map[i], k, y));

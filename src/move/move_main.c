@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/13 08:12:10 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 16:56:10 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,20 @@ int	is_wall(t_cub3d *main, double x, double y)
 	return (0);
 }
 
+int	mouse_cursor(int x, int y, t_cub3d *main)
+{
+	if (x > MOUSE_CENTER)
+		main->player->angle -= ROT_ANGLE;
+	if (x < MOUSE_CENTER)
+		main->player->angle += ROT_ANGLE;
+	if (y < MOUSE_CENTER)
+		main->mini_map->screen_focus += 4;
+	if (y > MOUSE_CENTER)
+		main->mini_map->screen_focus -= 4;
+	
+	mlx_mouse_move(main->mlx_window, MOUSE_CENTER, MOUSE_CENTER);
+	return (0);
+}
 
 int	move_loop(t_cub3d *main)
 {
@@ -175,6 +189,7 @@ int	move_loop(t_cub3d *main)
 	game_mini_map_paint(main);
 	draw_ray(main, 0, 0);
 	game_put_player(main);
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->map->torch, SCREEN_WIDTH - 250, 0);
 	//printf("x:%0.2f\ty:%0.2f\tAng:%0.2f\n", main->player->player_x, main->player->player_y, main->player->angle);
 	//printf("x:%d y:%d MX:%0.2f MY:%0.2f\n", x, y, main->player->player_x, main->player->player_y);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:58:03 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/12 23:45:28 by uercan           ###   ########.fr       */
+/*   Updated: 2023/01/14 16:53:25 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ int	ft_close(void)// şimdilik kapatmak için
 
 void loop_window_and_game(t_cub3d *main)
 {
+	mlx_mouse_move(main->mlx_window, MOUSE_CENTER, MOUSE_CENTER);
 	main_game_img_paint(main);
 	game_mini_map_paint(main);
+	mlx_mouse_hide();
 	mlx_hook(main->mlx_window, 2, 1L<<0, &ft_key_press, main);
 	mlx_hook(main->mlx_window, 3, 1L<<1, &ft_key_release, main);
+	mlx_hook(main->mlx_window, 6, 0L, &mouse_cursor, main);
 	mlx_hook(main->mlx_window, 17, (0L), ft_close, main);
 	mlx_loop_hook(main->mlx, move_loop, main);//for loop test
 	mlx_loop(main->mlx);
