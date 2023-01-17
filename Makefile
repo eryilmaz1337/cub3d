@@ -2,7 +2,7 @@ NAME		= libft.a
 LIBFT		= ./lib/libft/
 MLX			= ./lib/mlx/
 CC			= gcc
-FLAGS		= -framework OpenGL -framework AppKit -L ./lib/mlx -Wall -Wextra -Werror
+FLAGS		= -framework OpenGL -framework AppKit -L ./lib/mlx -I ./lib/ ./lib/cub3d.h -Wall -Wextra -Werror
 FILE		= ./src/move/*.c \
 				./src/graphic/*.c \
 				./src/map_src/*.c \

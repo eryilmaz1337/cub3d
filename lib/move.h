@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   move.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: eryilmaz <eryilmaz@student.42kocaeli.com.  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/14 17:06:13 by uercan           ###   ########.fr       */
+/*   Created: 2023/01/16 13:59:21 by eryilmaz          #+#    #+#             */
+/*   Updated: 2023/01/16 13:59:25 by eryilmaz         ###   ########.tr	      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-
-# include "mlx/mlx.h"
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "define.h"
+#ifndef MOVE_H
+# define MOVE_H
 # include "struct.h"
-# include "exit.h"
-# include "map.h"
-# include "graphic.h"
-# include "move.h"
-# include <math.h>
-
+int				move_loop(t_cub3d *main);
+int				ft_key_press(int key_code, t_cub3d *main);
+int				ft_key_release(int key_code, t_cub3d *main);
+int				mouse_cursor(int x, int y, t_cub3d *main);
+int				is_wall(t_cub3d *main, double x, double y);
 #endif

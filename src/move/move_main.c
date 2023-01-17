@@ -10,53 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lib/cub3d.h"
-
-// void get_move_value(t_cub3d *main, int value,  int status_axis, int status)
-// {
-// 	if(status_axis)
-// 	{
-// 		main->player->player_x += value * sin(angle_to_radyan(main->player->angle));
-// 		if(status)
-// 			main->player->player_y += cos(angle_to_radyan(main->player->angle));
-// 		else
-// 			main->player->player_y -= cos(angle_to_radyan(main->player->angle));
-// 	}
-// 	else
-// 	{
-// 		if(status)
-// 		{
-// 			main->player->player_x += cos(angle_to_radyan(main->player->angle));
-// 			main->player->player_y += -1 * sin(angle_to_radyan(main->player->angle));
-// 		}
-// 		else
-// 		{
-// 			main->player->player_x += -1 * cos(angle_to_radyan(main->player->angle));
-// 			main->player->player_y += sin(angle_to_radyan(main->player->angle));
-// 		}
-// 	}
-// }
-
-// int	move_loop(t_cub3d *main)
-// {
-// 	//printf("%d %d", main->player->key_a, main->mini_map->dir_left);
-// 	if (main->player->key_a)
-// 		get_move_value(main, -1, 1, 0);
-// 	if (main->player->key_d)
-// 		get_move_value(main, 1, 1, 1);
-// 	if (main->player->key_w)
-// 		get_move_value(main, 0, 0, 1);
-// 	if (main->player->key_s)
-// 		get_move_value(main, 0, 0, 0);
-// 	if (main->player->dir_left)
-// 		main->player->angle += ROT_ANGLE;
-// 	if (main->player->dir_right)
-// 		main->player->angle -= ROT_ANGLE;
-// 	game_mini_map_paint(main);
-// 	//game_put_player(main);
-// 	printf("x:%0.2f\ty:%0.2f\tAng:%0.2f\n", main->player->player_x, main->player->player_y, main->player->angle);
-// 	return (0);
-// }
+#include "cub3d.h"
 
 int	is_wall(t_cub3d *main, double x, double y)
 {
@@ -67,8 +21,6 @@ int	is_wall(t_cub3d *main, double x, double y)
 	collider = 4.5;
 	new_x = (x + collider) / main->mini_map->map_img_size_x;
 	new_y = (y + collider) / main->mini_map->map_img_size_y;
-	// new_x = main->mini_map->map_img_size_x / 2;
-	// new_y = main->mini_map->map_img_size_y / 2;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sol_üst\n");
@@ -100,16 +52,15 @@ int	is_wall(t_cub3d *main, double x, double y)
 
 int	mouse_cursor(int x, int y, t_cub3d *main)
 {
-	if (x > MOUSE_CENTER)
+	if (x > MOVE_MOUSE_CENTER)
 		main->player->angle -= ROT_ANGLE;
-	if (x < MOUSE_CENTER)
+	if (x < MOVE_MOUSE_CENTER)
 		main->player->angle += ROT_ANGLE;
-	if (y < MOUSE_CENTER)
+	if (y < MOVE_MOUSE_CENTER && main->mini_map->screen_focus < (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
 		main->mini_map->screen_focus += 10;
-	if (y > MOUSE_CENTER)
+	if (y > MOVE_MOUSE_CENTER && main->mini_map->screen_focus > SCREEN_HEIGHT / 4)
 		main->mini_map->screen_focus -= 10;
-	
-	mlx_mouse_move(main->mlx_window, MOUSE_CENTER, MOUSE_CENTER);
+	mlx_mouse_move(main->mlx_window, MOVE_MOUSE_CENTER, MOVE_MOUSE_CENTER);
 	return (0);
 }
 
@@ -123,17 +74,13 @@ int	move_loop(t_cub3d *main)
 	x = main->player->player_x;
 	y = main->player->player_y;
 	if (main->player->key_shift == true)
-		//main->player->move_speed = MOVE_PIXEL_FAST;
 		main->player->move_speed = MOVE_PIXEL;
 	else if (main->player->key_shift == false)
 		main->player->move_speed = MOVE_PIXEL;
-	//printf("%0.2f\n", main->player->move_speed);
 	if (main->player->key_w)
 	{
 		x += cos(angle_to_radyan(main->player->angle));
-		//x += main->player->move_speed;
 		y += -1 * sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
-		//y += -1 * main->player->move_speed;
 		if (!is_wall(main, x, y))
 			status = 1;
 		else
@@ -184,14 +131,11 @@ int	move_loop(t_cub3d *main)
 			main->player->angle -= 360;
 	while (main->player->angle < 0)
 			main->player->angle += 360;
-	//printf("%0.2f\n", main->player->angle);
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
 	put_backscreen(main);
-	game_mini_map_paint(main);
-	draw_ray(main, 0, 0);
-	game_put_player(main);
-	mlx_put_image_to_window(main->mlx, main->mlx_window, main->map->torch, SCREEN_WIDTH - 250, 0);
-	//printf("x:%0.2f\ty:%0.2f\tAng:%0.2f\n", main->player->player_x, main->player->player_y, main->player->angle);
-	//printf("x:%d y:%d MX:%0.2f MY:%0.2f\n", x, y, main->player->player_x, main->player->player_y);
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map_img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->player->player_img, main->player->player_x, main->player->player_y);
+	//raycasting(main);
 	return (0);
 }
 

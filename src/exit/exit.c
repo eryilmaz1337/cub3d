@@ -10,7 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lib/cub3d.h"
+#include "cub3d.h"
+
+int	ft_close(void)// şimdilik kapatmak için
+{
+	exit (0);
+	return (0);
+}
 
 void	write_error(char *s)
 {

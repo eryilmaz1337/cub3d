@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "../../lib/cub3d.h"
+#include "cub3d.h"
 
 void	name_check(char *str, t_cub3d *main)
 {
@@ -76,19 +76,6 @@ char	*ft_strjoin_2(char *save, char *buffer)
 	temp[i] = '\0';
 	free(save);
 	return (temp);
-}
-
-
-void	free_double_Str(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		free(&s[i]);
-		i++;
-	}
 }
 
 char	**ft_double_strcpy(char **s, int i)
