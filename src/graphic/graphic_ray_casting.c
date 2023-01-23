@@ -12,156 +12,160 @@
 
 #include "cub3d.h"
 
-// int is_wall_tmp(double x, double y, t_cub3d *main)
-// {
-// 	int xX;
-// 	int yY;
+int is_wall_tmp(double x, double y, t_cub3d *main)
+{
+	int xX;
+	int yY;
 
-// 	if (x < 0 || x > main->map->map_max_line || y < 0 || y > main->map->map_lines_num)
-// 		return (1);
-//     xX = floor(x);
-//     yY = floor(y);
-// 	if (main->map->map[yY][xX] != '1')
-// 		return (0);
-//     return (1);
-// }
-
-
-// void draw_ray(double distance, int x, int y, double angle, t_cub3d *main)
-// {
-// 	double    ray_x;
-//     double    ray_y;
-//     double    dx;
-//     double    dy;
-
-//     ray_x = main->player->def_p_x;
-//     ray_y = main->player->def_p_y;
-//     dx = distance * fabs(cos(angle * (M_PI / 180))) * x;
-//     dy = distance * fabs(sin(angle * (M_PI / 180))) * y;
-//     dx /= distance;
-//     dy /= distance;
-//     while (1)
-//     {
-//         if (!is_wall_tmp(ray_x, ray_y, main))
-//             main->mini_map->ray_addr[SCREEN_WIDTH * (int)floor(main->mini_map->map_img_size_y * ray_y) + (int)floor(main->mini_map->map_img_size_x * ray_x)] = rgb_to_hex(color_assignment(0,0,255,0));
-//         else
-//             break;
-//         ray_x += dx / 100;
-//         ray_y += dy / 100;
-//     }
-// }
+	if (x < 0 || x > main->map->map_max_line || y < 0 || y > main->map->map_lines_num)
+		return (1);
+    xX = floor(x);
+    yY = floor(y);
+	if (xX < 0 || xX > main->map->map_max_line || yY < 0 || yY > main->map->map_lines_num)
+		return (1);
+	if (main->map->map[yY][xX] != '1')
+		return (0);
+    return (1);
+}
 
 
-// double ray_vertical(t_cub3d *main, double angle, int x, int y)
-// {
-// 	double vdy;
-// 	double vdx;
+void draw_ray(double distance, int x, int y, double angle, t_cub3d *main)
+{
+	double    ray_x;
+    double    ray_y;
+    double    dx;
+    double    dy;
 
-// 	if (x == -1)
-// 		vdx = main->player->def_p_x - floor(main->player->def_p_x);
-// 	else
-// 		vdx = ceil(main->player->def_p_x) - main->player->def_p_x;
-// 	vdy = fabs(tan(angle * (M_PI / 180)) * vdx);
+    ray_x = main->player->def_p_x;
+    ray_y = main->player->def_p_y;
+    dx = distance * fabs(cos(angle * (M_PI / 180))) * x;
+    dy = distance * fabs(sin(angle * (M_PI / 180))) * y;
+    dx /= distance;
+    dy /= distance;
+    while (1)
+    {
+        if (!is_wall_tmp(ray_x, ray_y, main))
+            main->mini_map->ray_addr[MINI_MAP_WIDTH * (int)floor(main->mini_map->map_img_size_y * ray_y) + (int)floor(main->mini_map->map_img_size_x * ray_x)] = rgb_to_hex(color_assignment(0,0,255,0));
+        else
+            break;
+        ray_x += dx / 100;
+        ray_y += dy / 100;
+    }
+}
 
-// 	double tmp_x = vdx*x;
-// 	double tmp_y = vdy*y;
+double ray_vertical(t_cub3d *main, double angle, int x, int y)
+{
+	double vdy;
+	double vdx;
 
-// 	if (!is_wall_tmp(main->player->def_p_x + vdx * x, main->player->def_p_y + vdy * y, main))
-// 	{
-// 		while (1)
-// 		{
-// 			vdx = vdx + 1;
-// 			vdy = fabs(tan(angle * (M_PI / 180)) * vdx);
-// 			if (!is_wall_tmp(main->player->def_p_x + vdx*x, main->player->def_p_y + vdy*y, main))
-// 			{
-// 				tmp_x = vdx*x;
-// 				tmp_y = vdy*y;
-// 			}
-// 			else
-// 				break ;
-// 		}
-// 	}
-// 	double distance;
-// 	distance = sqrt((tmp_x*tmp_x) + (tmp_y*tmp_y));
-// 	//printf("vertical_distance:%f\n", distance);
-// 	//printf("tmp_x:%f, tmp_y:%f\n", tmp_x, tmp_y);
-// 	return (distance);
-// }
+	if (x == -1)
+		vdx = main->player->def_p_x - floor(main->player->def_p_x);
+	else
+		vdx = ceil(main->player->def_p_x) - main->player->def_p_x;
+	vdy = fabs(tan(angle * (M_PI / 180)) * vdx);
 
-// double ray_horizonal(t_cub3d *main, double angle, int x, int y)
-// {
-// 	double hdy;
-// 	double hdx;
+	double tmp_x = vdx * x;
+	double tmp_y = vdy * y;
 
-// 	if (y == -1)
-// 		hdy = floor(main->player->def_p_y) - main->player->def_p_y;
-// 	else
-// 		hdy = ceil(main->player->def_p_y) - main->player->def_p_y;
-// 	hdx = fabs(hdy / tan(angle * (M_PI / 180)));
+	if (!is_wall_tmp(main->player->def_p_x + vdx * x, main->player->def_p_y + vdy * y, main))
+	{
+		while (1)
+		{
+			vdx = vdx + 1;
+			vdy = fabs(tan(angle * (M_PI / 180)) * vdx);
+			// printf("tmp_x:%f, tmp_y:%f\n", vdx, vdy);
+			// printf("def_x:%f, def_y:%f\n", main->player->def_p_x, main->player->def_p_y);
+			if (!is_wall_tmp(main->player->def_p_x + vdx*x, main->player->def_p_y + vdy*y, main))
+			{
+				tmp_x = vdx * x;
+				tmp_y = vdy * y;
+			}
+			else
+				break ;
+		}
+	}
+	double distance;
+	distance = sqrt((tmp_x*tmp_x) + (tmp_y*tmp_y));
+	// printf("vertical_distance:%f\n", distance);
+	// printf("tmp_x:%f, tmp_y:%f\n", tmp_x, tmp_y);
+	return (distance);
+}
 
-// 	double tmp_y = hdy*y;
-// 	double tmp_x = hdx*x;
+double ray_horizonal(t_cub3d *main, double angle, int x, int y)
+{
+	double hdy;
+	double hdx;
 
-// 	if (!is_wall_tmp(main->player->def_p_x + hdx*x, main->player->def_p_y + hdy*y, main))
-// 	{
-// 		while (1)
-// 		{
-// 			hdy = hdy + 1;
-// 			hdx = fabs(hdy / tan(angle * (M_PI / 180)));
-// 			if (!is_wall_tmp(main->player->def_p_x + hdx*x, main->player->def_p_y + hdy*y, main))
-// 			{
-// 				tmp_y = hdy*y;
-// 				tmp_x = hdx*x;
-// 			}
-// 			else
-// 				break;
-// 		}
-// 	}
-// 	double distance;
-// 	distance = sqrt((tmp_x*tmp_x) + (tmp_y*tmp_y));
-// 	//printf("horizonal_distance:%f\n", distance);
-// 	//printf("tmp_x:%f\n", hdy);
-// 	return (distance);
-// }
+	if (y == -1)
+		hdy = floor(main->player->def_p_y) - main->player->def_p_y;
+	else
+		hdy = ceil(main->player->def_p_y) - main->player->def_p_y;
+	hdx = fabs(hdy / tan(angle * (M_PI / 180)));
 
-// void beam_calculation(t_cub3d *main, double angle)
-// {
-// 	double distance_v;
-// 	double distance_h;
-// 	double distance;
-// 	int x;
-// 	int y;
+	double tmp_y = hdy*y;
+	double tmp_x = hdx*x;
 
-// 	x = ((cos(angle * (M_PI / 180)) > 0) * 2) - 1;
-// 	y = ((sin(angle * (M_PI / 180)) > 0) * -2) + 1;
+	if (!is_wall_tmp(main->player->def_p_x + hdx*x, main->player->def_p_y + hdy*y, main))
+	{
+		while (1)
+		{
+			hdy = hdy + 1;
+			hdx = fabs(hdy / tan(angle * (M_PI / 180)));
+			if (!is_wall_tmp(main->player->def_p_x + hdx*x, main->player->def_p_y + hdy*y, main))
+			{
+				tmp_y = hdy * y;
+				tmp_x = hdx * x;
+			}
+			else
+				break;
+		}
+	}
+	double distance;
+	distance = sqrt((tmp_x*tmp_x) + (tmp_y*tmp_y));
+	// printf("horizonal_distance:%f\n", distance);
+	// printf("tmp_x:%f\n", hdy);
+	return (distance);
+}
 
-// 	distance_v = ray_vertical(main, angle, x, y);
-// 	distance_h = ray_horizonal(main, angle, x, y);
+void beam_calculation(t_cub3d *main, double angle)
+{
+	double distance_v;
+	double distance_h;
+	double distance;
+	int x;
+	int y;
 
-// 	if(distance_v < distance_h)
-// 		distance = distance_v;
-// 	else
-// 		distance = distance_h;
-// 	printf("distance:%f\n", distance);
-// 	//draw_ray(distance, x, y, angle, main);
-// }
+	x = ((cos(angle * (M_PI / 180)) > 0) * 2) - 1;
+	y = ((sin(angle * (M_PI / 180)) > 0) * -2) + 1;
 
-// void raycasting(t_cub3d *main)
-// {
-// 	double angle;
-// 	angle = -1 * MOVE_PERSPECTIVE / 2;
-// 	main->player->def_p_x = main->player->player_x / main->mini_map->map_img_size_x;
-// 	main->player->def_p_y = main->player->player_y / main->mini_map->map_img_size_y;
-// 	img_colors(main->mini_map->ray_addr, MINI_MAP_HEIGHT, MINI_MAP_WIDTH, color_assignment(255, 0, 0, 0));
-// 	while (angle <= MOVE_PERSPECTIVE / 2)
-// 	{
-// 		double angle = 0;
-// 		beam_calculation(main, main->player->angle + angle);
-// 		angle += MOVE_BEAM_ANGLE_INCREASE_RATIO;
-// 	}
-// 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map->ray_img, 0, 0);
-// }
 
+	distance_v = ray_vertical(main, angle, x, y);
+	distance_h = ray_horizonal(main, angle, x, y);
+	// printf("distance_h:%f\n", distance_h);
+	// printf("distance_v:%f\n", distance_v);
+
+	if(distance_v > distance_h)
+		distance = distance_v;
+	else
+		distance = distance_h;
+	draw_ray(distance, x, y, angle, main);
+}
+
+void raycasting(t_cub3d *main)
+{
+	main->player->def_p_x = (main->player->player_x + (main->mini_map->map_img_size_x / 2)) / main->mini_map->map_img_size_x;
+	main->player->def_p_y = (main->player->player_y + (main->mini_map->map_img_size_x / 2)) / main->mini_map->map_img_size_y;
+	double angle;
+	angle = -1 * MOVE_PERSPECTIVE / 2;
+	img_colors(main->mini_map->ray_addr, MINI_MAP_HEIGHT, MINI_MAP_WIDTH, color_assignment(255, 0, 0, 0));
+	while (angle <= MOVE_PERSPECTIVE / 2)
+	{
+		// double angle = 0;
+		beam_calculation(main, main->player->angle + angle);
+		angle += MOVE_BEAM_ANGLE_INCREASE_RATIO;
+	}
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map->ray_img, 0, 0);
+}
 
 // void	draw_3d(t_cub3d *main, double dis, int ray, int loc, double angle)
 // {
@@ -191,7 +195,7 @@
 // }
 
 
-// void ray(t_cub3d *main)
+// void raycasting(t_cub3d *main)
 // {
 // 	double ray_lenght;
 // 	double angle_tmp;
@@ -225,8 +229,12 @@
 // 			{
 // 				draw_3d(main, ray_lenght, i,(((tmp_y - (int)(sin(angle_to_radyan(angle_tmp)) * (double)ray_lenght))) * MINI_MAP_WIDTH) + ((tmp_x + (int) (cos(angle_to_radyan(angle_tmp)) * (double)ray_lenght))), angle_tmp);
 // 				status = 1;
-// 			}
-// 			ray_lenght++;
+// 			};
+// 			//printf("%f\n", ray_lenght);
+// 			if (ray_lenght > 50)
+// 				ray_lenght++;
+// 			else
+// 				ray_lenght+=0.1;
 // 		}
 // 		angle_tmp += ((double)ROT_ANGLE_USER / (double)SCREEN_WIDTH);
 // 		i++;

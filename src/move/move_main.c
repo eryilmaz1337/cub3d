@@ -135,7 +135,7 @@ int	move_loop(t_cub3d *main)
 	put_backscreen(main);
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map_img, 0, 0);
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->player->player_img, main->player->player_x, main->player->player_y);
-	//raycasting(main);
+	raycasting(main);
 	return (0);
 }
 

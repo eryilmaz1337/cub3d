@@ -13,6 +13,7 @@
 		"algorithm": "c",
 		"get_next_line.h": "c",
 		"stdbool.h": "c",
-		"mlx.h": "c"
+		"mlx.h": "c",
+		"iterator": "c"
 	}
 }
