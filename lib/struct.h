@@ -17,10 +17,8 @@
 
 typedef struct s_ray
 {
-	double	pos_vx;
-	double	pos_vy;
-	double	pos_hx;
-	double	pos_hy;
+	double	pos_x;
+	double	pos_y;
 
 	bool	hit_v;
 	bool	hit_h;
@@ -36,7 +34,6 @@ typedef struct s_cub3d_map
 	void			*torch;
 	void			*WE_texture_img;
 	void			*EA_texture_img;
-
 	char			**map;
 	char			*map_name;
 	char			*NO_texture_path;

@@ -37,24 +37,3 @@ void	put_backscreen(t_cub3d *main)
 		k++;
 	}
 }
-
-// void main_game_img_paint(t_cub3d *main)
-// {
-// 	int i;
-// 	int k;
-// 	int sky;
-// 	k = 0;
-// 	i = 0;
-// 	sky = SCREEN_HEIGHT / 2;
-// 	// while (k != SCREEN_HEIGHT)
-// 	// {
-// 	// 	i = -1;
-// 	// 	while (++i != SCREEN_WIDTH && k != sky)
-// 	// 			main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
-// 	// 	i = -1;
-// 	// 	while (++i != SCREEN_WIDTH && k >= sky)
-// 	// 		main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->F_rgb_code;
-// 	// 	k++;
-// 	// }
-// 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
-// }

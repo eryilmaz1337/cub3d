@@ -65,7 +65,7 @@
 
 /*----------------USER------------------*/
 # define ROT_ANGLE 5
-# define ROT_ANGLE_USER 360
+# define ROT_ANGLE_USER 66
 /*--------------------------------------*/
 
 

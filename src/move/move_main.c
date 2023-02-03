@@ -18,35 +18,36 @@ int	is_wall(t_cub3d *main, double x, double y)
 	double	new_y;
 	double	collider;
 
-	collider = 4.5;
-	new_x = (x + collider) / main->mini_map->map_img_size_x;
+	// collider = 4.5;
+	collider = 0;
+	new_x = (x + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
 	new_y = (y + collider) / main->mini_map->map_img_size_y;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sol_üst\n");
 		return (1);
 	}
-		new_x = ((x - collider) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
-		new_y = (y + collider) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sağ_üst\n");
-		return (2);
-	}
-		new_x = (x + collider) / main->mini_map->map_img_size_x;
-		new_y = ((y - collider) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sol_alt\n");
-		return (3);
-	}
-		new_x = ((x - collider) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
-		new_y = ((y - collider) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sağ_alt\n");
-		return (4);
-	}
+	// 	new_x = ((x - collider) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
+	// 	new_y = (y + collider) / main->mini_map->map_img_size_y;
+	// if (main->map->map[(int)new_y][(int)new_x] == '1')
+	// {
+	// 	printf("WHTYUk_sağ_üst\n");
+	// 	return (2);
+	// }
+	// 	new_x = (x + collider) / main->mini_map->map_img_size_x;
+	// 	new_y = ((y - collider) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
+	// if (main->map->map[(int)new_y][(int)new_x] == '1')
+	// {
+	// 	printf("WHTYUk_sol_alt\n");
+	// 	return (3);
+	// }
+	// 	new_x = ((x - collider) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
+	// 	new_y = ((y - collider) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
+	// if (main->map->map[(int)new_y][(int)new_x] == '1')
+	// {
+	// 	printf("WHTYUk_sağ_alt\n");
+	// 	return (4);
+	// }
 	return (0);
 }
 

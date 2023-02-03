@@ -42,7 +42,6 @@ void	img_colors(int *img, int height, int width, t_color_data color)
 {
 	int	i;
 	int	k;
-
 	k = 0;
 
 	while (k != height)

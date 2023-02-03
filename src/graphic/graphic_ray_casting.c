@@ -34,11 +34,13 @@ void	draw_xpm_to_wall(t_cub3d *main, int location, int oran, int * xpm)
 	int	i = -1;
 	int find_pixel = 0;
 	if (main->ray.hit_h == true)
-		find_pixel = ((main->ray.pos_hx - floor(main->ray.pos_hx)) * 64); // resimdeki pixel sütun konumunu bulur.
+		find_pixel = ((main->ray.pos_x - floor(main->ray.pos_x)) * 64); // resimdeki pixel sütun konumunu bulur.
 	else if (main->ray.hit_v == true)
-		find_pixel = ((main->ray.pos_hy - floor(main->ray.pos_hy)) * 64); // resimdeki pixel sütun konumunu bulur.
+		find_pixel = ((main->ray.pos_y - floor(main->ray.pos_y)) * 64); // resimdeki pixel sütun konumunu bulur.
 	int img_loc = (64 * (64 / 2)) + find_pixel;
 	int color;
+	if (oran >= 4000)
+		oran = 4000;
 	while (++i < oran)
 	{
 		color = xpm[img_loc - 64 * (int)((double)i * ((double)64 / (double)(oran * 2)))];//xpm.img.addr[img_loc - (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))];
@@ -54,7 +56,7 @@ void draw_3d(t_cub3d *main, double distance, int ray_number)
 {
 	int loc;
 	int oran;
-	distance = distance * 16.0 * ((double)SCREEN_HEIGHT / (double)SCREEN_WIDTH);
+	distance = distance * main->mini_map->map_img_size_x * ((double)SCREEN_HEIGHT / (double)SCREEN_WIDTH);
 	loc = (SCREEN_WIDTH * main->mini_map->screen_focus) - ray_number;// 180000. pixel
 	oran = (((double)SCREEN_HEIGHT / 2.0) / distance) * 16.0;
 
@@ -87,8 +89,8 @@ void draw_ray(double distance, int x, int y, double angle, t_cub3d *main, int ra
             main->mini_map->ray_addr[MINI_MAP_WIDTH * (int)floor(main->mini_map->map_img_size_y * ray_y) + (int)floor(main->mini_map->map_img_size_x * ray_x)] = rgb_to_hex(color_assignment(0,0,255,0));
         else
 		{
-			main->ray.pos_hx = ray_x;
-			main->ray.pos_hy = ray_y;
+			main->ray.pos_x = ray_x;
+			main->ray.pos_y = ray_y;
 			draw_3d(main, distance, ray_number);
 			break;
 		}
@@ -134,8 +136,6 @@ double ray_vertical(t_cub3d *main, double angle, int x, int y)
 			hit = true;
 			tmp_x = vdx * x;
 			tmp_y = vdy*y;
-			main->ray.pos_vx = vdx;
-			main->ray.pos_vy = vdy;
 			break;
 		}
 		vdx += 1.0 - 0.0001;
@@ -176,8 +176,6 @@ double ray_horizonal(t_cub3d *main, double angle, int x, int y)
 			hit = true;
 			tmp_y = hdy * y;
 			tmp_x = hdx * x;
-			main->ray.pos_hx = hdx;
-			main->ray.pos_hy = hdy;
 			break;
 		}
 		hdy =  hdy + 1.0 - 0.0001;
@@ -229,7 +227,6 @@ void raycasting(t_cub3d *main)
 	int ray_number;
 	ray_number = 0;
 	angle = main->player->angle - (ROT_ANGLE_USER / 2);
-	// angle = main->player->angle;
 	img_colors(main->mini_map->ray_addr, MINI_MAP_HEIGHT, MINI_MAP_WIDTH, color_assignment(255, 0, 0, 0));
 	while (ray_number < SCREEN_WIDTH)
 	{
