@@ -14,6 +14,7 @@
 
 void loop_window_and_game(t_cub3d *main)
 {
+	main->player->dir_down = false;
 	mlx_mouse_move(main->mlx_window, MOVE_MOUSE_CENTER, MOVE_MOUSE_CENTER);
 	put_backscreen(main);
 	map_paint(main);
@@ -28,6 +29,17 @@ void loop_window_and_game(t_cub3d *main)
 
 void mlx_img_init(t_cub3d *main)
 {
+	main->player->dir_down = false;
+	main->player->dir_up = false;
+	main->player->dir_left = false;
+	main->player->dir_right = false;
+	main->player->key_a = false;
+	main->player->key_s = false;
+	main->player->key_d = false;
+	main->player->key_w = false;
+	main->player->key_e = false;
+	main->player->key_shift = false;
+
 	printf("%d ", main->mini_map->map_img_size_y);
 	printf("%d\n", main->mini_map->map_img_size_x);
 	main->game_img = mlx_new_image(main->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);

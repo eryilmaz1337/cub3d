@@ -49,11 +49,14 @@
 # define KEY_RIGHT				124
 # define KEY_UP					126
 # define KEY_SHIFT				257
+# define KEY_Q					12
+# define KEY_E					14
+
 /*--------------------------------------*/
 
 /*----------------MOVE------------------*/
 # define MOVE_BEAM_ANGLE_INCREASE_RATIO 0.5
-# define MOVE_PERSPECTIVE 60
+# define MOVE_PERSPECTIVE 66
 # define MOVE_PIXEL 1
 # define MOVE_ANGLE 2.5
 # define MOVE_PIXEL_FAST 10
@@ -62,7 +65,7 @@
 
 /*----------------USER------------------*/
 # define ROT_ANGLE 5
-# define ROT_ANGLE_USER 60
+# define ROT_ANGLE_USER 360
 /*--------------------------------------*/
 
 

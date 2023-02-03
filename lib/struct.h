@@ -15,6 +15,20 @@
 # define STRUCT_H
 # include <stdbool.h>
 
+typedef struct s_ray
+{
+	double	pos_vx;
+	double	pos_vy;
+	double	pos_hx;
+	double	pos_hy;
+
+	bool	hit_v;
+	bool	hit_h;
+
+	int		dir_y;
+	int		dir_x;
+} t_ray;
+
 typedef struct s_cub3d_map
 {
 	void			*NO_texture_img;
@@ -56,6 +70,7 @@ typedef struct s_player
 	bool			key_s;
 	bool			key_d;
 	bool			key_a;
+	bool			key_e;
 	bool			key_shift;
 	bool			dir_right;
 	bool			dir_left;
@@ -96,6 +111,7 @@ typedef struct s_cub3d
 	t_cub3d_mini_map	*mini_map;
 	t_cub3d_map			*map;
 	t_player			*player;
-}	t_cub3d;
+	t_ray				ray;
+} t_cub3d;
 
 #endif
