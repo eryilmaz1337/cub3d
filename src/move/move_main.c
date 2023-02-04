@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/14 17:12:47 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/04 14:40:34 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,34 @@ int	is_wall(t_cub3d *main, double x, double y)
 
 	// collider = 4.5;
 	collider = 0;
-	new_x = (x + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
-	new_y = (y + collider) / main->mini_map->map_img_size_y;
+	new_x = (x + (main->mini_map->map_img_size_x / 2)) / main->mini_map->map_img_size_x;
+	new_y = (y + (main->mini_map->map_img_size_y / 2)) / main->mini_map->map_img_size_y;
 	if (main->map->map[(int)new_y][(int)new_x] == '1')
 	{
 		printf("WHTYUk_sol_üst\n");
 		return (1);
 	}
-	new_x = ((x - collider) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
-	new_y = (y + collider) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sağ_üst\n");
-		return (2);
-	}
-	new_x = (x + collider) / main->mini_map->map_img_size_x;
-	new_y = ((y - collider) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sol_alt\n");
-		return (3);
-	}
-	new_x = ((x - collider) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
-	new_y = ((y - collider) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sağ_alt\n");
-		return (4);
-	}
+	// 	new_x = ((x - collider) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
+	// 	new_y = (y + collider) / main->mini_map->map_img_size_y;
+	// if (main->map->map[(int)new_y][(int)new_x] == '1')
+	// {
+	// 	printf("WHTYUk_sağ_üst\n");
+	// 	return (2);
+	// }
+	// 	new_x = (x + collider) / main->mini_map->map_img_size_x;
+	// 	new_y = ((y - collider) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
+	// if (main->map->map[(int)new_y][(int)new_x] == '1')
+	// {
+	// 	printf("WHTYUk_sol_alt\n");
+	// 	return (3);
+	// }
+	// 	new_x = ((x - collider) + main->mini_map->map_img_size_x) / main->mini_map->map_img_size_x;
+	// 	new_y = ((y - collider) + main->mini_map->map_img_size_y) / main->mini_map->map_img_size_y;
+	// if (main->map->map[(int)new_y][(int)new_x] == '1')
+	// {
+	// 	printf("WHTYUk_sağ_alt\n");
+	// 	return (4);
+	// }
 	return (0);
 }
 

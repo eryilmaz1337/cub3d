@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryilmaz <eryilmaz@student.42kocaeli.com.  +#+  +:+       +#+        */
+/*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:19:17 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/16 12:19:18 by eryilmaz         ###   ########.tr	      */
+/*   Updated: 2023/02/04 14:38:43 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void mlx_img_init(t_cub3d *main)
 	main->player->key_w = false;
 	main->player->key_e = false;
 	main->player->key_shift = false;
+	main->map = false;
 
 	printf("%d ", main->mini_map->map_img_size_y);
 	printf("%d\n", main->mini_map->map_img_size_x);

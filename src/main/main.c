@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:58:03 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/14 16:53:25 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/04 14:44:38 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ int main(int argc, char **argv)
 	map_full_check(argc, argv, main);
 	mlx_inits(main);
 	loop_window_and_game(main);
-	//check_leaks();
 	return (EXIT_SUCCESS);
 }

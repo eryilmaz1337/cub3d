@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_casting.c                                      :+:      :+:    :+:   */
+/*   graphic_ray_casting.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryilmaz <eryilmaz@student.42kocaeli.com.  +#+  +:+       +#+        */
+/*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:30:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/17 12:30:50 by eryilmaz         ###   ########.tr	      */
+/*   Updated: 2023/02/04 14:41:15 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void beam_calculation(t_cub3d *main, double angle, int ray_number)
 void raycasting(t_cub3d *main)
 {
 	main->player->def_p_x = (main->player->player_x + (main->mini_map->map_img_size_x / 2)) / main->mini_map->map_img_size_x;
-	main->player->def_p_y = (main->player->player_y + (main->mini_map->map_img_size_x / 2)) / main->mini_map->map_img_size_y;
+	main->player->def_p_y = (main->player->player_y + (main->mini_map->map_img_size_y / 2)) / main->mini_map->map_img_size_y;
 	double angle;
 	int ray_number;
 	ray_number = 0;

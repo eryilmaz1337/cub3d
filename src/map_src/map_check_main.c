@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:47:51 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/14 14:31:30 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/04 14:37:01 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,20 @@ void	check_invallid_chracters(char s, t_cub3d *main, int status)
 	static int	player_c;
 
 	if (status == 0 && check_isspace(s) == 1)
-		if (s != '1')
-			if (s != '0')
-			{
-				if (s == 'N' || s == 'W' || s == 'S' || s == 'E')
+		if (s != 'K' || s != 'A')
+			if (s != '1')
+				if (s != '0')
 				{
-					if (player_c == 0)
-						player_c++;
-					else if (player_c > 1)
-						exit_free (main, INVALID_COUNTS);
+					if (s == 'N' || s == 'W' || s == 'S' || s == 'E')
+					{
+						if (player_c == 0)
+							player_c++;
+						else if (player_c > 1)
+							exit_free (main, INVALID_COUNTS);
+					}
+					else
+						exit_free (main, INVALID_CHARACTER);
 				}
-				else
-					exit_free (main, INVALID_CHARACTER);
-			}
 	if (status == 1 && player_c == 0)
 		exit_free (main, INVALID_COUNTS);
 }

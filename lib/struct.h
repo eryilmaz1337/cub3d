@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryilmaz <eryilmaz@student.42kocaeli.com.  +#+  +:+       +#+        */
+/*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:39:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/01/16 13:39:50 by eryilmaz         ###   ########.tr	      */
+/*   Updated: 2023/02/04 14:44:59 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ typedef struct s_ray
 
 typedef struct s_cub3d_map
 {
-	void			*NO_texture_img;
 	void			*SO_texture_img;
+	void			*door_img;
+	void			*NO_texture_img;
 	void			*torch;
 	void			*WE_texture_img;
 	void			*EA_texture_img;
@@ -49,6 +50,7 @@ typedef struct s_cub3d_map
 	int				*WE_texture_addr;
 	int				*EA_texture_addr;
 	int				*SO_texture_addr;
+	int				*door_addr;
 } t_cub3d_map;
 
 typedef struct s_cub3d_mini_map
