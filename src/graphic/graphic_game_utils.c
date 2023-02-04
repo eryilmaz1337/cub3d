@@ -57,3 +57,27 @@ void	img_colors(int *img, int height, int width, t_color_data color)
 		k++;
 	}
 }
+
+void	draw_xpm_to_wall(t_cub3d *main, int location, int oran, int* xpm)
+{
+	int	i = -1;
+	int find_pixel = 0;
+	if (main->ray.hit_h == true)
+		find_pixel = ((main->ray.pos_x - floor(main->ray.pos_x)) * 64); // resimdeki pixel sütun konumunu bulur.
+	else if (main->ray.hit_v == true)
+		find_pixel = ((main->ray.pos_y - floor(main->ray.pos_y)) * 64); // resimdeki pixel sütun konumunu bulur.
+	int img_loc = (64 * (64 / 2)) + find_pixel;
+	int color;
+	if (oran >= 4000)
+		oran = 4000;
+	while (++i < oran)
+	{
+		color = xpm[img_loc - 64 * (int)((double)i * ((double)64 / (double)(oran * 2)))];//xpm.img.addr[img_loc - (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))];
+		if ((location - (SCREEN_WIDTH * i)) >= 0 && color >= 0) //yukarı
+			main->game_img_adress[(location - (SCREEN_WIDTH * i))] = color;
+		color = xpm[img_loc + 64 * (int)((double)i * ((double)64 / (double)(oran * 2)))];//xpm.img.addr[img_loc + (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))];
+		if ((SCREEN_HEIGHT * SCREEN_WIDTH) >= (location + (SCREEN_WIDTH * i)) && color >= 0) // aşağı
+			main->game_img_adress[(location + (SCREEN_WIDTH * i))] = color;
+	}
+}
+

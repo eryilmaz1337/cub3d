@@ -24,6 +24,36 @@ void ft_pixel_put(t_cub3d *main, int x, int y, t_color_data color)
 	img_colors(main->mini_map_img_adress, main->mini_map->map_img_size_y, main->mini_map->map_img_size_x, data);
 }
 
+
+void draw_ray(double distance, int x, int y, double angle, t_cub3d *main, int ray_number)
+{
+	double    ray_x;
+    double    ray_y;
+    double    dx;
+    double    dy;
+
+    ray_x = main->player->def_p_x;
+    ray_y = main->player->def_p_y;
+    dx = distance * fabs(cos(angle * (M_PI / 180.0))) * x;
+    dy = distance * fabs(sin(angle * (M_PI / 180.0))) * y;
+    dx /= distance;
+    dy /= distance;
+	while (1)
+	{
+        if (!is_wall_v2(main,ray_x, ray_y))
+            main->mini_map->ray_addr[MINI_MAP_WIDTH * (int)floor(main->mini_map->map_img_size_y * ray_y) + (int)floor(main->mini_map->map_img_size_x * ray_x)] = rgb_to_hex(color_assignment(0,0,255,0));
+        else
+		{
+			main->ray.pos_x = ray_x;
+			main->ray.pos_y = ray_y;
+			draw_3d(main, distance, ray_number);
+			break;
+		}
+        ray_x += dx / 100;
+        ray_y += dy / 100;
+    }
+}
+
 void map_paint(t_cub3d *main)
 {
 	int x;

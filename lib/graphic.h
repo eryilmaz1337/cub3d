@@ -18,7 +18,12 @@ void		mlx_inits(t_cub3d *main);
 void		put_backscreen(t_cub3d *main);
 void		map_paint(t_cub3d *main);
 void		img_colors(int *img, int height, int width, t_color_data color);
+void		draw_xpm_to_wall(t_cub3d *main, int location, int oran, int *xpm);
 void		raycasting(t_cub3d *main);
+void		draw_3d(t_cub3d *main, double distance, int ray_number);
+void 		draw_ray(double distance, int x, int y, double angle, t_cub3d *main, int ray_number);
+int is_wall_v2(t_cub3d *main, double x, double y);
+int is_wall_tmp(t_cub3d *main, double x, double y);
 
 unsigned long rgb_to_hex(t_color_data color);
 
