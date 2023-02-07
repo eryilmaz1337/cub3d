@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:39:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/04 14:44:59 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/06 17:59:45 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_ray
 
 	int		dir_y;
 	int		dir_x;
+	char	lh_x;
+	char	lh_y;
+	char	last_hit;
+	int		ray_num;
+	double	distance;
+	int		door_x;
+	int		door_y;
 } t_ray;
 
 typedef struct s_cub3d_map
@@ -65,6 +72,8 @@ typedef struct s_cub3d_mini_map
 
 typedef struct s_player
 {
+	double			p_last_x;
+	double			p_last_y;
 	bool			key_w;
 	bool			key_s;
 	bool			key_d;
@@ -87,13 +96,13 @@ typedef struct s_player
 
 typedef struct  s_color_data
 {
-	int transparent;
-	int red;
-	int green;
-	int blue;
-	int tmp_x;
-	int tmp_y;
-	int flag;
+	int	transparent;
+	int	red;
+	int	green;
+	int	blue;
+	int	tmp_x;
+	int	tmp_y;
+	int	flag;
 } t_color_data;
 
 typedef struct s_cub3d

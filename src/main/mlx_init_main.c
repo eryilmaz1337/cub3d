@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:19:17 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/04 14:51:22 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/06 18:00:11 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void mlx_img_init(t_cub3d *main)
 	main->player->key_w = false;
 	main->player->key_e = false;
 	main->player->key_shift = false;
+	main->player->p_last_x = main->player->player_x;
+	main->player->p_last_y = main->player->player_y;
+	
 	// main->map = false;
 
 	printf("%d ", main->mini_map->map_img_size_y);
@@ -52,7 +55,7 @@ void mlx_img_init(t_cub3d *main)
 	main->mini_map->ray_img = mlx_new_image(main->mlx, MINI_MAP_WIDTH, MINI_MAP_HEIGHT);
 	if (!main->mini_map->ray_img)
 		exit_free(main, MLX_ERROR_IMG);
-	main->player->player_img = mlx_new_image(main->mlx, main->mini_map->map_img_size_y, main->mini_map->map_img_size_x);
+	main->player->player_img = mlx_new_image(main->mlx, main->mini_map->map_img_size_x, main->mini_map->map_img_size_y);
 	if (!main->player->player_img)
 		exit_free(main, MLX_ERROR_IMG);
 	main->map->NO_texture_img = mlx_xpm_file_to_image(main->mlx, main->map->NO_texture_path, &main->tmp_img_x, &main->tmp_img_y);
