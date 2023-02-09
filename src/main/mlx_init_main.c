@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:19:17 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/06 18:00:11 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:41:35 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,7 @@ void mlx_img_init(t_cub3d *main)
 	main->player->key_shift = false;
 	main->player->p_last_x = main->player->player_x;
 	main->player->p_last_y = main->player->player_y;
-	
-	// main->map = false;
 
-	printf("%d ", main->mini_map->map_img_size_y);
-	printf("%d\n", main->mini_map->map_img_size_x);
 	main->game_img = mlx_new_image(main->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!main->game_img)
 		exit_free(main, MLX_ERROR_IMG);
@@ -71,6 +67,7 @@ void mlx_img_init(t_cub3d *main)
 	if(!main->map->EA_texture_img)
 		exit_free(main, MLX_ERROR_IMG);
 	main->map->door_img = mlx_xpm_file_to_image(main->mlx, "./texture/wood.xpm", &main->tmp_img_x, &main->tmp_img_y);
+	// main->map->hand = mlx_xpm_file_to_image(main->mlx, "./texture/giant_hand.xpm", &main->tmp_img_x, &main->tmp_img_y);
 }
 
 void mlx_img_addr_init(t_cub3d *main)
@@ -100,6 +97,7 @@ void mlx_img_addr_init(t_cub3d *main)
 	if(!main->map->EA_texture_img)
 		exit_free(main, MLX_ERROR_IMG);
 	main->map->door_addr = (int *)mlx_get_data_addr(main->map->door_img, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
+	// main->map->door_addr = (int *)mlx_get_data_addr(main->map->hand, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
 }
 
 unsigned long	rgb_to_hex_1(int transparent ,int r, int g, int b)//0x_00_00_ff

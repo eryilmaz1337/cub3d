@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:39:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/06 17:59:45 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:32:26 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef struct s_cub3d_map
 	void			*SO_texture_img;
 	void			*door_img;
 	void			*NO_texture_img;
-	void			*torch;
+	void			*hand;
+	void			*hand_addr;
 	void			*WE_texture_img;
 	void			*EA_texture_img;
 	char			**map;
