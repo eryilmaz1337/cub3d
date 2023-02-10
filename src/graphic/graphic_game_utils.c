@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:04:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/06 13:10:51 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:05:21 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,35 @@ void	img_colors(int *img, int height, int width, t_color_data color)
 	}
 }
 
-void	draw_xpm_to_wall(t_cub3d *main, int location, int oran, int* xpm)
+void	draw_xpm_to_wall(t_cub3d *main, int location, int WH, int* xpm)
 {
-	int	i = -1;
-	int find_pixel = 0;
+	int	i;
+	int find_pixel;
+	int	img_loc;
+	int	color;
+
+	i = -1;
+	find_pixel = 0;
 	if (main->ray.hit_h == true)
 		find_pixel = ((main->ray.pos_x - floor(main->ray.pos_x)) * 64); // resimdeki pixel sütun konumunu bulur.
 	else if (main->ray.hit_v == true)
 		find_pixel = ((main->ray.pos_y - floor(main->ray.pos_y)) * 64); // resimdeki pixel sütun konumunu bulur.
-	int img_loc = (64 * (64 / 2)) + find_pixel;
-	int color;
-	if (oran >= 4000)
-		oran = 4000;
-	while (++i < oran && (location - (SCREEN_WIDTH * i)) <= SCREEN_HEIGHT * SCREEN_WIDTH && img_loc - 64 * (int)((double)i * ((double)64 / (double)(oran * 2))) <= 64 * 64)
+	if (WH >= 4000)
+		WH = 4000;
+	img_loc = (64 * (64 / 2)) + find_pixel;
+	while (++i < WH && (location - (SCREEN_WIDTH * i)) <= SCREEN_HEIGHT * SCREEN_WIDTH && img_loc - 64 * (int)((double)i * ((double)64 / (double)(WH * 2))) <= 64 * 64)
 	{
-		if (img_loc - 64 * (int)((double)i * ((double)64 / (double)(oran * 2))) >= 0)
+		if (img_loc - 64 * (int)((double)i * ((double)64 / (double)(WH * 2))) >= 0)
 		{
-			color = xpm[img_loc - 64 * (int)((double)i * ((double)64 / (double)(oran * 2)))];//xpm.img.addr[img_loc - (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))];
+			color = xpm[img_loc - 64 * (int)((double)i * ((double)64 / (double)(WH * 2)))];//xpm.img.addr[img_loc - (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))]
 			if ((location - (SCREEN_WIDTH * i)) >= 0 && color >= 0) //yukarı
 				main->game_img_adress[(location - (SCREEN_WIDTH * i))] = color;
 		}
 		else
 			printf("<0\n");
-		if (img_loc + 64 * (int)((double)i * ((double)64 / (double)(oran * 2))) < 64 * 64)
+		if (img_loc + 64 * (int)((double)i * ((double)64 / (double)(WH * 2))) < 64 * 64)
 		{
-			color = xpm[img_loc + 64 * (int)((double)i * ((double)64 / (double)(oran * 2)))];//xpm.img.addr[img_loc + (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))];
+			color = xpm[img_loc + 64 * (int)((double)i * ((double)64 / (double)(WH * 2)))];//xpm.img.addr[img_loc + (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))];
 			if ((SCREEN_HEIGHT * SCREEN_WIDTH) >= (location + (SCREEN_WIDTH * i)) && color >= 0) // aşağı
 				main->game_img_adress[(location + (SCREEN_WIDTH * i))] = color;
 		}

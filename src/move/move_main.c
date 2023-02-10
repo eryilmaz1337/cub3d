@@ -6,56 +6,11 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/09 14:41:49 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/09 16:59:07 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	is_wall(t_cub3d *main, double x, double y)
-{
-	double	new_x;
-	double	new_y;
-	double	collider;
-
-	collider = 5;
-	// collider = 0;
-	// new_x = (x + (main->mini_map->map_img_size_x / 2) - collider) / main->mini_map->map_img_size_x;
-	// new_y = (y + (main->mini_map->map_img_size_y / 2)) / main->mini_map->map_img_size_y;
-	// if (main->map->map[(int)new_y][(int)new_x] == 'K')
-	// {
-	// 	return (2);
-	// }
-	new_x = (x + (main->mini_map->map_img_size_x / 2) - collider) / main->mini_map->map_img_size_x;
-	new_y = (y + (main->mini_map->map_img_size_y / 2) - collider) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sol_üst\n");
-		return (1);
-	}
-	new_x = (x + (main->mini_map->map_img_size_x / 2) + collider) / main->mini_map->map_img_size_x;
-	new_y = (y + (main->mini_map->map_img_size_y / 2) - collider) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sağ_üst\n");
-		return (1);
-	}
-	new_x = (x + (main->mini_map->map_img_size_x / 2) - collider) / main->mini_map->map_img_size_x;
-	new_y = (y + (main->mini_map->map_img_size_y / 2) + collider) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sol_alt\n");
-		return (2);
-	}
-	new_x = (x + (main->mini_map->map_img_size_x / 2) + collider) / main->mini_map->map_img_size_x;
-	new_y = (y + (main->mini_map->map_img_size_y / 2) + collider) / main->mini_map->map_img_size_y;
-	if (main->map->map[(int)new_y][(int)new_x] == '1')
-	{
-		printf("WHTYUk_sağ_alt\n");
-		return (1);
-	}
-	return (0);
-}
 
 int	mouse_cursor(int x, int y, t_cub3d *main)
 {
@@ -71,60 +26,19 @@ int	mouse_cursor(int x, int y, t_cub3d *main)
 	return (0);
 }
 
+void	img_loop(t_cub3d *main)
+{
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
+	put_backscreen(main);
+	map_paint(main);
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map_img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_window, main->player->player_img, main->player->player_x, main->player->player_y);
+	raycasting(main);
+}
+
 int	move_loop(t_cub3d *main)
 {
-	double	x;
-	double	y;
-	int		hit_x;
-	int		hit_y;
-
-	hit_x = 0;
-	hit_y = 0;
-	x = main->player->player_x;
-	y = main->player->player_y;
-	if (main->player->key_shift == true)
-		main->player->move_speed = MOVE_PIXEL;
-	else if (main->player->key_shift == false)
-		main->player->move_speed = MOVE_PIXEL;
-	if (main->player->key_w)
-	{
-		x += cos(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, x, main->player->player_y))
-			hit_x = 1;
-		y += -1 * sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
-		if (!is_wall(main, main->player->player_x, y))
-			hit_y = 1;
-	}
-	if (main->player->key_a)
-	{
-		x += -1 * sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
-		
-		if (!is_wall(main, x, main->player->player_y))
-			hit_x = 1;
-		y -= cos(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, main->player->player_x, y))
-			hit_y = 1;
-	}
-	if (main->player->key_s)
-	{
-		x += -1 * cos(angle_to_radyan(main->player->angle));
-		
-		if (!is_wall(main, x, main->player->player_y))
-			hit_x = 1;
-		y += sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
-		if (!is_wall(main, main->player->player_x, y))
-			hit_y = 1;
-	}
-	if (main->player->key_d)
-	{
-		x += sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
-		
-		if (!is_wall(main, x, main->player->player_y))
-			hit_x = 1;
-		y += cos(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, main->player->player_x, y))
-			hit_y = 1;
-	}
+	keys(main);
 	if (main->player->dir_left)
 		main->player->angle += ROT_ANGLE;
 	if (main->player->dir_right)
@@ -133,27 +47,11 @@ int	move_loop(t_cub3d *main)
 		main->mini_map->screen_focus += 2;
 	if (main->player->dir_down && main->mini_map->screen_focus > SCREEN_HEIGHT / 4)
 		main->mini_map->screen_focus -= 2;
-	if (hit_x == 1)
-	{
-		main->player->player_x = x;
-		hit_x = 0;
-	}
-	if (hit_y == 1)
-	{
-		main->player->player_y = y;
-		hit_y = 0;
-	}
 	while (main->player->angle >= 360)
 			main->player->angle -= 360;
 	while (main->player->angle < 0)
 			main->player->angle += 360;
-	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
-	put_backscreen(main);
-	map_paint(main);
-	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map_img, 0, 0);
-	mlx_put_image_to_window(main->mlx, main->mlx_window, main->player->player_img, main->player->player_x, main->player->player_y);
-	// mlx_put_image_to_window(main->mlx, main->mlx_window, main->map->hand, 0, 0);
-	raycasting(main);
+	img_loop(main);
 	return (0);
 }
 
@@ -186,7 +84,6 @@ int	ft_key_press(int key_code, t_cub3d *main)
 
 int	ft_key_release(int key_code, t_cub3d *main)
 {
-	//mlx_clear_window(main->mlx, main->mlx_window);
 	if (key_code == KEY_A)
 		main->player->key_a = false;
 	if (key_code == KEY_S)
