@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:18:09 by uercan            #+#    #+#             */
-/*   Updated: 2023/01/14 17:06:13 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 17:47:41 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
-# include "define.h"
-# include "struct.h"
+# include "defines.h"
+# include "assigments.h"
 # include "exit.h"
 # include "map.h"
 # include "graphic.h"

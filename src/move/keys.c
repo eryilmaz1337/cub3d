@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:27:04 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/09 16:49:39 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 18:17:56 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,120 +14,67 @@
 
 void	move_key_w(t_cub3d *main, double x, double y)
 {
-	int	hit_x;
-	int	hit_y;
-
-	hit_x = 0;
-	hit_y = 0;
 	if (main->player->key_w)
 	{
-		x += cos(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, x, main->player->player_y, 0.0, 0.0))
-			hit_x = 1;
-		y += -1 * sin(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, main->player->player_x, y, 0.0, 0.0))
-			hit_y = 1;
-	}
-	if (hit_x == 1)
-	{
-		main->player->player_x = x;
-		hit_x = 0;
-	}
-	if (hit_y == 1)
-	{
-		main->player->player_y = y;
-		hit_y = 0;
+		x += cos(angle_to_radyan(main->player->angle)) * main->player->move_speed;
+		if (is_wall(main, x, main->player->player_y) == 0)
+			main->player->player_x = x;
+		y += -1 * sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
+		if (is_wall(main, main->player->player_x, y) == 0)
+			main->player->player_y = y;
 	}
 }
 
 void	move_key_a(t_cub3d *main, double x, double y)
 {
-	int	hit_x;
-	int	hit_y;
-
-	hit_x = 0;
-	hit_y = 0;
 	if (main->player->key_a)
 	{
-		x += -1 * sin(angle_to_radyan(main->player->angle));
-		
-		if (!is_wall(main, x, main->player->player_y, 0.0, 0.0))
-			hit_x = 1;
-		y -= cos(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, main->player->player_x, y, 0.0, 0.0))
-			hit_y = 1;
-	}
-	if (hit_x == 1)
-	{
-		main->player->player_x = x;
-		hit_x = 0;
-	}
-	if (hit_y == 1)
-	{
-		main->player->player_y = y;
-		hit_y = 0;
+		x += -1 * sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
+		if (is_wall(main, x, main->player->player_y) == 0)
+			main->player->player_x = x;
+		y -= cos(angle_to_radyan(main->player->angle)) * main->player->move_speed;
+		if (is_wall(main, main->player->player_x, y) == 0)
+			main->player->player_y = y;
 	}
 }
 
 void	move_key_s(t_cub3d *main, double x, double y)
 {
-	int	hit_x;
-	int	hit_y;
-
-	hit_x = 0;
-	hit_y = 0;
 	if (main->player->key_s)
 	{
-		x += -1 * cos(angle_to_radyan(main->player->angle));
-		
-		if (!is_wall(main, x, main->player->player_y, 0.0, 0.0))
-			hit_x = 1;
-		y += sin(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, main->player->player_x, y, 0.0, 0.0))
-			hit_y = 1;
-	}
-	if (hit_x == 1)
-	{
-		main->player->player_x = x;
-		hit_x = 0;
-	}
-	if (hit_y == 1)
-	{
-		main->player->player_y = y;
-		hit_y = 0;
+		x += -1 * cos(angle_to_radyan(main->player->angle)) * main->player->move_speed;
+		if (is_wall(main, x, main->player->player_y) == 0)
+			main->player->player_x = x;
+		y += sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
+		if (is_wall(main, main->player->player_x, y) == 0)
+			main->player->player_y = y;
 	}
 }
 
 void	move_key_d(t_cub3d *main, double x, double y)
 {
-	int	hit_x;
-	int	hit_y;
-
-	hit_x = 0;
-	hit_y = 0;
 	if (main->player->key_d)
 	{
-		x += sin(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, x, main->player->player_y, 0.0, 0.0))
-			hit_x = 1;
-		y += cos(angle_to_radyan(main->player->angle));
-		if (!is_wall(main, main->player->player_x, y, 0.0, 0.0))
-			hit_y = 1;
+		x += sin(angle_to_radyan(main->player->angle)) * main->player->move_speed;
+		if (is_wall(main, x, main->player->player_y) == 0)
+			main->player->player_x = x;
+		y += cos(angle_to_radyan(main->player->angle)) * main->player->move_speed;
+		if (is_wall(main, main->player->player_x, y) == 0)
+			main->player->player_y = y;
 	}
-	if (hit_x == 1)
+}
+
+void	move_key_t(t_cub3d *main)
+{
+	if (main->player->key_t)
 	{
-		main->player->player_x = x;
-		hit_x = 0;
-	}
-	if (hit_y == 1)
-	{
-		main->player->player_y = y;
-		hit_y = 0;
+		main->mini_map->screen_focus = -500;
 	}
 }
 
 void	keys(t_cub3d *main)
 {
+	// move_key_t(main);
 	move_key_w(main, main->player->player_x, main->player->player_y);
 	move_key_a(main, main->player->player_x, main->player->player_y);
 	move_key_s(main, main->player->player_x, main->player->player_y);

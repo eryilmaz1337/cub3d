@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:10:05 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/09 16:58:00 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 18:14:21 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define KEY_UP					126
 # define KEY_SHIFT				257
 # define KEY_E					14
+# define KEY_T					17
 
 /*--------------------------------------*/
 
@@ -58,7 +59,7 @@
 # define MOVE_PERSPECTIVE 66
 # define MOVE_PIXEL 1
 # define MOVE_ANGLE 2.5
-# define MOVE_PIXEL_FAST 10
+# define MOVE_PIXEL_FAST 5
 # define MOVE_MOUSE_CENTER 123
 /*--------------------------------------*/
 

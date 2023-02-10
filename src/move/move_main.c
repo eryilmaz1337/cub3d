@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/09 16:59:07 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 18:11:28 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,18 @@ void	img_loop(t_cub3d *main)
 int	move_loop(t_cub3d *main)
 {
 	keys(main);
+	if (main->player->key_shift)
+		main->player->move_speed = MOVE_PIXEL_FAST;
+	if (!main->player->key_shift)
+		main->player->move_speed = MOVE_PIXEL;
 	if (main->player->dir_left)
 		main->player->angle += ROT_ANGLE;
-	if (main->player->dir_right)
+	else if (main->player->dir_right)
 		main->player->angle -= ROT_ANGLE;
 	if (main->player->dir_up && main->mini_map->screen_focus < (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
-		main->mini_map->screen_focus += 2;
-	if (main->player->dir_down && main->mini_map->screen_focus > SCREEN_HEIGHT / 4)
-		main->mini_map->screen_focus -= 2;
+		main->mini_map->screen_focus += 10;
+	else if (main->player->dir_down && main->mini_map->screen_focus > SCREEN_HEIGHT / 4)
+		main->mini_map->screen_focus -= 10;
 	while (main->player->angle >= 360)
 			main->player->angle -= 360;
 	while (main->player->angle < 0)
@@ -61,6 +65,8 @@ int	ft_key_press(int key_code, t_cub3d *main)
 		exit(0);
 	if (key_code == KEY_A)
 		main->player->key_a = true;
+	if (key_code == KEY_T)
+		main->player->key_t = true;
 	if (key_code == KEY_S)
 		main->player->key_s = true;
 	if (key_code == KEY_D)
@@ -86,6 +92,8 @@ int	ft_key_release(int key_code, t_cub3d *main)
 {
 	if (key_code == KEY_A)
 		main->player->key_a = false;
+	if (key_code == KEY_T)
+		main->player->key_t = false;
 	if (key_code == KEY_S)
 		main->player->key_s = false;
 	if (key_code == KEY_D)

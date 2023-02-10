@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:47:51 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/04 14:48:39 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 17:29:20 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	map_down_control(t_cub3d *main)//{printf("NO:1  i:%d k:%d  O:%c\n", i, k, m
 				else if (k == (int)ft_strlen(main->map->map[i]) - 1 && check_isspace(main->map->map[i][k]) == 1)
 					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (i + 1 < l_i - 1 && check_isspace(main->map->map[i + 1][k]) == 0)
-					{printf("F:%s f:%s, l:%d\n", __FILE__, __FUNCTION__, __LINE__);exit (1);}//exit_free(main, INVALID_MAP);
+					{printf("F:%s f:%s, l:%d %d %d\n", __FILE__, __FUNCTION__, __LINE__, i, k);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (i == l_i - 1 && check_isspace(main->map->map[i][k]) == 1)
 					{printf("F:%s f:%s, l:%d %d %d\n", __FILE__, __FUNCTION__, __LINE__, i, k);exit (1);}//exit_free(main, INVALID_MAP);
 				else if (k == 0 && check_isspace(main->map->map[i][k]) == 1)

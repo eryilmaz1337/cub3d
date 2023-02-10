@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:30:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/06 14:23:29 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 19:08:54 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,19 @@ void	door_control(t_cub3d *main, double x, double y)
 {
 	int xX;
 	int yY;
-	double	new_x;
-	double	new_y;
 	
 	xX = (int)floor(x);
 	yY = (int)floor(y);
-	new_x = (x + (main->mini_map->map_img_size_x / 2)) / main->mini_map->map_img_size_x;
-	new_y = (y + (main->mini_map->map_img_size_y / 2)) / main->mini_map->map_img_size_y;
-	if (x < 0 || x > main->map->map_max_line || y < 0 || y > main->map->map_lines_num)
-	{
-		printf("HYWAS\n");
-	}
-	else
+	if (x >= 0 && x < main->map->map_max_line && y >= 0 && y < main->map->map_lines_num)
 		if (main->ray.ray_num == SCREEN_WIDTH / 2)
 		{
-			if (main->map->map[yY][xX] == 'K' && main->player->key_e && main->map->map[(int)new_y][(int)new_x] != 'K' && (int)main->ray.distance < 2)
+			if (main->map->map[yY][xX] == 'K' && main->player->key_e && (int)main->ray.distance < 2)
 			{
-				// printf("%0.1f %0.1f\n", main->player->player_x, main->player->player_y);
 				main->map->map[yY][xX] = 'A';
 				main->player->key_e = false;
 			}
-			else if (main->map->map[yY][xX] == 'A' && main->player->key_e && main->map->map[(int)new_y][(int)new_x] != 'A')
+			else if (main->map->map[yY][xX] == 'A' && main->player->key_e && is_door(main, main->player->player_x, main->player->player_y) != 'A')
 			{
-				// printf("%0.1f %0.1f\n", main->player->player_x, main->player->player_y);
 				main->map->map[yY][xX] = 'K';
 				main->player->key_e = false;
 			}
@@ -53,9 +43,7 @@ int		is_wall_v2(t_cub3d *main, double x, double y)
 	xX = (int)floor(x);
 	yY = (int)floor(y);
 	if (x < 0 || x > main->map->map_max_line || y < 0 || y > main->map->map_lines_num)
-	{
 		return (0);
-	}
 	return (ft_strchr("0NSEWA", main->map->map[yY][xX]) == NULL);
 }
 
