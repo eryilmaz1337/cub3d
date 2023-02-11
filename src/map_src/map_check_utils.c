@@ -6,16 +6,16 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:13:05 by eryilmaz          #+#    #+#             */
-/*   Updated: 2022/12/27 19:13:32 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/11 16:09:21 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
 void	name_check(char *str, t_cub3d *main)
 {
 	int	tmp;
+
 	tmp = open(str, O_RDONLY);
 	if (tmp == -1)
 		exit_free(main, FILE_NOT_FOUND_ERROR);
@@ -80,7 +80,7 @@ char	*ft_strjoin_2(char *save, char *buffer)
 
 char	**ft_double_strcpy(char **s, int i)
 {
-	char **map;
+	char	**map;
 	int		a;
 	int		c;
 
@@ -108,8 +108,7 @@ void	set_direction(t_cub3d *main, char s, int c, int b)
 	main->player->player_y = (double)c;
 	main->player->player_y *= MINI_MAP_HEIGHT / main->map->map_lines_num;
 	main->player->player_x *= MINI_MAP_WIDTH / main->map->map_max_line;
-	//printf("x:%d y:%d MX:%0.2f MY:%0.2f\n", b, c, main->player->player_x, main->player->player_y)
-	main->map->map[c][b]  = '0';
+	main->map->map[c][b] = '0';
 	if (s == 'W')
 		main->player->angle = 180.0;
 	else if (s == 'S')
