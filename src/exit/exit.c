@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:02:01 by uercan            #+#    #+#             */
-/*   Updated: 2022/12/19 19:20:46 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/11 16:34:55 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	write_error(char *s)
 	exit (EXIT_FAILURE);
 }
 
-void exit_free(t_cub3d *main, int err_no)
+void	exit_free(t_cub3d *main, int err_no)
 {
 	if (err_no == PROGRAM_ARG_ERROR)
 		write_error("*101* PROGRAM_ARG_ERROR");
@@ -40,19 +40,13 @@ void exit_free(t_cub3d *main, int err_no)
 		write_error("*105*: INVALID_CHARACTER");
 	else if (err_no == INVALID_COUNTS)
 		write_error("*106*: INVALID_COUNTS");
-	else if(err_no == MALLOC_ERROR)
+	else if (err_no == MALLOC_ERROR)
 		write_error("*107*: MALLOC_ERROR");
-	else if(err_no == MLX_ERROR_INIT)
+	else if (err_no == MLX_ERROR_INIT)
 		write_error("*108*: MLX_ERROR_INIT");
-	else if(err_no == MLX_ERROR_WINDOW)
+	else if (err_no == MLX_ERROR_WINDOW)
 		write_error("*109*: MLX_ERROR_WINDOW");
-	else if(err_no == MLX_ERROR_IMG)
+	else if (err_no == MLX_ERROR_IMG)
 		write_error("*110*: MLX_ERROR_IMG");
-	else if (err_no != 0)
-	{
-		write(2, ft_itoa(err_no), ft_strlen(ft_itoa(err_no)));
-		write (2, "\n", 1);
-		write_error("*404* UNKNOWN_ERROR");
-	}
 	free(main->map->map);
 }

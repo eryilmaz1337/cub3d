@@ -6,10 +6,9 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:39:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/11 16:21:16 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/11 17:44:59 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCT_H
 # define STRUCT_H
@@ -28,10 +27,10 @@ typedef struct s_ray
 	char	lh_x;
 	char	lh_y;
 	char	last_hit;
-	int		ray_num;
 	double	distance;
 	int		door_x;
 	int		door_y;
+	int		ray_number;
 } t_ray;
 
 typedef struct s_cub3d_map
@@ -60,6 +59,7 @@ typedef struct s_cub3d_map
 	int				*EA_texture_addr;
 	int				*SO_texture_addr;
 	int				*door_addr;
+	int				*xpm_tmp;
 } t_cub3d_map;
 
 typedef struct s_cub3d_mini_map
@@ -115,6 +115,7 @@ typedef struct s_cub3d
 	int					tmp_img_z;
 	int					*game_img_adress;
 	int					*mini_map_img_adress;
+	int					WH;
 	void				*mlx;
 	void				*mlx_window;
 	void				*game_img;

@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:04:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/10 20:15:39 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/11 17:17:40 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	img_colors(int *img, int height, int width, t_color_data color)
 		while (++i != width)
 		{
 			if (color.flag == 1)
-				img[(int)MINI_MAP_WIDTH *
-					(color.tmp_y + k) + (color.tmp_x + i)] = rgb_to_hex(color);
+				img[(int)MINI_MAP_WIDTH * (color.tmp_y + k)
+					+ (color.tmp_x + i)] = rgb_to_hex(color);
 			else
 				img[(int)width * k + i] = rgb_to_hex(color);
 		}
@@ -62,36 +62,27 @@ void	img_colors(int *img, int height, int width, t_color_data color)
 	}
 }
 
-void	draw_xpm_to_wall(t_cub3d *main, int location, int WH, int* xpm)
+void	textured_wall(t_cub3d *main, int img_loc, int location, int i)
 {
-	int	i;
-	int	find_pixel;
-	int	img_loc;
 	int	color;
+	int	*xpm;
 
-	i = -1;
-	find_pixel = 0;
-	if (main->ray.hit_h == true)
-		find_pixel = ((main->ray.pos_x - floor(main->ray.pos_x)) * 64); // resimdeki pixel sütun konumunu bulur.
-	else if (main->ray.hit_v == true)
-		find_pixel = ((main->ray.pos_y - floor(main->ray.pos_y)) * 64); // resimdeki pixel sütun konumunu bulur.
-	if (WH >= 4000)
-		WH = 4000;
-	img_loc = (64 * (64 / 2)) + find_pixel;
-	while (++i < WH && (location - (SCREEN_WIDTH * i)) <= SCREEN_HEIGHT * SCREEN_WIDTH && img_loc - 64 * (int)((double)i * ((double)64 / (double)(WH * 2))) <= 64 * 64)
+	xpm = main->map->xpm_tmp;
+	if (img_loc - 64 * (int)((double)i \
+	* ((double)64 / (double)(main->WH * 2))) >= 0)
 	{
-		if (img_loc - 64 * (int)((double)i * ((double)64 / (double)(WH * 2))) >= 0)
-		{
-			color = xpm[img_loc - 64 * (int)((double)i * ((double)64 / (double)(WH * 2)))];//xpm.img.addr[img_loc - (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))]
-			if ((location - (SCREEN_WIDTH * i)) >= 0 && color >= 0) //yukarı
-				main->game_img_adress[(location - (SCREEN_WIDTH * i))] = color;
-		}
-		if (img_loc + 64 * (int)((double)i * ((double)64 / (double)(WH * 2))) < 64 * 64)
-		{
-			color = xpm[img_loc + 64 * (int)((double)i * ((double)64 / (double)(WH * 2)))];//xpm.img.addr[img_loc + (xpm.width * ((i / (WINDOW_H / main->xpm[0].height)) % xpm.height))];
-			if ((SCREEN_HEIGHT * SCREEN_WIDTH) >= (location + (SCREEN_WIDTH * i)) && color >= 0) // aşağı
-				main->game_img_adress[(location + (SCREEN_WIDTH * i))] = color;
-		}
+		color = xpm[img_loc - 64 * (int)((double)i \
+		* ((double)64 / (double)(main->WH * 2)))];
+		if ((location - (SCREEN_WIDTH * i)) >= 0 && color >= 0)
+			main->game_img_adress[(location - (SCREEN_WIDTH * i))] = color;
+	}
+	if (img_loc + 64 * (int)((double)i \
+	* ((double)64 / (double)(main->WH * 2))) < 64 * 64)
+	{
+		color = xpm[img_loc + 64 * (int)((double)i \
+		* ((double)64 / (double)(main->WH * 2)))];
+		if ((SCREEN_HEIGHT * SCREEN_WIDTH) >= \
+			(location + (SCREEN_WIDTH * i)) && color >= 0)
+			main->game_img_adress[(location + (SCREEN_WIDTH * i))] = color;
 	}
 }
-
