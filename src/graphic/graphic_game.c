@@ -12,24 +12,26 @@
 
 #include "cub3d.h"
 
-
 void	draw_3d(t_cub3d *main, double distance, int ray_number)
 {
-	int	loc;
-	int	WH;
-	distance = distance * main->mini_map->map_img_size_x * ((double)SCREEN_HEIGHT / (double)SCREEN_WIDTH);
-	loc = (SCREEN_WIDTH * main->mini_map->screen_focus) - ray_number;// 180000. pixel
-	WH = (((double)SCREEN_HEIGHT / 2.0) / distance) * 16.0;
-	if (main->ray.last_hit == 'K')// kapı
-		draw_xpm_to_wall(main, loc, WH, main->map->door_addr);
-	else if (main->ray.hit_h == true && main->ray.dir_y == -1)// kuzey
-		draw_xpm_to_wall(main, loc, WH, main->map->NO_texture_addr);
-	else if (main->ray.hit_h == true && main->ray.dir_y == 1)// guney
-		draw_xpm_to_wall(main, loc, WH, main->map->SO_texture_addr);
-	else if (main->ray.hit_v == true && main->ray.dir_x == 1)// dogu
-		draw_xpm_to_wall(main, loc, WH, main->map->EA_texture_addr);
-	else if (main->ray.hit_v == true && main->ray.dir_x == -1)// bati
-		draw_xpm_to_wall(main, loc, WH, main->map->WE_texture_addr);
+	int		loc;
+	int		wh;
+
+	distance = distance * main->mini_map->map_img_size_x * ((double)
+			SCREEN_HEIGHT / (double)SCREEN_WIDTH);
+	loc = (SCREEN_WIDTH * main->mini_map->screen_focus)
+		- ray_number;
+	wh = (((double)SCREEN_HEIGHT / 2.0) / distance) * 16.0;
+	if (main->ray.last_hit == 'K')
+		draw_xpm_to_wall(main, loc, wh, main->map->door_addr);
+	else if (main->ray.hit_h == true && main->ray.dir_y == -1)
+		draw_xpm_to_wall(main, loc, wh, main->map->NO_texture_addr);
+	else if (main->ray.hit_h == true && main->ray.dir_y == 1)
+		draw_xpm_to_wall(main, loc, wh, main->map->SO_texture_addr);
+	else if (main->ray.hit_v == true && main->ray.dir_x == 1)
+		draw_xpm_to_wall(main, loc, wh, main->map->EA_texture_addr);
+	else if (main->ray.hit_v == true && main->ray.dir_x == -1)
+		draw_xpm_to_wall(main, loc, wh, main->map->WE_texture_addr);
 }
 
 void	put_backscreen(t_cub3d *main)
@@ -49,7 +51,8 @@ void	put_backscreen(t_cub3d *main)
 			if ((i * k) / 7 % 10000 == 0)
 				main->game_img_adress[SCREEN_WIDTH * k + i] = 0xffe100;
 			else
-				main->game_img_adress[SCREEN_WIDTH * k + i] = main->map->C_rgb_code;
+				main->game_img_adress[SCREEN_WIDTH * k + i]
+					= main->map->C_rgb_code;
 		}
 		i = -1;
 		while (++i != SCREEN_WIDTH && k >= sky)

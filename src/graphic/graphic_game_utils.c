@@ -10,13 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-// bu dosya mini_map ve ana ekran resmi için ortak kullanılan fonksiyonları içeriri lütfen sadece ilgili fonksiyonları ayırın "yazan=erdem"
 #include "cub3d.h"
 
-t_color_data color_assignment(int transparent, int red, int green, int blue)
+t_color_data	color_assignment(int transparent, int red, int green, int blue)
 {
-	t_color_data color;
+	t_color_data	color;
 
 	color.transparent = transparent;
 	color.red = red;
@@ -30,7 +28,8 @@ t_color_data color_assignment(int transparent, int red, int green, int blue)
 
 unsigned long	rgb_to_hex(t_color_data color)
 {
-	return ((color.transparent << 24)+(color.red << 16) + (color.green << 8) + (color.blue));
+	return ((color.transparent << 24)
+		+ (color.red << 16) + (color.green << 8) + (color.blue));
 }
 
 double	angle_to_radyan(double ang)
@@ -39,22 +38,23 @@ double	angle_to_radyan(double ang)
 		ang += 360;
 	while (ang > 360.0)
 		ang -= 360;
-	return(ang * (M_PI / 180.0));
+	return (ang * (M_PI / 180.0));
 }
 
 void	img_colors(int *img, int height, int width, t_color_data color)
 {
 	int	i;
 	int	k;
-	k = 0;
 
+	k = 0;
 	while (k != height)
 	{
 		i = -1;
 		while (++i != width)
 		{
 			if (color.flag == 1)
-				img[(int)MINI_MAP_WIDTH * (color.tmp_y + k) + (color.tmp_x + i)] = rgb_to_hex(color);
+				img[(int)MINI_MAP_WIDTH *
+					(color.tmp_y + k) + (color.tmp_x + i)] = rgb_to_hex(color);
 			else
 				img[(int)width * k + i] = rgb_to_hex(color);
 		}
@@ -65,7 +65,7 @@ void	img_colors(int *img, int height, int width, t_color_data color)
 void	draw_xpm_to_wall(t_cub3d *main, int location, int WH, int* xpm)
 {
 	int	i;
-	int find_pixel;
+	int	find_pixel;
 	int	img_loc;
 	int	color;
 

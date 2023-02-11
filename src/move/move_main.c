@@ -18,9 +18,11 @@ int	mouse_cursor(int x, int y, t_cub3d *main)
 		main->player->angle -= ROT_ANGLE;
 	if (x < MOVE_MOUSE_CENTER)
 		main->player->angle += ROT_ANGLE;
-	if (y < MOVE_MOUSE_CENTER && main->mini_map->screen_focus < (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
+	if (y < MOVE_MOUSE_CENTER && main->mini_map->screen_focus
+		< (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
 		main->mini_map->screen_focus += 10;
-	if (y > MOVE_MOUSE_CENTER && main->mini_map->screen_focus > SCREEN_HEIGHT / 4)
+	if (y > MOVE_MOUSE_CENTER && main->mini_map->screen_focus
+		> SCREEN_HEIGHT / 4)
 		main->mini_map->screen_focus -= 10;
 	mlx_mouse_move(main->mlx_window, MOVE_MOUSE_CENTER, MOVE_MOUSE_CENTER);
 	return (0);
@@ -31,14 +33,17 @@ void	img_loop(t_cub3d *main)
 	mlx_put_image_to_window(main->mlx, main->mlx_window, main->game_img, 0, 0);
 	put_backscreen(main);
 	map_paint(main);
-	mlx_put_image_to_window(main->mlx, main->mlx_window, main->mini_map_img, 0, 0);
-	mlx_put_image_to_window(main->mlx, main->mlx_window, main->player->player_img, main->player->player_x, main->player->player_y);
+	mlx_put_image_to_window(main->mlx, main->mlx_window,
+		main->mini_map_img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_window,
+		main->player->player_img, main->player->player_x,
+		main->player->player_y);
 	raycasting(main);
 }
 
 int	move_loop(t_cub3d *main)
 {
-	keys(main);
+	key(main);
 	if (main->player->key_shift)
 		main->player->move_speed = MOVE_PIXEL_FAST;
 	if (!main->player->key_shift)
@@ -47,9 +52,11 @@ int	move_loop(t_cub3d *main)
 		main->player->angle += ROT_ANGLE;
 	else if (main->player->dir_right)
 		main->player->angle -= ROT_ANGLE;
-	if (main->player->dir_up && main->mini_map->screen_focus < (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
+	if (main->player->dir_up && main->mini_map->screen_focus
+		< (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
 		main->mini_map->screen_focus += 10;
-	else if (main->player->dir_down && main->mini_map->screen_focus > SCREEN_HEIGHT / 4)
+	else if (main->player->dir_down && main->mini_map
+		->screen_focus > SCREEN_HEIGHT / 4)
 		main->mini_map->screen_focus -= 10;
 	while (main->player->angle >= 360)
 			main->player->angle -= 360;
@@ -114,4 +121,3 @@ int	ft_key_release(int key_code, t_cub3d *main)
 		main->player->key_shift = false;
 	return (0);
 }
-

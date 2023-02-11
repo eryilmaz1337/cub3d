@@ -13,11 +13,15 @@
 #ifndef MOVE_H
 # define MOVE_H
 # include "struct.h"
+
 int		move_loop(t_cub3d *main);
 int		ft_key_press(int key_code, t_cub3d *main);
 int		ft_key_release(int key_code, t_cub3d *main);
 int		mouse_cursor(int x, int y, t_cub3d *main);
-int		is_wall(t_cub3d *main, double x, double y);
+int		is_wall_functions(t_cub3d *main, double x, double y);
+double	get_x_value(t_cub3d *main, int status, double x);
+double	get_y_value(t_cub3d *main, int status, double y);
+int		is_wall_c(t_cub3d *main, double x, double y, char c);
 char	is_door(t_cub3d *main, double x, double y);
-void	keys(t_cub3d *main);
+void	key(t_cub3d *main);
 #endif

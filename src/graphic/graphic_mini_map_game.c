@@ -14,7 +14,8 @@
 
 void	ft_pixel_put(t_cub3d *main, int x, int y, t_color_data color)
 {
-	t_color_data data;
+	t_color_data	data;
+
 	data.tmp_x = x;
 	data.tmp_y = y;
 	data.flag = 1;
@@ -22,11 +23,12 @@ void	ft_pixel_put(t_cub3d *main, int x, int y, t_color_data color)
 	data.red = color.red;
 	data.green = color.green;
 	data.blue = color.blue;
-	img_colors(main->mini_map_img_adress, main->mini_map->map_img_size_y, main->mini_map->map_img_size_x, data);
+	img_colors(main->mini_map_img_adress,
+		main->mini_map->map_img_size_y, main->mini_map->map_img_size_x, data);
 }
 
 
-void	draw_ray(int x, int y, double angle, t_cub3d *main, int ray_number)
+void	draw_ray(int x, int y, double angle, t_cub3d	*main, int ray_number)
 {
 	double	ray_x;
 	double	ray_y;

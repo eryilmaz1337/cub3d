@@ -14,9 +14,9 @@
 
 void	door_control(t_cub3d *main, double x, double y)
 {
-	int	xX;
-	int	yY;
-	
+	int		xX;
+	int		yY;
+
 	xX = (int)floor(x);
 	yY = (int)floor(y);
 	if (x >= 0 && x < main->map->map_max_line && y >= 0 && y < main->map->map_lines_num)
@@ -68,9 +68,9 @@ double	ray_vertical(t_cub3d *main, double angle, int x, int y)
 	{
 		vdx += 0.0001;
 		// printf("%c\n", main->map->map[(int)(main->player->def_p_y + vdy*y)][(int)(main->player->def_p_x + vdx*x)]);
-		if ((int)(main->player->def_p_y + vdy*y) >= 0 && 
-		(int)(main->player->def_p_y + vdy*y) < main->map->map_lines_num && 
-		(int)(main->player->def_p_x + vdx*x) >= 0 && 
+		if ((int)(main->player->def_p_y + vdy*y) >= 0 &&
+		(int)(main->player->def_p_y + vdy*y) < main->map->map_lines_num &&
+		(int)(main->player->def_p_x + vdx*x) >= 0 &&
 		(int)(main->player->def_p_x + vdx*x) < main->map->map_max_line
 		)
 		main->ray.lh_y = main->map->map[(int)(main->player->def_p_y + vdy*y)][(int)(main->player->def_p_x + vdx*x)];
@@ -114,9 +114,9 @@ double ray_horizonal(t_cub3d *main, double angle, int x, int y)
 		&& main->player->def_p_y + hdy * y - 0.0001 <= main->map->map_lines_num)
 	{
 		hdy += 0.0001;
-		if ((int)(main->player->def_p_y + hdy*y) >= 0 && 
-		(int)(main->player->def_p_y + hdy*y) < main->map->map_lines_num && 
-		(int)(main->player->def_p_x + hdx*x) >= 0 && 
+		if ((int)(main->player->def_p_y + hdy*y) >= 0 &&
+		(int)(main->player->def_p_y + hdy*y) < main->map->map_lines_num &&
+		(int)(main->player->def_p_x + hdx*x) >= 0 &&
 		(int)(main->player->def_p_x + hdx*x) < main->map->map_max_line
 		)
 		main->ray.lh_x = main->map->map[(int)(main->player->def_p_y + hdy*y)][(int)(main->player->def_p_x + hdx*x)];
@@ -142,10 +142,10 @@ double ray_horizonal(t_cub3d *main, double angle, int x, int y)
 
 void beam_calculation(t_cub3d *main, double angle, int ray_number)
 {
-	double distance_v;
-	double distance_h;
-	int x;
-	int y;
+	double	distance_v;
+	double	distance_h;
+	int		x;
+	int		y;
 
 	x = ((cos(angle * (M_PI / 180)) > 0) * 2) - 1;
 	y = ((sin(angle * (M_PI / 180)) > 0) * -2) + 1;
@@ -153,7 +153,7 @@ void beam_calculation(t_cub3d *main, double angle, int ray_number)
 	main->ray.dir_y = y;
 	distance_v = ray_vertical(main, angle, x, y);
 	distance_h = ray_horizonal(main, angle, x, y);
-	if(distance_v < distance_h)
+	if (distance_v < distance_h)
 	{
 		main->ray.distance = distance_v;
 		main->ray.hit_v = true;
@@ -167,7 +167,8 @@ void beam_calculation(t_cub3d *main, double angle, int ray_number)
 		main->ray.hit_h = true;
 		main->ray.last_hit = main->ray.lh_x;
 	}
-	main->ray.distance = main->ray.distance * cos((main->player->angle - angle) * (M_PI / 180.0));// balik gozunu engellemek icin.
+	main->ray.distance = main->ray.distance
+		* cos((main->player->angle - angle) * (M_PI / 180.0));
 	draw_ray(x, y, angle, main, ray_number);
 }
 
