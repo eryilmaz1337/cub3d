@@ -6,13 +6,13 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 15:05:39 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/06 12:29:12 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 20:09:45 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ft_pixel_put(t_cub3d *main, int x, int y, t_color_data color)
+void	ft_pixel_put(t_cub3d *main, int x, int y, t_color_data color)
 {
 	t_color_data data;
 	data.tmp_x = x;
@@ -26,7 +26,7 @@ void ft_pixel_put(t_cub3d *main, int x, int y, t_color_data color)
 }
 
 
-void draw_ray(int x, int y, double angle, t_cub3d *main, int ray_number)
+void	draw_ray(int x, int y, double angle, t_cub3d *main, int ray_number)
 {
 	double	ray_x;
 	double	ray_y;
@@ -55,7 +55,7 @@ void draw_ray(int x, int y, double angle, t_cub3d *main, int ray_number)
 	}
 }
 
-void map_paint(t_cub3d *main)
+void	map_paint(t_cub3d *main)
 {
 	int x;
 	int y;

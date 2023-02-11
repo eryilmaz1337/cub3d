@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:30:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/10 19:08:54 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 20:10:07 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	door_control(t_cub3d *main, double x, double y)
 {
-	int xX;
-	int yY;
+	int	xX;
+	int	yY;
 	
 	xX = (int)floor(x);
 	yY = (int)floor(y);
@@ -35,10 +35,10 @@ void	door_control(t_cub3d *main, double x, double y)
 		}
 }
 
-int		is_wall_v2(t_cub3d *main, double x, double y)
+int	is_wall_v2(t_cub3d *main, double x, double y)
 {
-	int xX;
-	int yY;
+	int	xX;
+	int	yY;
 
 	xX = (int)floor(x);
 	yY = (int)floor(y);
@@ -47,7 +47,7 @@ int		is_wall_v2(t_cub3d *main, double x, double y)
 	return (ft_strchr("0NSEWA", main->map->map[yY][xX]) == NULL);
 }
 
-double ray_vertical(t_cub3d *main, double angle, int x, int y)
+double	ray_vertical(t_cub3d *main, double angle, int x, int y)
 {
 	double vdy;
 	double vdx;

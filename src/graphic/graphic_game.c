@@ -6,14 +6,14 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/09 17:04:07 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/10 20:09:28 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
-void draw_3d(t_cub3d *main, double distance, int ray_number)
+void	draw_3d(t_cub3d *main, double distance, int ray_number)
 {
 	int	loc;
 	int	WH;
