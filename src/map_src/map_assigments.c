@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:14:30 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/13 15:47:57 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 16:51:04 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	get_rgb(t_cub3d *main, int i, int k)
 
 	a = 0;
 	path = get_texture_path(main, i, k);
+	free(main->map->val);
 	main->map->val = NULL;
 	a = get_val(main, a, path);
 	if (a != 3)
