@@ -15,6 +15,7 @@
 		"stdbool.h": "c",
 		"mlx.h": "c",
 		"iterator": "c",
-		"struct.h": "c"
+		"struct.h": "c",
+		"defines.h": "c"
 	}
 }

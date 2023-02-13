@@ -6,12 +6,12 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:39:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/11 17:44:59 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 13:51:32 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#ifndef ASSIGMENTS_H
+# define ASSIGMENTS_H
 # include <stdbool.h>
 
 typedef struct s_ray

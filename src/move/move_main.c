@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/10 18:11:28 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:05:48 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	move_loop(t_cub3d *main)
 		main->player->move_speed = MOVE_PIXEL;
 	if (main->player->dir_left)
 		main->player->angle += ROT_ANGLE;
-	else if (main->player->dir_right)
+	if (main->player->dir_right)
 		main->player->angle -= ROT_ANGLE;
 	if (main->player->dir_up && main->mini_map->screen_focus
 		< (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
 		main->mini_map->screen_focus += 10;
-	else if (main->player->dir_down && main->mini_map
+	if (main->player->dir_down && main->mini_map
 		->screen_focus > SCREEN_HEIGHT / 4)
 		main->mini_map->screen_focus -= 10;
 	while (main->player->angle >= 360)

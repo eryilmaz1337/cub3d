@@ -6,13 +6,13 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:02:01 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/11 16:34:55 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:21:25 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_close(void)// şimdilik kapatmak için
+int	ft_close(void)
 {
 	exit (0);
 	return (0);

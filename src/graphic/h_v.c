@@ -6,45 +6,49 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:09:02 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/11 18:34:24 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:03:33 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	if_check_v(t_cub3d *main, double y, double x, double angle)
+int	if_check_v(t_cub3d *main, double vdy, double vdx)
 {
-	double	vdx;
-	double	vdy;
-
-	if (x == -1)
-		vdx = main->player->def_p_x - floor(main->player->def_p_x);
-	else
-		vdx = ceil(main->player->def_p_x) - main->player->def_p_x;
-	vdy = fabs(tan(angle_to_radyan(angle)) * vdx);
-	if ((int)(main->player->def_p_y + vdy * y) >= 0
-			&& (int)(main->player->def_p_y + vdy * y) < main->map->map_lines_num
-			&& (int)(main->player->def_p_x + vdx * x) >= 0 &&
-			(int)(main->player->def_p_x + vdx * x) < main->map->map_max_line)
+	if ((int)(main->player->def_p_y + vdy) >= 0
+			&& (int)(main->player->def_p_y + vdy) < main->map->map_lines_num
+			&& (int)(main->player->def_p_x + vdx) >= 0 &&
+			(int)(main->player->def_p_x + vdx) < main->map->map_max_line)
 		return (0);
 	return (1);
 }
 
-int	if_check_h(t_cub3d *main, double y, double x, double angle)
+int	while_check_v(t_cub3d *main, double vdx, double vdy)
 {
-	double	hdx;
-	double	hdy;
+	if (main->player->def_p_x + vdx - 0.0001 >= 0
+		&& main->player->def_p_x + vdx - 0.0001 <= main->map->map_max_line
+		&& main->player->def_p_y + vdy >= 0
+		&& main->player->def_p_y + vdy <= main->map->map_lines_num)
+		return (0);
+	return (1);
+}
 
-	if (y == -1)
-		hdy = main->player->def_p_y - floor(main->player->def_p_y);
-	else
-		hdy = ceil(main->player->def_p_y) - main->player->def_p_y;
-	hdx = fabs(hdy / tan(angle_to_radyan(angle)));
-	if ((int)(main->player->def_p_y + hdy * y) >= 0 &&
-		(int)(main->player->def_p_y + hdy * y) < main->map->map_lines_num &&
-		(int)(main->player->def_p_x + hdx * x) >= 0 &&
-		(int)(main->player->def_p_x + hdx * x) < main->map->map_max_line
+int	if_check_h(t_cub3d *main, double hdy, double hdx)
+{
+	if ((int)(main->player->def_p_y + hdy) >= 0 &&
+		(int)(main->player->def_p_y + hdy) < main->map->map_lines_num &&
+		(int)(main->player->def_p_x + hdx) >= 0 &&
+		(int)(main->player->def_p_x + hdx) < main->map->map_max_line
 		)
+		return (0);
+	return (1);
+}
+
+int	while_check_h(t_cub3d *main, double vdx, double vdy)
+{
+	if (main->player->def_p_x + vdx >= 0
+		&& main->player->def_p_x + vdx <= main->map->map_max_line
+		&& main->player->def_p_y + vdy - 0.0001 >= 0
+		&& main->player->def_p_y + vdy - 0.0001 <= main->map->map_lines_num)
 		return (0);
 	return (1);
 }

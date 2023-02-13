@@ -6,31 +6,16 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:30:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/11 18:43:09 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:24:14 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_wall_v2(t_cub3d *main, double x, double y)
-{
-	int	x_x;
-	int	y_y;
-
-	x_x = (int)floor(x);
-	y_y = (int)floor(y);
-	if (x < 0 || x > main->map->map_max_line
-		|| y < 0 || y > main->map->map_lines_num)
-		return (0);
-	return (ft_strchr("0NSEWA", main->map->map[y_y][x_x]) == NULL);
-}
-
 double	ray_vertical(t_cub3d *main, double angle, int x, int y)
 {
 	double	vdy;
 	double	vdx;
-	double	tmp_x;
-	double	tmp_y;
 	double	distance;
 
 	if (x == -1)
@@ -38,23 +23,16 @@ double	ray_vertical(t_cub3d *main, double angle, int x, int y)
 	else
 		vdx = ceil(main->player->def_p_x) - main->player->def_p_x;
 	vdy = fabs(tan(angle_to_radyan(angle)) * vdx);
-	tmp_x = vdx * x;
-	tmp_y = vdy * y;
 	distance = 10000;
-	while (main->player->def_p_x + vdx * x - 0.0001 >= 0
-		&& main->player->def_p_x + vdx * x - 0.0001 <= main->map->map_max_line
-		&& main->player->def_p_y + vdy * y >= 0
-		&& main->player->def_p_y + vdy * y <= main->map->map_lines_num)
+	while (!while_check_v(main, vdx * x, vdy * y))
 	{
 		vdx += 0.0001;
-		if (!if_check_v(main, y, x, angle))
-			main->ray.lh_y = main->map->map[(int)(main->player->def_p_y + vdy * y)][(int)(main->player->def_p_x + vdx * x)];
-		door_control(main, main->player->def_p_x + vdx * x, main->player->def_p_y + vdy * y);
-		if (is_wall_v2(main, main->player->def_p_x + vdx * x, main->player->def_p_y + vdy * y))
+		if (!if_check_v(main, vdy * y, vdx * x))
+			set_last_hit_v(main, vdx * x, vdy * y);
+		if (is_wall_v2(main, main->player->def_p_x + vdx \
+		* x, main->player->def_p_y + vdy * y))
 		{
-			tmp_x = vdx * x;
-			tmp_y = vdy * y;
-			distance = sqrt((tmp_x * tmp_x) + (tmp_y * tmp_y));
+			distance = sqrt(((vdx * x) * (vdx * x)) + ((vdy * y) * (vdy * y)));
 			break ;
 		}
 		vdx += 1.0 - 0.0001;
@@ -68,32 +46,22 @@ double	ray_horizonal(t_cub3d *main, double angle, int x, int y)
 	double	hdy;
 	double	hdx;
 	double	distance;
-	double	tmp_y;
-	double	tmp_x;
 
 	if (y == -1)
 		hdy = main->player->def_p_y - floor(main->player->def_p_y);
 	else
 		hdy = ceil(main->player->def_p_y) - main->player->def_p_y;
 	hdx = fabs(hdy / tan(angle_to_radyan(angle)));
-	tmp_y = hdy * y;
-	tmp_x = hdx * x;
 	distance = 10000;
-	while (main->player->def_p_x + hdx * x >= 0
-		&& main->player->def_p_x + hdx * x <= main->map->map_max_line
-		&& main->player->def_p_y + hdy * y - 0.0001 >= 0
-		&& main->player->def_p_y + hdy * y - 0.0001 <= main->map->map_lines_num)
+	while (!while_check_v(main, hdx * x, hdy * y))
 	{
 		hdy += 0.0001;
-		if (!if_check_v(main, y, x, angle))
-			main->ray.lh_x = main->map->map[(int)(main->player->def_p_y + hdy * y)]
-			[(int)(main->player->def_p_x + hdx * x)];
-		door_control(main, main->player->def_p_x + hdx * x, main->player->def_p_y + hdy * y);
-		if (is_wall_v2(main, main->player->def_p_x + hdx * x, main->player->def_p_y + hdy * y))
+		if (!if_check_h(main, hdy * y, hdx * x))
+			set_last_hit_h(main, hdx * x, hdy * y);
+		if (is_wall_v2(main, main->player->def_p_x + hdx * x,
+				main->player->def_p_y + hdy * y))
 		{
-			tmp_y = hdy * y;
-			tmp_x = hdx * x;
-			distance = sqrt((tmp_x * tmp_x) + (tmp_y * tmp_y));
+			distance = sqrt(((hdx * x) * (hdx * x)) + ((hdy * y) * (hdy * y)));
 			break ;
 		}
 		hdy = hdy + 1.0 - 0.0001;

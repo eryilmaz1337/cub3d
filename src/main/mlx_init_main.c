@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:19:17 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/09 14:41:35 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:24:44 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	loop_window_and_game(t_cub3d *main)
 {
-	main->player->dir_down = false;
-//	mlx_mouse_move(main->mlx_window, MOVE_MOUSE_CENTER, MOVE_MOUSE_CENTER);
+	mlx_mouse_move(main->mlx_window, MOVE_MOUSE_CENTER, MOVE_MOUSE_CENTER);
+	mlx_mouse_hide();
 	put_backscreen(main);
 	map_paint(main);
-	mlx_mouse_hide();
 	mlx_hook(main->mlx_window, 2, 1L << 0, &ft_key_press, main);
 	mlx_hook(main->mlx_window, 3, 1L << 1, &ft_key_release, main);
-//	mlx_hook(main->mlx_window, 6, 0L, &mouse_cursor, main);
+	mlx_hook(main->mlx_window, 6, 0L, &mouse_cursor, main);
 	mlx_hook(main->mlx_window, 17, (0L), ft_close, main);
 	mlx_loop_hook(main->mlx, move_loop, main);
 	mlx_loop(main->mlx);

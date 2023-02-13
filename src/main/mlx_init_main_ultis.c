@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init_main_ultis.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryilmaz <eryilmaz@student.42kocaeli.com.  +#+  +:+       +#+        */
+/*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:45:59 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/11 14:46:00 by eryilmaz         ###   ########.tr	      */
+/*   Updated: 2023/02/13 14:20:37 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
