@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:17:32 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/13 16:27:54 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 17:19:50 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_invallid_chracters(char s, t_cub3d *main, int status)
 
 	if (status == 0 && check_isspace(s) == 1)
 	{
-		if (s != 'K' && s != 'A')
+		if (s != 'K' && s != 'A' && s != 'L')
 		{
 			if (s != '1')
 			{

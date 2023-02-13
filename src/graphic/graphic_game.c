@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/11 17:30:19 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 17:15:02 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	draw_xpm_to_wall(t_cub3d *main, int location, int *xpm)
 		find_pixel = ((main->ray.pos_y - floor(main->ray.pos_y)) * 64);
 	while (main->WH >= 4000)
 		main->WH--;
-	img_loc = (64 * (64 / 2)) + find_pixel;
+	if ((64 * (64 / 2)) + find_pixel < 64 * 64)
+		img_loc = (64 * (64 / 2)) + find_pixel;
 	while (++i < main->WH && (location - (SCREEN_WIDTH * i)) <= SCREEN_HEIGHT \
 	* SCREEN_WIDTH && img_loc - 64 \
 	* (int)((double)i * ((double)64 / (double)(main->WH * 2))) <= 64 * 64)
