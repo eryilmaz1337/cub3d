@@ -16,6 +16,7 @@
 		"mlx.h": "c",
 		"iterator": "c",
 		"struct.h": "c",
-		"defines.h": "c"
+		"defines.h": "c",
+		"cub3d": "c"
 	}
 }

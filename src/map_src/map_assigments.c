@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:14:30 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/11 16:05:42 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/13 15:47:57 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void	get_rgb(t_cub3d *main, int i, int k)
 		free(main->map->val[a]);
 		a++;
 	}
+	set_c_f(main, i, k, code);
 	free(main->map->val[a]);
 	free(path);
-	set_c_f(main, i, k, code);
+	free(code);
 }
