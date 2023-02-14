@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:39:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/13 13:51:32 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:33:39 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_ray
 	double	sp_value;
 	double	sp_angle;
 	double	sp_lenght;
+	double	o_distance;
 	int		door_x;
 	int		door_y;
 	double		sp_x;

@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:03:30 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/13 17:15:02 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:41:45 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_xpm_to_wall(t_cub3d *main, int location, int *xpm)
 		textured_wall(main, img_loc, location, i);
 }
 
-void sp_paint(t_cub3d *main, int location)
+void	sp_paint(t_cub3d *main, int location)
 {
 	int	i;
 	int	find_pixel = 0;
@@ -60,7 +60,6 @@ void sp_paint(t_cub3d *main, int location)
 		if ((location - (SCREEN_WIDTH * i)) >= 0
 			&& main->ray.sp_value > 0 && color > 0)
 			main->game_img_adress[(location - (SCREEN_WIDTH * i))] = color;
-
 		color = main->map->sp_addr[img_loc + 64 * (int)((double)i
 				* ((double)64 / (double)(value * 2)))];
 		if ((SCREEN_HEIGHT * SCREEN_WIDTH) >= (location + (SCREEN_WIDTH * i))
@@ -69,7 +68,7 @@ void sp_paint(t_cub3d *main, int location)
 	}
 }
 
-void sp_calculete(t_cub3d *main, double angle, int location)
+void	sp_calculete(t_cub3d *main, double angle, int location)
 {
 	if (main->ray.sp_ray == true)
 	{
@@ -116,7 +115,7 @@ void	draw_3d(t_cub3d *main, double distance, double angle)
 		draw_xpm_to_wall(main, loc, main->map->EA_texture_addr);
 	else if (main->ray.hit_v == true && main->ray.dir_x == -1)
 		draw_xpm_to_wall(main, loc, main->map->WE_texture_addr);
-	if(main->ray.sp_ray == true)  // burda kalsın :)
+	if(main->ray.sp_ray == true && main->ray.o_distance > main->ray.sp_distance)  // burda kalsın :)
 		sp_calculete(main, angle, loc);
 }
 

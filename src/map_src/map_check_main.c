@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:47:51 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/13 15:23:26 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:27:09 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	map_check(t_cub3d *main)
 	char	*map;
 	int		i;
 
-	i = 0;
+	i = -1;
 	map = NULL;
 	main->map->map_line_c = 1;
 	fd = open(main->map->map_name, O_RDONLY);
@@ -40,12 +40,9 @@ void	map_check(t_cub3d *main)
 		exit_free(main, FILE_NOT_FOUND_ERROR);
 	map = get_file_line(fd, map);
 	main->map->map = ft_split(map, '\n');
-	while (map[i])
-	{
-		if (i != 0 && map[i] == '\n' && map[i - 1] != '\n')
-			main->map->map_line_c++;
-		i++;
-	}
+	while (main->map->map[++i])
+		main->map->map_line_c++;
+	printf("%d\n", main->map->map_line_c);
 	free(map);
 	close(fd);
 	map_down_control(main);

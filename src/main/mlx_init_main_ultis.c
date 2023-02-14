@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:45:59 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/13 14:20:37 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/14 18:07:09 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	error_chack_img_addr(t_cub3d *main)
 		exit_free(main, MLX_ERROR_IMG);
 	if (!main->map->door_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->sp_addr)
-		exit_free(main, MLX_ERROR_IMG);
+	// if (!main->map->sp_addr)
+	// 	exit_free(main, MLX_ERROR_IMG);
 }
 
 static void	error_chack_img(t_cub3d *main)
@@ -75,8 +75,8 @@ static void	error_chack_img(t_cub3d *main)
 		exit_free(main, MLX_ERROR_IMG);
 	if (!main->map->door_img)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->sp_img)
-		exit_free(main, MLX_ERROR_IMG);
+	// if (!main->map->sp_img)
+	// 	exit_free(main, MLX_ERROR_IMG);
 }
 
 void	mlx_img_init(t_cub3d *main)
@@ -98,8 +98,8 @@ void	mlx_img_init(t_cub3d *main)
 			main->map->EA_texture_path, &main->tmp_img_x, &main->tmp_img_y);
 	main->map->door_img = mlx_xpm_file_to_image(main->mlx,
 			"./texture/wood.xpm", &main->tmp_img_x, &main->tmp_img_y);
-	main->map->sp_img = mlx_xpm_file_to_image(main->mlx,
-			"./texture/sp.xpm", &main->tmp_img_x, &main->tmp_img_y);
+	// main->map->sp_img = mlx_xpm_file_to_image(main->mlx,
+	// 		"./texture/sp.xpm", &main->tmp_img_x, &main->tmp_img_y);
 	error_chack_img(main);
 }
 
@@ -127,9 +127,6 @@ void	mlx_img_addr_init(t_cub3d *main)
 			&main->tmp_img_y, &main->tmp_img_z);
 	main->map->door_addr = (int *)mlx_get_data_addr(main->map
 			->door_img, &main->tmp_img_x,
-			&main->tmp_img_y, &main->tmp_img_z);
-	main->map->sp_addr = (int *)mlx_get_data_addr(main->map
-			->sp_img, &main->tmp_img_x,
 			&main->tmp_img_y, &main->tmp_img_z);
 	error_chack_img_addr(main);
 }

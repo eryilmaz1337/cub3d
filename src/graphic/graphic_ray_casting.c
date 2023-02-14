@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:30:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/13 14:24:14 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:34:39 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	ray_calculator(t_cub3d *main, double angle)
 	distance_v = ray_vertical(main, angle, x, y);
 	distance_h = ray_horizonal(main, angle, x, y);
 	ray_calculator_c(main, distance_v, distance_h);
+	main->ray.o_distance = main->ray.distance;
 	main->ray.distance = main->ray.distance
 		* cos((main->player->angle - angle) * (M_PI / 180.0));
 	draw_ray(x, y, angle, main);

@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:19:17 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/13 15:09:48 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/14 18:10:36 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	loop_window_and_game(t_cub3d *main)
 {
+	
+
 	// mlx_mouse_hide();
 	// mlx_mouse_move(main->mlx_window, MOVE_MOUSE_CENTER, MOVE_MOUSE_CENTER);
 	put_backscreen(main);
