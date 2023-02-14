@@ -33,23 +33,25 @@ void	mlx_variable_init_value(t_cub3d *main)
 
 static void	error_chack_img_addr(t_cub3d *main)
 {
-	if (!main->game_img)
+	if (!main->game_img_adress)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->mini_map_img)
+	if (!main->mini_map_img_adress)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->mini_map->ray_img)
+	if (!main->mini_map->ray_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->player->player_img)
+	if (!main->player->player_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->NO_texture_img)
+	if (!main->map->NO_texture_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->SO_texture_img)
+	if (!main->map->SO_texture_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->WE_texture_img)
+	if (!main->map->WE_texture_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->EA_texture_img)
+	if (!main->map->EA_texture_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->door_img)
+	if (!main->map->door_addr)
+		exit_free(main, MLX_ERROR_IMG);
+	if (!main->map->sp_addr)
 		exit_free(main, MLX_ERROR_IMG);
 }
 
@@ -73,6 +75,8 @@ static void	error_chack_img(t_cub3d *main)
 		exit_free(main, MLX_ERROR_IMG);
 	if (!main->map->door_img)
 		exit_free(main, MLX_ERROR_IMG);
+	if (!main->map->sp_img)
+		exit_free(main, MLX_ERROR_IMG);
 }
 
 void	mlx_img_init(t_cub3d *main)
@@ -94,6 +98,8 @@ void	mlx_img_init(t_cub3d *main)
 			main->map->EA_texture_path, &main->tmp_img_x, &main->tmp_img_y);
 	main->map->door_img = mlx_xpm_file_to_image(main->mlx,
 			"./texture/wood.xpm", &main->tmp_img_x, &main->tmp_img_y);
+	main->map->sp_img = mlx_xpm_file_to_image(main->mlx,
+			"./texture/sp.xpm", &main->tmp_img_x, &main->tmp_img_y);
 	error_chack_img(main);
 }
 
@@ -121,6 +127,9 @@ void	mlx_img_addr_init(t_cub3d *main)
 			&main->tmp_img_y, &main->tmp_img_z);
 	main->map->door_addr = (int *)mlx_get_data_addr(main->map
 			->door_img, &main->tmp_img_x,
+			&main->tmp_img_y, &main->tmp_img_z);
+	main->map->sp_addr = (int *)mlx_get_data_addr(main->map
+			->sp_img, &main->tmp_img_x,
 			&main->tmp_img_y, &main->tmp_img_z);
 	error_chack_img_addr(main);
 }

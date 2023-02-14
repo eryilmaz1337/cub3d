@@ -32,7 +32,7 @@ void			img_colors(int *img, int height, int width, t_color_data color);
 void			draw_xpm_to_wall(t_cub3d *main,
 					int location, int *xpm);
 void			raycasting(t_cub3d *main);
-void			draw_3d(t_cub3d *main, double distance);
+void			draw_3d(t_cub3d *main, double distance, double angle);
 void			draw_ray(int x, int y, double angle,
 					t_cub3d *main);
 int				while_check_h(t_cub3d *main, double vdx, double vdy);

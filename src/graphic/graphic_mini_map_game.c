@@ -56,7 +56,7 @@ void	draw_ray(int x, int y, double angle, t_cub3d *main)
 		{
 			main->ray.pos_x = ray_x;
 			main->ray.pos_y = ray_y;
-			draw_3d(main, main->ray.distance);
+			draw_3d(main, main->ray.distance, angle);
 			break ;
 		}
 		ray_x += dx / 100;

@@ -30,8 +30,8 @@
 /*--------------------------------------*/
 
 /*------------MAP-SIZE------------------*/
-# define SCREEN_WIDTH			1920 / 1
-# define SCREEN_HEIGHT			1080 / 1
+# define SCREEN_WIDTH			800 / 1
+# define SCREEN_HEIGHT			800 / 1
 # define MINI_MAP_WIDTH_RATION	3
 # define MINI_MAP_HEIGHT_RATION	3
 # define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION

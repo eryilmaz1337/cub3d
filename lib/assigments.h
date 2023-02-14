@@ -21,6 +21,7 @@ typedef struct s_ray
 
 	bool	hit_v;
 	bool	hit_h;
+	bool	sp_ray;
 
 	int		dir_y;
 	int		dir_x;
@@ -28,18 +29,25 @@ typedef struct s_ray
 	char	lh_y;
 	char	last_hit;
 	double	distance;
+	double	sp_distance;
+	double	sp_value;
+	double	sp_angle;
+	double	sp_lenght;
 	int		door_x;
 	int		door_y;
+	double		sp_x;
+	double		sp_y;
 	int		ray_number;
 } t_ray;
 
 typedef struct s_cub3d_map
 {
-	void			*SO_texture_img;
-	void			*door_img;
-	void			*NO_texture_img;
 	void			*hand;
 	void			*hand_addr;
+	void			*door_img;
+	void			*sp_img;
+	void			*SO_texture_img;
+	void			*NO_texture_img;
 	void			*WE_texture_img;
 	void			*EA_texture_img;
 	char			**map;
@@ -59,6 +67,7 @@ typedef struct s_cub3d_map
 	int				*EA_texture_addr;
 	int				*SO_texture_addr;
 	int				*door_addr;
+	int				*sp_addr;
 	int				*xpm_tmp;
 } t_cub3d_map;
 

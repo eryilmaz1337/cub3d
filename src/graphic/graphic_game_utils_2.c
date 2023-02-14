@@ -40,5 +40,14 @@ int	is_wall_v2(t_cub3d *main, double x, double y)
 	if (x < 0 || x > main->map->map_max_line
 		|| y < 0 || y > main->map->map_lines_num)
 		return (0);
-	return (ft_strchr("0NSEWA", main->map->map[y_y][x_x]) == NULL);
+	if (ft_strchr("L", main->map->map[y_y][x_x]))
+	{
+		main->ray.sp_x = x_x + 0.5;
+		main->ray.sp_y = y_y + 0.5;
+		main->ray.sp_distance = sqrt(
+				powf(main->player->def_p_x - main->ray.sp_x, 2)
+				+ powf(main->player->def_p_y - main->ray.sp_y, 2));
+		main->ray.sp_ray = true;
+	}
+	return (ft_strchr("0NSEWAL", main->map->map[y_y][x_x]) == NULL);
 }

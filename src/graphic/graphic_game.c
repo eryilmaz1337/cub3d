@@ -35,7 +35,69 @@ void	draw_xpm_to_wall(t_cub3d *main, int location, int *xpm)
 		textured_wall(main, img_loc, location, i);
 }
 
-void	draw_3d(t_cub3d *main, double distance)
+void sp_paint(t_cub3d *main, int location)
+{
+	int	i;
+	int	find_pixel = 0;
+	int	img_loc;
+	int	value;
+	int	color;
+
+	if (main->ray.sp_value >= 0 && main->ray.sp_value <= 1.0)
+		find_pixel = (main->ray.sp_value) * (64);
+	img_loc = (64 * (64 / 2))
+		+ find_pixel;
+	value = (int)((double)((64 / 2) * main->mini_map->map_img_size_x)
+			/ main->ray.sp_distance);
+	if (value > 4000)
+		value = 4000;
+	i = -1;
+	while (++i < value)
+	{
+		color = main->map->sp_addr[img_loc - 64
+			* (int)((double)i
+				* ((double)64 / (double)(value * 2)))];
+		if ((location - (SCREEN_WIDTH * i)) >= 0
+			&& main->ray.sp_value > 0 && color > 0)
+			main->game_img_adress[(location - (SCREEN_WIDTH * i))] = color;
+
+		color = main->map->sp_addr[img_loc + 64 * (int)((double)i
+				* ((double)64 / (double)(value * 2)))];
+		if ((SCREEN_HEIGHT * SCREEN_WIDTH) >= (location + (SCREEN_WIDTH * i))
+			&& main->ray.sp_value > 0 && color > 0)
+			main->game_img_adress[(location + (SCREEN_WIDTH * i))] = color;
+	}
+}
+
+void sp_calculete(t_cub3d *main, double angle, int location)
+{
+	if (main->ray.sp_ray == true)
+	{
+		main->ray.sp_value = 0;
+		main->ray.sp_angle = 180.0 - atan2(
+				main->ray.sp_y - main->player->def_p_y,
+				main->ray.sp_x - main->player->def_p_x) * (180.0 / M_PI);
+		if (angle > main->ray.sp_angle)
+		{
+			main->ray.sp_angle = angle - main->ray.sp_angle;
+			main->ray.sp_lenght = tan(main->ray.sp_angle * (M_PI / 180.0))
+				* main->ray.sp_distance;
+			if (main->ray.sp_lenght <= 0.5 && main->ray.sp_lenght >= -0.5)
+				main->ray.sp_value = 0.5 - main->ray.sp_lenght;
+		}
+		else if (angle < main->ray.sp_angle)
+		{
+			main->ray.sp_angle = (main->ray.sp_angle - angle);
+			main->ray.sp_lenght = tan(main->ray.sp_angle * (M_PI / 180.0))
+				* main->ray.sp_distance;
+			if (main->ray.sp_lenght <= 0.5 && main->ray.sp_lenght >= -0.5)
+				main->ray.sp_value = main->ray.sp_lenght + 0.5;
+		}
+	}
+	sp_paint(main,location);
+}
+
+void	draw_3d(t_cub3d *main, double distance, double angle)
 {
 	int		loc;
 
@@ -54,6 +116,8 @@ void	draw_3d(t_cub3d *main, double distance)
 		draw_xpm_to_wall(main, loc, main->map->EA_texture_addr);
 	else if (main->ray.hit_v == true && main->ray.dir_x == -1)
 		draw_xpm_to_wall(main, loc, main->map->WE_texture_addr);
+	if(main->ray.sp_ray == true)  // burda kalsın :)
+		sp_calculete(main, angle, loc);
 }
 
 void	put_backscreen(t_cub3d *main)

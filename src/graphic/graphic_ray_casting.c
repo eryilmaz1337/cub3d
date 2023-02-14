@@ -81,6 +81,7 @@ void	ray_calculator(t_cub3d *main, double angle)
 	y = ((sin(angle * (M_PI / 180)) > 0) * -2) + 1;
 	main->ray.dir_x = x;
 	main->ray.dir_y = y;
+	main->ray.sp_ray = false;
 	distance_v = ray_vertical(main, angle, x, y);
 	distance_h = ray_horizonal(main, angle, x, y);
 	ray_calculator_c(main, distance_v, distance_h);
@@ -109,6 +110,7 @@ void	raycasting(t_cub3d *main)
 	main->ray.ray_number = 0;
 	while (main->ray.ray_number < SCREEN_WIDTH)
 	{
+		main->ray.sp_distance = 0;
 		ray_calculator(main, angle);
 		angle += (double)ROT_ANGLE_USER / (double)SCREEN_WIDTH;
 		main->ray.ray_number++;
