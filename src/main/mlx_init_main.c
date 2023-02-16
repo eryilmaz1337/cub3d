@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:19:17 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/16 15:56:09 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 18:02:18 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ void	mlx_inits(t_cub3d *main)
 		exit_free(main, MLX_ERROR_WINDOW);
 	mlx_img_init(main);
 	mlx_img_addr_init(main);
-	img_colors(main->mini_map_img_adress,
-		main->mini_map->height, main->mini_map->width, \
-		color_assignment(255, 0, 0, 0));
-	img_colors(main->player->player_addr,
+	main->color = color_assignment(255, 0, 0, 0);
+	img_colors(main, main->mini_map_img_adress,
+		main->mh, main->mw);
+	main->color = color_assignment(0, 255, 0, 0);
+	img_colors(main, main->player->player_addr,
 		main->mini_map->map_img_size_y,
-		main->mini_map->map_img_size_x, color_assignment(0, 255, 0, 0));
+		main->mini_map->map_img_size_x);
 }

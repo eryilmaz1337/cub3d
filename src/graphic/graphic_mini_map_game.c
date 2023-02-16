@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 15:05:39 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/16 15:55:12 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 18:02:18 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,23 @@ void	ft_pixel_put(t_cub3d *main, int x, int y, t_color_data color)
 	data.red = color.red;
 	data.green = color.green;
 	data.blue = color.blue;
-	img_colors(main->mini_map_img_adress,
-		main->mini_map->map_img_size_y, main->mini_map->map_img_size_x, data);
+	main->color = data;
+	img_colors(main, main->mini_map_img_adress,
+		main->mini_map->map_img_size_y, main->mini_map->map_img_size_x);
 }
 
 void	put_to_ray_addr(t_cub3d *main, double ray_y, double ray_x)
 {
-	if (main->mini_map->width * \
+	if (main->mw * \
 	(int)floor(main->mini_map->map_img_size_y \
 	* ray_y) + (int)floor(main->mini_map->map_img_size_x \
 	* ray_x) >= 0 && \
-	main->mini_map->width * \
+	main->mw * \
 	(int)floor(main->mini_map->map_img_size_y \
 	* ray_y) + (int)floor(main->mini_map->map_img_size_x \
-	* ray_x) < main->mini_map->height * main->mini_map->width)
+	* ray_x) < main->mh * main->mw)
 	{
-		main->mini_map->ray_addr[main->mini_map->width * \
+		main->mini_map->ray_addr[main->mw * \
 	(int)floor(main->mini_map->map_img_size_y \
 	* ray_y) + (int)floor(main->mini_map->map_img_size_x \
 	* ray_x)] = rgb_to_hex(color_assignment(100, 0, 255, 0));

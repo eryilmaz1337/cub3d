@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:45:59 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/16 15:56:29 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 18:02:18 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,13 @@ void	mlx_variable_init_value(t_cub3d *main)
 	main->player->key_w = false;
 	main->player->key_e = false;
 	main->player->key_shift = false;
-	main->mini_map->height = SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION;
-	main->mini_map->width = SCREEN_WIDTH / MINI_MAP_WIDTH_RATION;
 	main->player->p_last_x = main->player->player_x;
 	main->player->p_last_y = main->player->player_y;
 	main->mini_map->screen_focus = SCREEN_HEIGHT / 2;
 	main->mini_map->map_img_size_y = \
-	main->mini_map->height / main->map->map_lines_num;
+	main->mh / main->map->map_lines_num;
 	main->mini_map->map_img_size_x = \
-	main->mini_map->width / main->map->map_max_line;
+	main->mw / main->map->map_max_line;
 }
 
 static void	error_chack_img_addr(t_cub3d *main)
@@ -83,9 +81,9 @@ void	mlx_img_init(t_cub3d *main)
 {
 	main->game_img = mlx_new_image(main->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	main->mini_map_img = mlx_new_image(main->mlx,
-			main->mini_map->width, main->mini_map->height);
-	main->mini_map->ray_img = mlx_new_image(main->mlx, main->mini_map->width,
-			main->mini_map->height);
+			main->mw, main->mh);
+	main->mini_map->ray_img = mlx_new_image(main->mlx, main->mw,
+			main->mh);
 	main->player->player_img = mlx_new_image(main->mlx, main->mini_map
 			->map_img_size_x, main->mini_map->map_img_size_y);
 	main->map->no_texture_img = mlx_xpm_file_to_image(main->mlx,

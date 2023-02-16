@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:39:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/16 15:54:09 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 17:57:30 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,13 @@ typedef struct s_cub3d
 	int					*game_img_adress;
 	int					*mini_map_img_adress;
 	int					wh;
+	int					mw;
+	int					mh;
 	void				*mlx;
 	void				*mlx_window;
 	void				*game_img;
 	void				*mini_map_img;
+	t_color_data		color;
 	t_cub3d_mini_map	*mini_map;
 	t_cub3d_map			*map;
 	t_player			*player;

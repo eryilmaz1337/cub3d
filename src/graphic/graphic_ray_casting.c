@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:30:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/16 15:55:12 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 18:02:18 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,13 @@ void	ray_calculator(t_cub3d *main, double angle)
 	draw_ray(x, y, angle, main);
 }
 
+static void	ray_c_norm(t_cub3d *main)
+{
+	main->color = color_assignment(255, 0, 0, 0);
+	img_colors(main, main->mini_map->ray_addr, main->mh,
+		main->mw);
+}
+
 void	raycasting(t_cub3d *main)
 {
 	double	angle;
@@ -106,8 +113,7 @@ void	raycasting(t_cub3d *main)
 		angle -= 360;
 	while (angle < 0)
 		angle += 360;
-	img_colors(main->mini_map->ray_addr, main->mini_map->height,
-		main->mini_map->width, color_assignment(255, 0, 0, 0));
+	ray_c_norm(main);
 	main->ray.ray_number = 0;
 	while (main->ray.ray_number < SCREEN_WIDTH)
 	{

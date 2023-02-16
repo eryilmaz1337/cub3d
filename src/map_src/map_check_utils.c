@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:13:05 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/16 15:55:12 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 18:02:18 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void	set_direction(t_cub3d *main, char s, int c, int b)
 	main->player = malloc(sizeof (t_player));
 	main->player->player_x = (double)b;
 	main->player->player_y = (double)c;
-	main->player->player_y *= main->mini_map->height / main->map->map_lines_num;
-	main->player->player_x *= main->mini_map->width / main->map->map_max_line;
+	main->player->player_y *= main->mh / main->map->map_lines_num;
+	main->player->player_x *= main->mw / main->map->map_max_line;
 	main->map->map[c][b] = '0';
 	if (s == 'W')
 		main->player->angle = 180.0;

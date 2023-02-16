@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:04:41 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/16 15:55:12 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 17:59:24 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	angle_to_radyan(double ang)
 	return (ang * (M_PI / 180.0));
 }
 
-void	img_colors(int *img, int height, int width, t_color_data color)
+void	img_colors(t_cub3d *main, int *img, int height, int width)
 {
 	int	i;
 	int	k;
@@ -52,11 +52,11 @@ void	img_colors(int *img, int height, int width, t_color_data color)
 		i = -1;
 		while (++i != width)
 		{
-			if (color.flag == 1)
-				img[(int)main->mini_map->width * (color.tmp_y + k)
-					+ (color.tmp_x + i)] = rgb_to_hex(color);
+			if (main->color.flag == 1)
+				img[(int)main->mw * (main->color.tmp_y + k)
+					+ (main->color.tmp_x + i)] = rgb_to_hex(main->color);
 			else
-				img[(int)width * k + i] = rgb_to_hex(color);
+				img[(int)width * k + i] = rgb_to_hex(main->color);
 		}
 		k++;
 	}

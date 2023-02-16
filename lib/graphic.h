@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:57:43 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/13 14:15:12 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 16:35:28 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void			mlx_inits(t_cub3d *main);
 void			mlx_img_addr_init(t_cub3d *main);
 void			put_backscreen(t_cub3d *main);
 void			map_paint(t_cub3d *main);
-void			img_colors(int *img, int height, int width, t_color_data color);
+// void			img_colors(int *img, int height, int width, t_color_data color);
+void			img_colors(t_cub3d *main, int *img, int height, int width);
 void			draw_xpm_to_wall(t_cub3d *main,
 					int location, int *xpm);
 void			raycasting(t_cub3d *main);

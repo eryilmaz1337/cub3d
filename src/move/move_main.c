@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/16 15:28:53 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 16:03:59 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ int	ft_key_press(int key_code, t_cub3d *main)
 		exit(0);
 	if (key_code == KEY_A)
 		main->player->key_a = true;
-	if (key_code == KEY_T)
-		main->player->key_t = true;
 	if (key_code == KEY_S)
 		main->player->key_s = true;
 	if (key_code == KEY_D)
@@ -103,8 +101,6 @@ int	ft_key_release(int key_code, t_cub3d *main)
 {
 	if (key_code == KEY_A)
 		main->player->key_a = false;
-	if (key_code == KEY_T)
-		main->player->key_t = false;
 	if (key_code == KEY_S)
 		main->player->key_s = false;
 	if (key_code == KEY_D)
