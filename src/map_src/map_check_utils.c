@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 void	name_check(char *str, t_cub3d *main)
 {

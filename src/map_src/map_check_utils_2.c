@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 void	check_invallid_chracters(char s, t_cub3d *main, int status)
 {

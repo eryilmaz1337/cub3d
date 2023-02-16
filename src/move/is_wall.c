@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 double	get_x_value(t_cub3d *main, int status, double x)
 {

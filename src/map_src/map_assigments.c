@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 static void	get_prime_map_while(t_cub3d *main, int b, int c)
 {

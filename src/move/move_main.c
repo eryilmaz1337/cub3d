@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 int	mouse_cursor(int x, int y, t_cub3d *main)
 {
 	if (x > MOVE_MOUSE_CENTER)
-		main->player->angle -= ROT_ANGLE;
+		main->player->angle -= ROT_ANGLE / 2;
 	if (x < MOVE_MOUSE_CENTER)
-		main->player->angle += ROT_ANGLE;
+		main->player->angle += ROT_ANGLE / 2;
 	if (y < MOVE_MOUSE_CENTER && main->mini_map->screen_focus
 		< (SCREEN_HEIGHT / 2) + (SCREEN_HEIGHT / 4))
-		main->mini_map->screen_focus += 100;
+		main->mini_map->screen_focus += 50;
 	if (y > MOVE_MOUSE_CENTER && main->mini_map->screen_focus
 		> SCREEN_HEIGHT / 4)
-		main->mini_map->screen_focus -= 100;
+		main->mini_map->screen_focus -= 50;
 	mlx_mouse_move(main->mlx_window, MOVE_MOUSE_CENTER, MOVE_MOUSE_CENTER);
 	return (0);
 }

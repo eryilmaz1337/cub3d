@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 static void	map_down_check_corners(t_cub3d *main, int i, int k, int s_i)
 {

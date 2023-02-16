@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 int	get_tex_dir_no(t_cub3d *main, int l, int i, int k)
 {

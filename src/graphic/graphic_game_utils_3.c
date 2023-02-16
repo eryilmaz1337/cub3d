@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 void	set_last_hit_v(t_cub3d *main, double dx, double dy)
 {

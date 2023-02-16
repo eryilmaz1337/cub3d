@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 double	ray_vertical(t_cub3d *main, double angle, int x, int y)
 {

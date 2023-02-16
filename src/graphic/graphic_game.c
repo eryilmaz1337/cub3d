@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 void	draw_xpm_to_wall(t_cub3d *main, int location, int *xpm)
 {

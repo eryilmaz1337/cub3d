@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../lib/cub3d.h"
 
 void	ray_calculator_c(t_cub3d *main, double distance_v, double distance_h)
 {

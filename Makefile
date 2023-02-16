@@ -1,8 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: eryilmaz <eryilmaz@student.42kocaeli.com.  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/16 18:28:45 by eryilmaz          #+#    #+#              #
+#    Updated: 2023/02/16 18:28:55 by eryilmaz         ###   ########.tr	       #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		= libft.a
 LIBFT		= ./lib/libft/
 MLX			= ./lib/mlx/
 CC			= gcc
-FLAGS		= -framework OpenGL -framework AppKit -L ./lib/mlx -I ./lib/ ./lib/cub3d.h -Wall -Wextra -Werror
+FLAGS		= -framework OpenGL -framework AppKit -L ./lib/mlx -Wall -Wextra -Werror
 FILE		= ./src/move/*.c \
 				./src/graphic/*.c \
 				./src/map_src/*.c \
@@ -14,29 +26,30 @@ FILE		= ./src/move/*.c \
 				./src/archive/libmlx.a \
 
 RM			= rm -f
-AR			= ar rcs
+AR			= ar -rcs
 
-SRC			= $(wildcard src/*.c)
+SRC			= $(wildcard src/*/*.c)
+OBJ = $(SRC:.c=.o)
 
-all:		$(NAME) compilation
+all: $(OBJ) $(NAME) compilation
 
 $(NAME):
-			make -C $(LIBFT)
-			make -C $(MLX)
-			cp lib/libft/libft.a src/archive/
-			cp lib/mlx/libmlx.a src/archive/
+	@make -C $(LIBFT)
+	@make -C $(MLX)
+	@cp lib/libft/libft.a src/archive/
+	@cp lib/mlx/libmlx.a src/archive/
 
 compilation:
-			$(CC) $(FLAGS) $(FILE)
-			mv ./a.out cub3d
+	@$(CC) $(FLAGS) $(FILE)
+	@mv ./a.out cub3d
 
 clean:
-			rm -f ./src/archive/libft.a
-			rm -f ./src/archive/libmlx.a
-			make clean -C $(LIBFT)
-			make clean -C $(MLX)
-
+	@rm -rf $(OBJ)
+	@make clean -C $(LIBFT)
+	@make clean -C $(MLX)
 fclean:		clean
+	@rm -f ./src/archive/libft.a
+	@rm -f ./src/archive/libmlx.a
 	@$(RM) -f ./src/libft.a
 	@$(RM) -f $(LIBFT)/libft.a
 	@$(RM) -f cub3d
