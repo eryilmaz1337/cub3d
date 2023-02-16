@@ -6,12 +6,12 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:10:05 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/14 18:07:58 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:54:32 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#ifndef DEFINES_H
+# define DEFINES_H
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
@@ -30,12 +30,10 @@
 /*--------------------------------------*/
 
 /*------------MAP-SIZE------------------*/
-# define SCREEN_WIDTH			1000 / 1
-# define SCREEN_HEIGHT			800 / 1
+# define SCREEN_WIDTH			1000
+# define SCREEN_HEIGHT			800
 # define MINI_MAP_WIDTH_RATION	3
 # define MINI_MAP_HEIGHT_RATION	3
-# define MINI_MAP_WIDTH			SCREEN_WIDTH / MINI_MAP_WIDTH_RATION
-# define MINI_MAP_HEIGHT		SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION
 /*--------------------------------------*/
 
 /*----------KEY-CODES-------------------*/

@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:13:05 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/13 15:33:58 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:55:12 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	**ft_double_strcpy(char **s, int i)
 	map = (char **)malloc(sizeof(char *) * c);
 	while (s[i])
 	{
-		map[a] = (char *)malloc(sizeof(char) * ft_strlen(s[i]));
+		map[a] = (char *)malloc(sizeof(char) * ft_strlen(s[i]) + 1);
 		map[a] = ft_strcpy(map[a], s[i]);
 		i++;
 		a++;
@@ -106,8 +106,8 @@ void	set_direction(t_cub3d *main, char s, int c, int b)
 	main->player = malloc(sizeof (t_player));
 	main->player->player_x = (double)b;
 	main->player->player_y = (double)c;
-	main->player->player_y *= MINI_MAP_HEIGHT / main->map->map_lines_num;
-	main->player->player_x *= MINI_MAP_WIDTH / main->map->map_max_line;
+	main->player->player_y *= main->mini_map->height / main->map->map_lines_num;
+	main->player->player_x *= main->mini_map->width / main->map->map_max_line;
 	main->map->map[c][b] = '0';
 	if (s == 'W')
 		main->player->angle = 180.0;

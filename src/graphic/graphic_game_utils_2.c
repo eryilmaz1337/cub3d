@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:36:38 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/13 12:26:16 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 12:52:31 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int	is_wall_v2(t_cub3d *main, double x, double y)
 	y_y = (int)floor(y);
 	if (x < 0 || x > main->map->map_max_line
 		|| y < 0 || y > main->map->map_lines_num)
+		return (0);
+	if (x_x < 0 || x_x > main->map->map_max_line
+		|| y_y < 0 || y_y > main->map->map_lines_num)
 		return (0);
 	if (ft_strchr("L", main->map->map[y_y][x_x]))
 	{

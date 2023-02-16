@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:17:32 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/13 17:19:50 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:48:29 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void	check_invallid_chracters(char s, t_cub3d *main, int status)
 				{
 					if (s == 'N' || s == 'W' || s == 'S' || s == 'E')
 					{
-						if (player_c == 0)
-							player_c++;
-						else if (player_c > 1)
+						player_c++;
+						if (player_c > 1)
 							exit_free (main, INVALID_COUNTS);
 					}
 					else
@@ -37,17 +36,17 @@ void	check_invallid_chracters(char s, t_cub3d *main, int status)
 			}
 		}
 	}
-	if (status == 1 && player_c == 0)
+	if (status == 1 && player_c != 1)
 		exit_free (main, INVALID_COUNTS);
 }
 
 void	set_c_f(t_cub3d *main, int i, int k, int *code)
 {
 	if (main->map->map[i][k] == 'F')
-		main->map->F_rgb_code
+		main->map->f_rgb_code
 			= rgb_to_hex(color_assignment(0, code[0], code[1], code[2]));
 	else if (main->map->map[i][k] == 'C')
-		main->map->C_rgb_code
+		main->map->c_rgb_code
 			= rgb_to_hex(color_assignment(0, code[0], code[1], code[2]));
 }
 

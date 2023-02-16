@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_init_main_ultis.c                              :+:      :+:    :+:   */
+/*   mlx_init_main_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:45:59 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/14 18:07:09 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:56:29 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@ void	mlx_variable_init_value(t_cub3d *main)
 	main->player->key_w = false;
 	main->player->key_e = false;
 	main->player->key_shift = false;
+	main->mini_map->height = SCREEN_HEIGHT / MINI_MAP_HEIGHT_RATION;
+	main->mini_map->width = SCREEN_WIDTH / MINI_MAP_WIDTH_RATION;
 	main->player->p_last_x = main->player->player_x;
 	main->player->p_last_y = main->player->player_y;
 	main->mini_map->screen_focus = SCREEN_HEIGHT / 2;
-	main->mini_map->map_img_size_y = MINI_MAP_HEIGHT / main->map->map_lines_num;
-	main->mini_map->map_img_size_x = MINI_MAP_WIDTH / main->map->map_max_line;
+	main->mini_map->map_img_size_y = \
+	main->mini_map->height / main->map->map_lines_num;
+	main->mini_map->map_img_size_x = \
+	main->mini_map->width / main->map->map_max_line;
 }
 
 static void	error_chack_img_addr(t_cub3d *main)
@@ -41,18 +45,16 @@ static void	error_chack_img_addr(t_cub3d *main)
 		exit_free(main, MLX_ERROR_IMG);
 	if (!main->player->player_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->NO_texture_addr)
+	if (!main->map->no_texture_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->SO_texture_addr)
+	if (!main->map->so_texture_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->WE_texture_addr)
+	if (!main->map->we_texture_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->EA_texture_addr)
+	if (!main->map->ea_texture_addr)
 		exit_free(main, MLX_ERROR_IMG);
 	if (!main->map->door_addr)
 		exit_free(main, MLX_ERROR_IMG);
-	// if (!main->map->sp_addr)
-	// 	exit_free(main, MLX_ERROR_IMG);
 }
 
 static void	error_chack_img(t_cub3d *main)
@@ -65,41 +67,37 @@ static void	error_chack_img(t_cub3d *main)
 		exit_free(main, MLX_ERROR_IMG);
 	if (!main->player->player_img)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->NO_texture_img)
+	if (!main->map->no_texture_img)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->SO_texture_img)
+	if (!main->map->so_texture_img)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->WE_texture_img)
+	if (!main->map->we_texture_img)
 		exit_free(main, MLX_ERROR_IMG);
-	if (!main->map->EA_texture_img)
+	if (!main->map->ea_texture_img)
 		exit_free(main, MLX_ERROR_IMG);
 	if (!main->map->door_img)
 		exit_free(main, MLX_ERROR_IMG);
-	// if (!main->map->sp_img)
-	// 	exit_free(main, MLX_ERROR_IMG);
 }
 
 void	mlx_img_init(t_cub3d *main)
 {
 	main->game_img = mlx_new_image(main->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	main->mini_map_img = mlx_new_image(main->mlx,
-			MINI_MAP_WIDTH, MINI_MAP_HEIGHT);
-	main->mini_map->ray_img = mlx_new_image(main->mlx, MINI_MAP_WIDTH,
-			MINI_MAP_HEIGHT);
+			main->mini_map->width, main->mini_map->height);
+	main->mini_map->ray_img = mlx_new_image(main->mlx, main->mini_map->width,
+			main->mini_map->height);
 	main->player->player_img = mlx_new_image(main->mlx, main->mini_map
 			->map_img_size_x, main->mini_map->map_img_size_y);
-	main->map->NO_texture_img = mlx_xpm_file_to_image(main->mlx,
-			main->map->NO_texture_path, &main->tmp_img_x, &main->tmp_img_y);
-	main->map->SO_texture_img = mlx_xpm_file_to_image(main->mlx,
-			main->map->SO_texture_path, &main->tmp_img_x, &main->tmp_img_y);
-	main->map->WE_texture_img = mlx_xpm_file_to_image(main->mlx,
-			main->map->WE_texture_path, &main->tmp_img_x, &main->tmp_img_y);
-	main->map->EA_texture_img = mlx_xpm_file_to_image(main->mlx,
-			main->map->EA_texture_path, &main->tmp_img_x, &main->tmp_img_y);
+	main->map->no_texture_img = mlx_xpm_file_to_image(main->mlx,
+			main->map->no_texture_path, &main->tmp_img_x, &main->tmp_img_y);
+	main->map->so_texture_img = mlx_xpm_file_to_image(main->mlx,
+			main->map->so_texture_path, &main->tmp_img_x, &main->tmp_img_y);
+	main->map->we_texture_img = mlx_xpm_file_to_image(main->mlx,
+			main->map->we_texture_path, &main->tmp_img_x, &main->tmp_img_y);
+	main->map->ea_texture_img = mlx_xpm_file_to_image(main->mlx,
+			main->map->ea_texture_path, &main->tmp_img_x, &main->tmp_img_y);
 	main->map->door_img = mlx_xpm_file_to_image(main->mlx,
 			"./texture/wood.xpm", &main->tmp_img_x, &main->tmp_img_y);
-	// main->map->sp_img = mlx_xpm_file_to_image(main->mlx,
-	// 		"./texture/sp.xpm", &main->tmp_img_x, &main->tmp_img_y);
 	error_chack_img(main);
 }
 
@@ -113,17 +111,17 @@ void	mlx_img_addr_init(t_cub3d *main)
 			&main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
 	main->player->player_addr = (int *)mlx_get_data_addr(main->player
 			->player_img, &main->tmp_img_x, &main->tmp_img_y, &main->tmp_img_z);
-	main->map->NO_texture_addr = (int *)mlx_get_data_addr(main->map
-			->NO_texture_img, &main->tmp_img_x,
+	main->map->no_texture_addr = (int *)mlx_get_data_addr(main->map
+			->no_texture_img, &main->tmp_img_x,
 			&main->tmp_img_y, &main->tmp_img_z);
-	main->map->SO_texture_addr = (int *)mlx_get_data_addr(main->map
-			->SO_texture_img, &main->tmp_img_x,
+	main->map->so_texture_addr = (int *)mlx_get_data_addr(main->map
+			->so_texture_img, &main->tmp_img_x,
 			&main->tmp_img_y, &main->tmp_img_z);
-	main->map->WE_texture_addr = (int *)mlx_get_data_addr(main->map
-			->WE_texture_img, &main->tmp_img_x,
+	main->map->we_texture_addr = (int *)mlx_get_data_addr(main->map
+			->we_texture_img, &main->tmp_img_x,
 			&main->tmp_img_y, &main->tmp_img_z);
-	main->map->EA_texture_addr = (int *)mlx_get_data_addr(main->map
-			->EA_texture_img, &main->tmp_img_x,
+	main->map->ea_texture_addr = (int *)mlx_get_data_addr(main->map
+			->ea_texture_img, &main->tmp_img_x,
 			&main->tmp_img_y, &main->tmp_img_z);
 	main->map->door_addr = (int *)mlx_get_data_addr(main->map
 			->door_img, &main->tmp_img_x,

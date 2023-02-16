@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:47:51 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/14 17:27:09 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:07:50 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	map_check(t_cub3d *main)
 	main->map->map = ft_split(map, '\n');
 	while (main->map->map[++i])
 		main->map->map_line_c++;
-	printf("%d\n", main->map->map_line_c);
 	free(map);
 	close(fd);
 	map_down_control(main);

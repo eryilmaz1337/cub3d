@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:39:48 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/14 17:33:39 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:54:09 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,28 @@
 
 typedef struct s_ray
 {
-	double	pos_x;
-	double	pos_y;
-
 	bool	hit_v;
 	bool	hit_h;
 	bool	sp_ray;
-
-	int		dir_y;
-	int		dir_x;
 	char	lh_x;
 	char	lh_y;
 	char	last_hit;
+	double	pos_x;
+	double	pos_y;
 	double	distance;
 	double	sp_distance;
 	double	sp_value;
 	double	sp_angle;
 	double	sp_lenght;
 	double	o_distance;
+	double	sp_y;
+	double	sp_x;
+	int		dir_y;
+	int		dir_x;
 	int		door_x;
 	int		door_y;
-	double		sp_x;
-	double		sp_y;
 	int		ray_number;
-} t_ray;
+}	t_ray;
 
 typedef struct s_cub3d_map
 {
@@ -47,51 +45,50 @@ typedef struct s_cub3d_map
 	void			*hand_addr;
 	void			*door_img;
 	void			*sp_img;
-	void			*SO_texture_img;
-	void			*NO_texture_img;
-	void			*WE_texture_img;
-	void			*EA_texture_img;
+	void			*so_texture_img;
+	void			*no_texture_img;
+	void			*we_texture_img;
+	void			*ea_texture_img;
 	char			**map;
 	char			**val;
 	char			*map_name;
-	char			*NO_texture_path;
-	char			*SO_texture_path;
-	char			*WE_texture_path;
-	char			*EA_texture_path;
+	char			*no_texture_path;
+	char			*so_texture_path;
+	char			*we_texture_path;
+	char			*ea_texture_path;
+	unsigned long	f_rgb_code;
+	unsigned long	c_rgb_code;
 	int				map_line_c;
-	unsigned long	F_rgb_code;
-	unsigned long	C_rgb_code;
 	int				map_lines_num;
 	int				map_max_line;
-	int				*NO_texture_addr;
-	int				*WE_texture_addr;
-	int				*EA_texture_addr;
-	int				*SO_texture_addr;
+	int				*no_texture_addr;
+	int				*we_texture_addr;
+	int				*ea_texture_addr;
+	int				*so_texture_addr;
 	int				*door_addr;
 	int				*sp_addr;
 	int				*xpm_tmp;
-} t_cub3d_map;
+}	t_cub3d_map;
 
 typedef struct s_cub3d_mini_map
 {
-	int				map_img_size_y;
-	int				map_img_size_x;
-	int				*ray_addr;
-	void			*ray_img;
-	int				screen_focus;
+	int		width;
+	int		height;
+	int		map_img_size_y;
+	int		map_img_size_x;
+	int		*ray_addr;
+	void	*ray_img;
+	int		screen_focus;
 
 }	t_cub3d_mini_map;
 
 typedef struct s_player
 {
-	double			p_last_x;
-	double			p_last_y;
 	bool			key_w;
 	bool			key_s;
 	bool			key_d;
 	bool			key_a;
 	bool			key_e;
-	bool			key_t;
 	bool			key_shift;
 	bool			dir_right;
 	bool			dir_left;
@@ -99,6 +96,8 @@ typedef struct s_player
 	bool			dir_down;
 	int				*player_addr;
 	double			move_speed;
+	double			p_last_x;
+	double			p_last_y;
 	double			player_x;
 	double			player_y;
 	double			def_p_x;
@@ -107,7 +106,7 @@ typedef struct s_player
 	void			*player_img;
 }	t_player;
 
-typedef struct  s_color_data
+typedef struct s_color_data
 {
 	int	transparent;
 	int	red;
@@ -116,7 +115,7 @@ typedef struct  s_color_data
 	int	tmp_x;
 	int	tmp_y;
 	int	flag;
-} t_color_data;
+}	t_color_data;
 
 typedef struct s_cub3d
 {
@@ -125,7 +124,7 @@ typedef struct s_cub3d
 	int					tmp_img_z;
 	int					*game_img_adress;
 	int					*mini_map_img_adress;
-	int					WH;
+	int					wh;
 	void				*mlx;
 	void				*mlx_window;
 	void				*game_img;
@@ -134,6 +133,6 @@ typedef struct s_cub3d
 	t_cub3d_map			*map;
 	t_player			*player;
 	t_ray				ray;
-} t_cub3d;
+}	t_cub3d;
 
 #endif

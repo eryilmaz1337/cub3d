@@ -6,7 +6,7 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 15:05:39 by uercan            #+#    #+#             */
-/*   Updated: 2023/02/13 17:19:35 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:55:12 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,20 @@ void	ft_pixel_put(t_cub3d *main, int x, int y, t_color_data color)
 
 void	put_to_ray_addr(t_cub3d *main, double ray_y, double ray_x)
 {
-	main->mini_map->ray_addr[MINI_MAP_WIDTH * \
+	if (main->mini_map->width * \
+	(int)floor(main->mini_map->map_img_size_y \
+	* ray_y) + (int)floor(main->mini_map->map_img_size_x \
+	* ray_x) >= 0 && \
+	main->mini_map->width * \
+	(int)floor(main->mini_map->map_img_size_y \
+	* ray_y) + (int)floor(main->mini_map->map_img_size_x \
+	* ray_x) < main->mini_map->height * main->mini_map->width)
+	{
+		main->mini_map->ray_addr[main->mini_map->width * \
 	(int)floor(main->mini_map->map_img_size_y \
 	* ray_y) + (int)floor(main->mini_map->map_img_size_x \
 	* ray_x)] = rgb_to_hex(color_assignment(100, 0, 255, 0));
+	}
 }
 
 void	draw_ray(int x, int y, double angle, t_cub3d *main)

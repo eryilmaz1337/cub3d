@@ -6,52 +6,11 @@
 /*   By: uercan <uercan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:00:44 by eryilmaz          #+#    #+#             */
-/*   Updated: 2023/02/14 18:19:54 by uercan           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:28:53 by uercan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	split_anim(t_cub3d *main, int anim)
-{
-	// void	*anim_sp;
-
-	printf("%d\n", anim);
-	if (anim < 5)
-	{
-		main->map->sp_addr = (int *)mlx_get_data_addr(mlx_xpm_file_to_image(main->mlx, \
-		"./texture/sp_1.xpm", &main->tmp_img_x, &main->tmp_img_y), &main->tmp_img_x,
-			&main->tmp_img_y, &main->tmp_img_z);
-		// anim_sp = mlx_xpm_file_to_image(main->mlx, \
-		// "./texture/sp_1.xpm", &main->tmp_img_x, &main->tmp_img_y);
-	}
-	if (anim % 10 == 0)
-	{
-		main->map->sp_addr = (int *)mlx_get_data_addr(mlx_xpm_file_to_image(main->mlx, \
-		"./texture/sp_2.xpm", &main->tmp_img_x, &main->tmp_img_y), &main->tmp_img_x,
-			&main->tmp_img_y, &main->tmp_img_z);
-	}
-	if (anim % 15 == 0)
-	{
-		main->map->sp_addr = (int *)mlx_get_data_addr(mlx_xpm_file_to_image(main->mlx, \
-		"./texture/sp_3.xpm", &main->tmp_img_x, &main->tmp_img_y), &main->tmp_img_x,
-			&main->tmp_img_y, &main->tmp_img_z);
-	}
-	if (anim % 20 == 0)
-	{
-		main->map->sp_addr = (int *)mlx_get_data_addr(mlx_xpm_file_to_image(main->mlx, \
-		"./texture/sp_4.xpm", &main->tmp_img_x, &main->tmp_img_y), &main->tmp_img_x,
-			&main->tmp_img_y, &main->tmp_img_z);
-	}
-	if (anim % 25 == 0)
-	{
-		main->map->sp_addr = (int *)mlx_get_data_addr(mlx_xpm_file_to_image(main->mlx, \
-		"./texture/sp_5.xpm", &main->tmp_img_x, &main->tmp_img_y), &main->tmp_img_x,
-			&main->tmp_img_y, &main->tmp_img_z);
-	}
-	// main->map->sp_addr = (int *)mlx_get_data_addr(anim_sp, &main->tmp_img_x,
-	// 		&main->tmp_img_y, &main->tmp_img_z);
-}
 
 int	mouse_cursor(int x, int y, t_cub3d *main)
 {
